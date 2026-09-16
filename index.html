@@ -3,247 +3,700 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Phishing Awareness Simulation - EDUCATIONAL USE ONLY</title>
+<title>Eastern Cyber Security - Complete Study Guide</title>
 <style>
   :root {
-    --google-blue: #4285f4;
-    --google-green: #34a853;
-    --google-yellow: #fbbc05;
-    --google-red: #ea4335;
+    --bg: #0f1220;
+    --panel: #1a1f35;
+    --accent: #7c6cff;
+    --accent2: #4cd6c0;
+    --text: #e8eaf6;
+    --muted: #9aa0c3;
+    --correct: #2ecc71;
+    --wrong: #ff5b77;
+    --radius: 14px;
   }
-  * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Arial', sans-serif; }
-  
-  /* 🚨 ETHICAL SIMULATION WATERMARKS - DO NOT REMOVE 🚨 */
-  body::before {
-    content: "🔒 PHISHING SIMULATION - EDUCATIONAL USE ONLY 🔒";
-    position: fixed; top: 0; left: 0; right: 0;
-    background: #ffcc00; color: #000;
-    text-align: center; font-weight: bold; font-size: 0.7rem;
-    padding: 4px; z-index: 99999;
-  }
-  body::after {
-    content: "This is NOT a real Google page. This is a cybersecurity training exercise.";
-    position: fixed; bottom: 0; left: 0; right: 0;
-    background: #333; color: white;
-    text-align: center; font-size: 0.65rem;
-    padding: 4px; z-index: 99999;
-  }
-  
+  * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', system-ui, sans-serif; }
   body {
-    background: #f0f2f5; min-height: 100vh; padding-top: 25px;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    padding-bottom: 60px;
   }
   
-  /* WARNING BANNER */
-  .sim-warning {
-    background: #fff3cd; border: 2px dashed #ffc107;
-    max-width: 500px; margin: 50px auto 20px;
-    padding: 15px; text-align: center; border-radius: 8px;
-    font-size: 0.8rem; color: #856404;
+  /* ========== NAVIGATION MENU ========== */
+  nav.main-nav {
+    position: sticky; top: 0; z-index: 1000;
+    background: linear-gradient(180deg, rgba(15,18,32,0.98), rgba(15,18,32,0.95));
+    backdrop-filter: blur(10px);
+    padding: 12px 20px;
+    border-bottom: 1px solid #2c3352;
+    overflow-x: auto;
+  }
+  nav.main-nav ul {
+    display: flex; justify-content: center; gap: 8px; flex-wrap: wrap;
+    list-style: none; max-width: 1000px; margin: 0 auto;
+  }
+  nav.main-nav li button {
+    background: var(--panel); color: var(--text);
+    border: 1px solid #2c3352; border-radius: 25px;
+    padding: 10px 20px; cursor: pointer; font-size: .9rem;
+    transition: all .2s; white-space: nowrap;
+  }
+  nav.main-nav li button:hover { border-color: var(--accent); transform: translateY(-1px); }
+  nav.main-nav li button.active {
+    background: var(--accent); border-color: var(--accent); color: #fff;
+    box-shadow: 0 4px 12px rgba(124,108,255,0.3);
   }
   
-  .login-container {
-    max-width: 450px; margin: 30px auto;
-    background: white; border-radius: 8px;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.12);
-    overflow: hidden;
+  /* ========== HEADER ========== */
+  header {
+    text-align: center; padding: 40px 20px 20px;
+  }
+  header h1 { font-size: 2rem; }
+  header h1 span { color: var(--accent); }
+  header p { color: var(--muted); margin-top: 6px; font-size: 1.05rem; }
+  
+  .progress-bar {
+    width: 90%; max-width: 700px; margin: 18px auto 0;
+    height: 10px; background: #262c47; border-radius: 5px; overflow: hidden;
+  }
+  .progress-fill {
+    height: 100%; width: 0%;
+    background: linear-gradient(90deg, var(--accent), var(--accent2));
+    transition: width .4s ease;
+  }
+  .progress-label { text-align:center; color: var(--muted); font-size:.85rem; margin-top:6px; }
+  
+  /* ========== CONTENT SECTIONS ========== */
+  main {
+    max-width: 900px; margin: 20px auto; padding: 0 15px;
+  }
+  section.module { display: none; animation: fadeIn .3s; }
+  section.module.show { display: block; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(8px);} to {opacity:1; transform:none;} }
+  
+  .module-header {
+    display: flex; justify-content: space-between; align-items: center;
+    margin-bottom: 20px; padding-bottom: 15px; border-bottom: 1px solid #2c3352;
+  }
+  .module-header h2 { color: var(--accent2); font-size: 1.5rem; }
+  .module-header .icon { font-size: 2rem; }
+  
+  /* ========== CONCEPT CARDS ========== */
+  .concept-card {
+    background: var(--panel); border: 1px solid #2c3352;
+    border-radius: var(--radius); padding: 20px 22px; margin-bottom: 16px;
+  }
+  .concept-card h3 { color: var(--accent2); margin-bottom: 8px; }
+  .concept-card p { color: #c7cbe6; line-height: 1.6; }
+  .tag {
+    display: inline-block; font-size: .72rem; background: #262c47;
+    padding: 3px 10px; border-radius: 12px; color: var(--muted); margin-top: 10px;
   }
   
-  .logo-area {
-    text-align: center; padding: 35px 0 25px;
+  /* ========== FLASHCARDS ========== */
+  .flashcard {
+    perspective: 1000px; height: 260px; margin: 25px auto; cursor: pointer;
   }
-  .logo-text {
-    font-size: 2rem; letter-spacing: -1px;
+  .flashcard-inner {
+    position: relative; width: 100%; height: 100%;
+    transition: transform .55s;
+    transform-style: preserve-3d;
   }
-  .logo-g { color: #4285f4; }
-  .logo-o1 { color: #ea4335; }
-  .logo-o2 { color: #fbbc05; }
-  .logo-o3 { color: #4285f4; }
-  .logo-l { color: #34a853; }
-  .logo-e { color: #ea4335; }
-  
-  .login-header {
-    text-align: center; padding: 0 30px 20px;
+  .flashcard.flipped .flashcard-inner { transform: rotateY(180deg); }
+  .fc-face {
+    position: absolute; inset: 0; backface-visibility: hidden;
+    background: var(--panel); border: 2px solid var(--accent);
+    border-radius: var(--radius);
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    padding: 25px; text-align: center;
   }
-  .login-header h2 { font-size: 1.7rem; margin-bottom: 10px; color: #202124; }
-  .login-header p { color: #5f6368; font-size: 1rem; }
+  .fc-back { transform: rotateY(180deg); border-color: var(--accent2); }
+  .fc-face h2 { font-size: 1.3rem; margin-bottom: 10px; }
+  .fc-face p { color: #c7cbe6; line-height: 1.55; }
+  .fc-hint { position: absolute; bottom: 14px; font-size: .75rem; color: var(--muted); }
   
-  .form-area { padding: 0 30px 30px; }
+  .flash-controls { display:flex; justify-content:center; gap:12px; flex-wrap:wrap; margin-top:20px; }
+  .flash-controls button {
+    background: var(--accent); border: none; color: white;
+    padding: 10px 24px; border-radius: 30px; cursor: pointer; font-size: .95rem;
+  }
+  .flash-controls button.secondary { background: var(--panel); border: 1px solid #2c3352; }
+  .counter { text-align: center; color: var(--muted); margin-top: 14px; }
   
-  input[type="email"], input[type="password"] {
+  /* ========== QUIZ ========== */
+  .quiz-box {
+    background: var(--panel); border: 1px solid #2c3352;
+    border-radius: var(--radius); padding: 25px;
+  }
+  .quiz-q { font-size: 1.15rem; margin-bottom: 18px; }
+  .option {
+    display: block; width: 100%; text-align: left;
+    background: #222844; color: var(--text);
+    border: 1px solid #2c3352; border-radius: 10px;
+    padding: 13px 18px; margin-bottom: 10px; cursor: pointer; font-size: .98rem;
+    transition: all .15s;
+  }
+  .option:hover { border-color: var(--accent); }
+  .option.correct { background: rgba(46,204,113,.15); border-color: var(--correct); }
+  .option.wrong { background: rgba(255,91,119,.15); border-color: var(--wrong); }
+  .feedback { min-height: 28px; margin-top: 10px; font-weight: 600; }
+  .feedback.ok { color: var(--correct); }
+  .feedback.no { color: var(--wrong); }
+  .result-score { font-size: 1.6rem; text-align: center; margin: 20px 0; }
+  .retry-btn {
+    display: block; margin: 15px auto; background: var(--accent2);
+    color: #0f1220; border: none; padding: 12px 32px;
+    border-radius: 30px; font-size: 1rem; cursor: pointer; font-weight: 700;
+  }
+  
+  /* ========== INTERACTIVE SCENARIO ========== */
+  .scenario-box {
+    background: var(--panel); border: 1px solid #2c3352;
+    border-radius: var(--radius); padding: 25px; margin-bottom: 20px;
+  }
+  .scenario-question { font-size: 1.2rem; margin-bottom: 20px; }
+  .scenario-option {
+    display: block; width: 100%; text-align: left;
+    background: #222844; color: var(--text);
+    border: 1px solid #2c3352; border-radius: 10px;
+    padding: 15px 20px; margin-bottom: 12px; cursor: pointer;
+    transition: all .2s;
+  }
+  .scenario-option:hover { border-color: var(--accent); transform: translateX(5px); }
+  .scenario-result {
+    background: #1a2a44; padding: 20px; border-radius: 10px;
+    margin-top: 20px; display: none; border-left: 4px solid var(--accent);
+  }
+  
+  /* ========== PASSWORD STRENGTH CHECKER ========== */
+  .password-checker {
+    background: var(--panel); border: 1px solid #2c3352;
+    border-radius: var(--radius); padding: 25px;
+  }
+  .password-input {
     width: 100%; padding: 14px 15px;
     border: 1px solid #dadce0; border-radius: 4px;
-    font-size: 1rem; margin-bottom: 10px;
-    transition: border 0.2s;
+    font-size: 1rem; margin-bottom: 15px;
+    background: #222844; color: var(--text);
   }
-  input:focus { outline: none; border-color: var(--google-blue); }
+  .strength-meter {
+    height: 8px; background: #262c47; border-radius: 4px;
+    margin: 15px 0; overflow: hidden;
+  }
+  .strength-fill {
+    height: 100%; width: 0%;
+    transition: all .3s;
+    background: var(--wrong);
+  }
+  .strength-label { text-align: center; margin-top: 8px; font-weight: 600; }
+  .requirements-list { margin-top: 15px; font-size: .9rem; color: var(--muted); }
+  .req-item { margin: 5px 0; }
+  .req-item.check { color: var(--correct); }
+  .req-item.cross { color: var(--wrong); }
   
-  .btn-primary {
-    width: 100%; background: var(--google-blue); color: white;
-    border: none; padding: 12px; border-radius: 4px;
-    font-size: 1rem; cursor: pointer; margin-top: 20px;
+  /* ========== PHISHING SIMULATION STYLES ========== */
+  .phishing-container {
+    background: var(--panel); border-radius: var(--radius);
+    max-width: 500px; margin: 20px auto; padding: 30px;
+    border: 1px solid #2c3352;
   }
-  .btn-primary:hover { background: #3367d6; }
+  .fake-logo { text-align: center; margin-bottom: 20px; }
+  .fake-logo h3 { font-size: 1.8rem; }
+  .fake-input {
+    width: 100%; padding: 12px; margin: 8px 0;
+    border: 1px solid #2c3352; border-radius: 6px;
+    background: #222844; color: var(--text);
+  }
+  .fake-btn {
+    width: 100%; background: var(--accent); color: white;
+    border: none; padding: 12px; border-radius: 6px;
+    font-size: 1rem; cursor: pointer; margin-top: 15px;
+  }
+  .learning-reveal {
+    display: none; background: var(--panel); border-radius: var(--radius);
+    max-width: 600px; margin: 20px auto; padding: 35px;
+    border: 2px solid var(--accent2);
+  }
+  .learning-reveal h3 { color: var(--correct); font-size: 1.6rem; text-align: center; margin-bottom: 15px; }
+  .red-flag { margin: 12px 0 12px 20px; color: var(--muted); }
+  .red-flag strong { color: var(--wrong); }
   
-  .links {
-    display: flex; justify-content: space-between;
-    margin-top: 15px; font-size: 0.875rem;
-  }
-  .links a { color: var(--google-blue); text-decoration: none; }
-  
-  .fake-verify {
-    display: none; text-align: center; padding: 40px;
-  }
-  
-  /* REVEAL PAGE - THE TEACHING MOMENT */
-  .reveal-page {
-    display: none;
-    max-width: 600px; margin: 30px auto;
-    background: white; border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-    padding: 40px;
-  }
-  .reveal-page h1 { 
-    font-size: 1.8rem; color: #ea4335; 
-    text-align: center; margin-bottom: 20px;
-  }
-  .reveal-page .emoji {
-    font-size: 3rem; text-align: center; display: block; margin: 20px 0;
-  }
-  .reveal-page p { line-height: 1.8; color: #333; margin: 15px 0; }
-  .reveal-page .highlight {
-    background: #fff3cd; padding: 3px 6px; border-radius: 3px; font-weight: bold;
-  }
-  .reveal-page .lesson-box {
-    background: #e8f5e9; border-left: 4px solid #4caf50;
-    padding: 20px; margin: 25px 0;
-  }
-  .reveal-page .lesson-box h3 { color: #2e7d32; margin-bottom: 10px; }
-  
-  .red-flag-list { margin: 15px 0 15px 20px; }
-  .red-flag-list li { margin: 10px 0; color: #5f6368; }
-  .red-flag-list strong { color: #d32f2f; }
-  
-  .btn-home {
-    background: var(--google-blue); color: white;
-    border: none; padding: 14px 40px; border-radius: 4px;
-    font-size: 1rem; cursor: pointer; margin: 30px auto 0;
-    display: block;
-  }
-  
-  .ethical-note {
-    font-size: 0.7rem; color: #888; text-align: center;
-    margin-top: 40px; padding: 20px;
-    background: #fafafa; border-top: 1px solid #eee;
-  }
+  /* ========== FOOTER ========== */
+  footer { text-align:center; color: var(--muted); font-size:.8rem; margin-top:40px; }
 </style>
 </head>
 <body>
 
-<!-- PHASE 1: FAKE LOGIN (SIMULATION) -->
-<div id="loginPhase">
-  <div class="sim-warning">
-    ⚠️ <strong>EDUCATIONAL SIMULATION:</strong> This is a controlled phishing awareness test. No data is collected or stored. Refresh the page to reset.
-  </div>
-  
-  <div class="login-container">
-    <div class="logo-area">
-      <div class="logo-text">
-        <span class="logo-g">G</span><span class="logo-o1">o</span><span class="logo-o2">o</span>
-        <span class="logo-o3">g</span><span class="logo-l">l</span><span class="logo-e">e</span>
-      </div>
+<!-- NAVIGATION MENU -->
+<nav class="main-nav">
+  <ul>
+    <li><button onclick="showModule('intro', this)" class="active">🏠 Home</button></li>
+    <li><button onclick="showModule('cia', this)">🛡️ CIA Triad</button></li>
+    <li><button onclick="showModule('malware', this)">🦠 Malware</button></li>
+    <li><button onclick="showModule('phishing', this)">🎣 Phishing Lab</button></li>
+    <li><button onclick="showModule('crypto', this)">🔐 Crypto</button></li>
+    <li><button onclick="showModule('password', this)">🔑 Password Lab</button></li>
+    <li><button onclick="showModule('quiz', this)">✅ Final Quiz</button></li>
+  </ul>
+</nav>
+
+<!-- PROGRESS BAR -->
+<div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+<div class="progress-label" id="progressLabel">Modules completed: 0 / 7</div>
+
+<main>
+
+  <!-- MODULE 1: INTRO -->
+  <section id="intro" class="module show">
+    <div class="module-header">
+      <h2>Welcome to Eastern Cyber Security</h2>
+      <span class="icon">🎯</span>
     </div>
     
-    <div class="login-header">
-      <h2>Sign in</h2>
-      <p>Use your @school.edu account for AP Cybersecurity class</p>
+    <div class="concept-card">
+      <h3>Your Interactive Study Guide</h3>
+      <p>This site contains 7 interactive modules covering AP Cybersecurity Unit 1 fundamentals. Each module has:</p>
+      <ul style="margin-left: 25px; margin-top: 10px; color: #c7cbe6;">
+        <li>📖 Core concept explanations</li>
+        <li>🃏 Flashcards for memorization</li>
+        <li>✅ Quizzes for practice</li>
+        <li>🎮 Interactive scenarios & labs</li>
+      </ul>
     </div>
     
-    <div class="form-area">
-      <input type="email" id="emailInput" placeholder="Email or phone" autocomplete="off">
-      <input type="password" id="passInput" placeholder="Enter your password" autocomplete="off">
-      
-      <div class="links">
-        <a href="#">Forgot email?</a>
-        <a href="#" onclick="submitLogin(); return false;">Next</a>
+    <div class="concept-card">
+      <h3>How to Use This Site</h3>
+      <p>1️⃣ Start with any module using the navigation bar above<br>
+      2️⃣ Read through the concepts<br>
+      3️⃣ Flip flashcards to test yourself<br>
+      4️⃣ Complete quizzes for immediate feedback<br>
+      5️⃣ Your progress saves automatically!</p>
+      <span class="tag">Tip: Try the Phishing Lab - it's memorable!</span>
+    </div>
+    
+    <div class="concept-card">
+      <h3>Unit 1 Topics Covered</h3>
+      <p>CIA Triad · Threats & Malware · Social Engineering · Cryptography · Authentication · Network Defense · Password Security</p>
+    </div>
+  </section>
+
+  <!-- MODULE 2: CIA TRIAD -->
+  <section id="cia" class="module">
+    <div class="module-header">
+      <h2>The CIA Triad</h2>
+      <span class="icon">🛡️</span>
+    </div>
+    
+    <div class="concept-card">
+      <h3>What is the CIA Triad?</h3>
+      <p>Three core goals of information security that guide all security decisions:</p>
+      <table style="width:100%; margin-top:15px; border-collapse: collapse;">
+        <tr><td style="padding:12px; border-bottom:1px solid #2c3352;"><strong>Confidentiality</strong></td><td style="padding:12px; border-bottom:1px solid #2c3352;">Only authorized access (encryption, access controls)</td></tr>
+        <tr><td style="padding:12px; border-bottom:1px solid #2c3352;"><strong>Integrity</strong></td><td style="padding:12px; border-bottom:1px solid #2c3352;">Data stays accurate & unaltered (hashing, checksums)</td></tr>
+        <tr><td style="padding:12px;"><strong>Availability</strong></td><td style="padding:12px;">Systems accessible when needed (backups, redundancy)</td></tr>
+      </table>
+      <span class="tag">★ Exam favorite!</span>
+    </div>
+    
+    <!-- FLASHCARDS FOR CIA -->
+    <div id="cia-flashcards">
+      <!-- Dynamic flashcard container -->
+    </div>
+    
+    <!-- QUIZ FOR CIA -->
+    <div class="quiz-box" id="cia-quiz">
+      <div class="quiz-q">Which CIA principle protects data from unauthorized viewing?</div>
+      <button class="option" onclick="quizCheck(this, false, 'Wrong! That affects integrity.')">Integrity</button>
+      <button class="option" onclick="quizCheck(this, true, 'Correct! Confidentiality ensures only authorized access.')">Confidentiality</button>
+      <button class="option" onclick="quizCheck(this, false, 'Wrong! That's about uptime.')">Availability</button>
+      <div class="feedback"></div>
+    </div>
+  </section>
+
+  <!-- MODULE 3: MALWARE -->
+  <section id="malware" class="module">
+    <div class="module-header">
+      <h2>Threats & Malware</h2>
+      <span class="icon">🦠</span>
+    </div>
+    
+    <div class="concept-card">
+      <h3>Common Malware Types</h3>
+      <p><strong>Virus</strong> — Attaches to files, needs user action to spread<br>
+      <strong>Worm</strong> — Self-replicates across networks without a host<br>
+      <strong>Trojan</strong> — Disguised as legitimate software<br>
+      <strong>Ransomware</strong> — Encrypts data, demands payment<br>
+      <strong>Spyware/Keylogger</strong> — Secretly records activity & credentials</p>
+    </div>
+    
+    <!-- INTERACTIVE SCENARIO -->
+    <div class="scenario-box">
+      <div class="scenario-question">🎬 Scenario: You find a USB drive labeled "Bonus Payroll" in the parking lot. What do you do?</div>
+      <button class="scenario-option" onclick="scenarioResult(this, false)">Plug it into my computer to see what's on it</button>
+      <button class="scenario-option" onclick="scenarioResult(this, true)">Turn it in to IT/security without plugging it in</button>
+      <button class="scenario-option" onclick="scenarioResult(this, false)">Take it home and look at the files</button>
+      <div class="scenario-result"></div>
+    </div>
+  </section>
+
+  <!-- MODULE 4: PHISHING LAB -->
+  <section id="phishing" class="module">
+    <div class="module-header">
+      <h2>Phishing Simulation Lab</h2>
+      <span class="icon">🎣</span>
+    </div>
+    
+    <div class="concept-card">
+      <h3>Test Your Skills</h3>
+      <p>This is a <strong>controlled simulation</strong>. You'll encounter a realistic phishing attempt. Can you spot it before entering credentials?</p>
+      <span class="tag">⚠️ Educational use only - no data is collected</span>
+    </div>
+    
+    <!-- FAKE LOGIN -->
+    <div class="phishing-container" id="phishingLogin">
+      <div class="fake-logo">
+        <h3><span style="color:#4285f4">G</span><span style="color:#ea4335">o</span><span style="color:#fbbc05">o</span><span style="color:#4285f4">g</span><span style="color:#34a853">l</span><span style="color:#ea4335">e</span></h3>
+      </div>
+      <input type="email" class="fake-input" placeholder="Email or phone" id="fakeEmail">
+      <input type="password" class="fake-input" placeholder="Password" id="fakePass">
+      <button class="fake-btn" onclick="triggerPhishingLesson()">Next</button>
+      <p style="text-align:center;color:#888;font-size:0.75rem;margin-top:15px;">Simulation mode active - no credentials stored</p>
+    </div>
+    
+    <!-- LEARNING REVEAL -->
+    <div class="learning-reveal" id="phishingReveal">
+      <span style="font-size:3rem;display:block;text-align:center;">🎯</span>
+      <h3>You Caught It!</h3>
+      <p>This was a phishing simulation. Whether you entered credentials or spotted it first, here's what to watch for:</p>
+      <div class="red-flag"><strong>🚩 Check the URL</strong> — Always verify you're on the real domain</div>
+      <div class="red-flag"><strong>🚩 Unexpected urgency</strong> — "Verify now" or "Account locked" = suspicious</div>
+      <div class="red-flag"><strong>🚩 Unsolicited login requests</strong> — Companies rarely send direct login links</div>
+      <div class="red-flag"><strong>🚩 Hover before clicking</strong> — See the actual destination URL</div>
+      <button class="fake-btn" onclick="document.getElementById('phishingReveal').style.display='none';document.getElementById('phishingLogin').style.display='block';">Try Again</button>
+    </div>
+  </section>
+
+  <!-- MODULE 5: CRYPTOGRAPHY -->
+  <section id="crypto" class="module">
+    <div class="module-header">
+      <h2>Cryptography Basics</h2>
+      <span class="icon">🔐</span>
+    </div>
+    
+    <div class="concept-card">
+      <h3>Types of Encryption</h3>
+      <table style="width:100%; margin-top:15px; border-collapse: collapse;">
+        <tr><td style="padding:12px; border-bottom:1px solid #2c3352;"><strong>Symmetric</strong></td><td style="padding:12px; border-bottom:1px solid #2c3352;">One shared key (fast, key distribution is hard)</td></tr>
+        <tr><td style="padding:12px;"><strong>Asymmetric</strong></td><td style="padding:12px;">Public/Private key pair (slower, solves key distribution)</td></tr>
+      </table>
+      <p style="margin-top:15px;"><strong>Hashing</strong> — One-way function for integrity verification (NOT reversible)</p>
+    </div>
+    
+    <!-- INTERACTIVE: SYMMETRIC VS ASYMMETRIC -->
+    <div class="scenario-box">
+      <div class="scenario-question">🧩 Match the scenario to the encryption type</div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:15px;">
+        <button class="scenario-option" onclick="scenarioResult(this, true)">AES-GCM for file encryption</button>
+        <button class="scenario-option" onclick="scenarioResult(this, true)">RSA for HTTPS certificates</button>
+        <button class="scenario-option" onclick="scenarioResult(this, true)">SHA-256 for password hashing</button>
+      </div>
+      <div class="scenario-result" style="background:#1a3a2a;border-color:var(--correct);"></div>
+    </div>
+  </section>
+
+  <!-- MODULE 6: PASSWORD LAB -->
+  <section id="password" class="module">
+    <div class="module-header">
+      <h2>Password Strength Checker</h2>
+      <span class="icon">🔑</span>
+    </div>
+    
+    <div class="concept-card">
+      <h3>Strong Password Requirements</h3>
+      <p>A good password should have:<br>
+      ✓ At least 12 characters<br>
+      ✓ Mix of uppercase & lowercase letters<br>
+      ✓ Numbers included<br>
+      ✓ Special symbols (!@#$%^&*)<br>
+      ✓ No common words or personal info</p>
+    </div>
+    
+    <!-- PASSWORD STRENGTH METER -->
+    <div class="password-checker">
+      <input type="text" class="password-input" placeholder="Type a password to test strength..." id="passwordInput">
+      <div class="strength-meter">
+        <div class="strength-fill" id="strengthFill"></div>
+      </div>
+      <div class="strength-label" id="strengthLabel">Strength: None</div>
+      <div class="requirements-list">
+        <div class="req-item" id="req1">❌ Length ≥ 12 characters</div>
+        <div class="req-item" id="req2">❌ Has uppercase letters</div>
+        <div class="req-item" id="req3">❌ Has numbers</div>
+        <div class="req-item" id="req4">❌ Has special characters</div>
       </div>
     </div>
-  </div>
-  
-  <div class="fake-verify" id="fakeVerify">
-    <div style="font-size: 3rem;">🔄</div>
-    <p>Verifying credentials...</p>
-    <p style="color:#888;font-size:0.85rem;margin-top:10px;">(Simulation running...)</p>
-  </div>
-</div>
+  </section>
 
-<!-- PHASE 2: REVEAL & LESSON -->
-<div id="revealPage" class="reveal-page">
-  <span class="emoji">🎯</span>
-  <h1>You Fell For It!</h1>
-  
-  <p>This was a <strong>controlled phishing simulation</strong>. Congratulations on completing the training!</p>
-  
-  <div class="lesson-box">
-    <h3>🛡️ What Happened Here?</h3>
-    <p>You encountered a classic <strong>spear-phishing</strong> attack. Notice the subtle cues:</p>
-    <ul class="red-flag-list">
-      <li><strong>Urgency:</strong> "@school.edu account for AP Cybersecurity class" creates false specificity</li>
-      <li><strong>Familiar branding:</strong> Mimics a trusted interface to lower guard</li>
-      <li><strong>Context manipulation:</strong> Links the login to your current class to seem legitimate</li>
-    </ul>
-  </div>
-  
-  <div class="lesson-box" style="background:#fff8e1;border-left-color:#ff9800;">
-    <h3>🚩 Red Flags to Watch For:</h3>
-    <ul class="red-flag-list">
-      <li><strong>Check the URL:</strong> Was this really <code>accounts.google.com</code>? Or something lookalike?</li>
-      <li><strong>Unexpected urgency:</strong> "Verify now" or "Account suspended" messages often mean trouble</li>
-      <li><strong>Unsolicited requests:</strong> Legitimate services rarely ask you to log in via email/link</li>
-      <li><strong>Request for sensitive info:</strong> Real companies won't ask for passwords in forms they send you</li>
-    </ul>
-  </div>
-  
-  <p>In real-world scenarios, attackers could use this data to access your email, school accounts, or worse. This simulation helps build muscle memory for spotting these tricks.</p>
-  
-  <div class="lesson-box">
-    <h3>✅ How to Protect Yourself:</h3>
-    <ul class="red-flag-list" style="list-style:none;padding-left:0;">
-      <li>🔍 <strong>Always hover before clicking</strong> links to see the real destination</li>
-      <li>🔐 <strong>Enable MFA</strong> everywhere — even if they get your password, they still can't log in</li>
-      <li>🏢 <strong>When in doubt, navigate directly</strong> to the service instead of clicking links</li>
-      <li>📧 <strong>Report suspicious emails</strong> to your IT/security team</li>
-    </ul>
-  </div>
-  
-  <button class="btn-home" onclick="location.reload()">Return to Lesson</button>
-</div>
+  <!-- MODULE 7: FINAL QUIZ -->
+  <section id="quiz" class="module">
+    <div class="module-header">
+      <h2>Final Comprehensive Quiz</h2>
+      <span class="icon">✅</span>
+    </div>
+    
+    <div class="quiz-box" id="finalQuiz">
+      <!-- Dynamic quiz content -->
+    </div>
+  </section>
 
-<div class="ethical-note">
-  <strong>Ethical Use Notice:</strong> This simulation is designed for educational purposes only. 
-  Never use phishing techniques without explicit authorization from the target organization.
-  Unauthorized phishing is illegal and violates cybersecurity laws worldwide.
-</div>
+</main>
+
+<footer>Made with 💜 · Eastern Cyber Security Study Guide · Progress saves automatically</footer>
 
 <script>
-// Simulated submission - NO DATA IS SAVED OR SENT ANYWHERE
-function submitLogin() {
-  const email = document.getElementById('emailInput').value;
-  const pass = document.getElementById('passInput').value;
-  
-  // Show loading animation
-  document.querySelector('.form-area').style.display = 'none';
-  document.querySelector('.fake-verify').style.display = 'block';
-  
-  // Simulate delay then reveal lesson
-  setTimeout(() => {
-    document.getElementById('loginPhase').style.display = 'none';
-    document.getElementById('revealPage').style.display = 'block';
-    document.querySelector('.sim-warning').style.display = 'none';
-    
-    console.log('⚠️ SIMULATION NOTICE: No credentials were captured or stored.');
-  }, 1500);
+/* ========== MODULE NAVIGATION ========== */
+function showModule(id, btn) {
+  document.querySelectorAll('.module').forEach(m => m.classList.remove('show'));
+  document.querySelectorAll('.main-nav button').forEach(b => b.classList.remove('active'));
+  document.getElementById(id).classList.add('show');
+  btn.classList.add('active');
+  updateProgress();
 }
-</script>
 
+/* ========== PROGRESS TRACKING ========== */
+let completedModules = JSON.parse(localStorage.getItem('completedModules') || '[]');
+function updateProgress() {
+  const total = 7;
+  const pct = Math.round((completedModules.length / total) * 100);
+  document.getElementById('progressFill').style.width = pct + '%';
+  document.getElementById('progressLabel').textContent = 
+    `Modules completed: ${completedModules.length} / ${total}`;
+}
+
+/* ========== FLASHCARD SYSTEM ========== */
+const flashcards = {
+  cia: [
+    ["What does C stand for in CIA triad?", "Confidentiality - only authorized access"],
+    ["What does I stand for in CIA triad?", "Integrity - data stays accurate & unaltered"],
+    ["What does A stand for in CIA triad?", "Availability - systems accessible when needed"]
+  ],
+  malware: [
+    ["Virus vs. Worm?", "Virus needs host file, worm spreads independently"],
+    ["What is ransomware?", "Encrypts data & demands payment to unlock"],
+    ["Trojan Horse definition?", "Malware disguised as legitimate software"]
+  ],
+  crypto: [
+    ["Symmetric vs. Asymmetric?", "Symmetric: 1 shared key | Asymmetric: Public/Private key pair"],
+    ["Is hashing encryption?", "No! Hashing is one-way, cannot be reversed"],
+    ["What does SHA-256 do?", "Creates unique hash for integrity verification"]
+  ]
+};
+
+let currentFC = { cia: 0, malware: 0, crypto: 0 };
+const fcKeys = ['cia', 'malware', 'crypto'];
+
+function initFlashcards() {
+  fcKeys.forEach(key => {
+    const container = document.getElementById(`${key}-flashcards`);
+    if (!container) return;
+    container.innerHTML = `
+      <div class="flashcard" onclick="flipFC('${key}')">
+        <div class="flashcard-inner">
+          <div class="fc-face"><h2 id="fc-${key}-front"></h2><div class="fc-hint">Click to flip</div></div>
+          <div class="fc-face fc-back"><p id="fc-${key}-back"></p></div>
+        </div>
+      </div>
+      <div class="flash-controls">
+        <button class="secondary" onclick="prevFC(event,'${key}')">← Prev</button>
+        <button onclick="flipFC('${key}')">Flip</button>
+        <button onclick="nextFC(event,'${key}')">Next →</button>
+      </div>
+      <div class="counter" id="fc-counter-${key}"></div>
+    `;
+    renderFC(key);
+  });
+}
+
+function renderFC(key) {
+  document.getElementById(`fc-${key}-front`).textContent = flashcards[key][currentFC[key]][0];
+  document.getElementById(`fc-${key}-back`).innerHTML = `<strong>${flashcards[key][currentFC[key]][1]}</strong>`;
+  document.getElementById(`fc-counter-${key}`).textContent = `${key.toUpperCase()} Card ${currentFC[key]+1}/${flashcards[key].length}`;
+}
+
+function flipFC(key) {
+  const card = document.querySelector(`#${key}-flashcards .flashcard`);
+  card.classList.toggle('flipped');
+}
+
+function nextFC(e, key) {
+  e.stopPropagation();
+  currentFC[key] = (currentFC[key] + 1) % flashcards[key].length;
+  renderFC(key);
+  document.querySelector(`#${key}-flashcards .flashcard`).classList.remove('flipped');
+}
+
+function prevFC(e, key) {
+  e.stopPropagation();
+  currentFC[key] = (currentFC[key] - 1 + flashcards[key].length) % flashcards[key].length;
+  renderFC(key);
+  document.querySelector(`#${key}-flashcards .flashcard`).classList.remove('flipped');
+}
+
+/* ========== QUIZ SYSTEM ========== */
+function quizCheck(btn, correct, feedback) {
+  const parent = btn.parentElement;
+  parent.querySelectorAll('.option').forEach(o => o.style.pointerEvents = 'none');
+  const fb = parent.querySelector('.feedback');
+  fb.textContent = feedback;
+  fb.className = 'feedback ' + (correct ? 'ok' : 'no');
+  btn.classList.add(correct ? 'correct' : 'wrong');
+}
+
+/* ========== SCENARIO SYSTEM ========== */
+function scenarioResult(btn, correct) {
+  const parent = btn.parentElement;
+  const resultDiv = parent.querySelector('.scenario-result');
+  if (correct) {
+    resultDiv.style.display = 'block';
+    resultDiv.innerHTML = '<strong>✓ Good choice!</strong> This is the recommended security response.';
+    resultDiv.style.borderColor = 'var(--correct)';
+    resultDiv.style.background = '#1a3a2a';
+  } else {
+    resultDiv.style.display = 'block';
+    resultDiv.innerHTML = '<strong>✗ Risky!</strong> This could expose you to malware or data theft. Trustworthy actions involve reporting unknown devices to IT.';
+    resultDiv.style.borderColor = 'var(--wrong)';
+    resultDiv.style.background = '#3a1a1a';
+  }
+}
+
+/* ========== PHISHING LAB ========== */
+function triggerPhishingLesson() {
+  document.getElementById('phishingLogin').style.display = 'none';
+  document.getElementById('phishingReveal').style.display = 'block';
+}
+
+/* ========== PASSWORD STRENGTH CHECKER ========== */
+const pwd = document.getElementById('passwordInput');
+if (pwd) {
+  pwd.addEventListener('input', checkPassword);
+}
+
+function checkPassword() {
+  const val = pwd.value;
+  const fill = document.getElementById('strengthFill');
+  const label = document.getElementById('strengthLabel');
+  const req1 = document.getElementById('req1');
+  const req2 = document.getElementById('req2');
+  const req3 = document.getElementById('req3');
+  const req4 = document.getElementById('req4');
+  
+  let score = 0;
+  req1.className = 'req-item' + (val.length >= 12 ? ' check' : '');
+  req2.className = 'req-item' + (/[A-Z]/.test(val) ? ' check' : '');
+  req3.className = 'req-item' + (/[0-9]/.test(val) ? ' check' : '');
+  req4.className = 'req-item' + (/[^A-Za-z0-9]/.test(val) ? ' check' : '');
+  
+  if (val.length >= 12) score += 25;
+  if (/[A-Z]/.test(val)) score += 25;
+  if (/[0-9]/.test(val)) score += 25;
+  if (/[^A-Za-z0-9]/.test(val)) score += 25;
+  
+  fill.style.width = score + '%';
+  if (score <= 25) {
+    fill.style.background = 'var(--wrong)';
+    label.textContent = 'Strength: Weak';
+  } else if (score <= 50) {
+    fill.style.background = '#f39c12';
+    label.textContent = 'Strength: Fair';
+  } else if (score <= 75) {
+    fill.style.background = '#3498db';
+    label.textContent = 'Strength: Good';
+  } else {
+    fill.style.background = 'var(--correct)';
+    label.textContent = 'Strength: Strong!';
+  }
+}
+
+/* ========== FINAL COMPREHENSIVE QUIZ ========== */
+const finalQuiz = [
+  { q: "Which CIA principle ensures data hasn't been altered?", opts: ["Confidentiality","Integrity","Availability"], a: 1,
+    ex: "Integrity guarantees data remains unchanged." },
+  { q: "What malware spreads without user action?", opts: ["Virus","Worm","Trojan"], a: 1,
+    ex: "Worms self-replicate across networks." },
+  { q: "Encryption that uses one shared key is called?", opts: ["Symmetric","Asymmetric","Hashing"], a: 0,
+    ex: "Symmetric encryption uses a single shared secret key." },
+  { q: "What authentication factor is a fingerprint?", opts: ["Something you know","Something you have","Something you are"], a: 2,
+    ex: "Biometrics are something you ARE." },
+  { q: "Best response to unexpected USB drive?", opts: ["Plug it in","Report to IT","Throw it away"], a: 1,
+    ex: "Unknown devices could contain malware." }
+];
+
+function initFinalQuiz() {
+  const box = document.getElementById('finalQuiz');
+  box.innerHTML = `
+    <div style="text-align:center;margin-bottom:20px;">
+      <p style="color:var(--muted);">Test your knowledge across all topics</p>
+    </div>
+    <div id="quiz-content"></div>
+  `;
+  renderQuiz(0);
+}
+
+let quizIndex = 0, quizScore = 0;
+
+function renderQuiz(idx) {
+  const content = document.getElementById('quiz-content');
+  if (idx >= finalQuiz.length) {
+    const pct = Math.round(quizScore / finalQuiz.length * 100);
+    const msg = pct === 100 ? "🏆 Perfect! You're exam ready!" :
+                pct >= 70 ? "👏 Great job! Review the weak spots." :
+                "📚 Keep studying and try again!";
+    content.innerHTML = `
+      <div style="text-align:center;padding:30px;">
+        <div class="result-score">${quizScore} / ${finalQuiz.length} (${pct}%)</div>
+        <p style="color:var(--muted);">${msg}</p>
+        <button class="retry-btn" onclick="initFinalQuiz();quizIndex=0;quizScore=0;">Restart Quiz</button>
+      </div>
+    `;
+    return;
+  }
+  const item = finalQuiz[idx];
+  content.innerHTML = `
+    <div style="color:var(--muted);font-size:.85rem;margin-bottom:8px;">Question ${idx+1}/${finalQuiz.length}</div>
+    <div class="quiz-q">${item.q}</div>
+    ${item.opts.map((o,i) => `<button class="option" onclick="ansQ(${i},${item.a},'${item.ex.replace(/'/g,"\\'")}');">${String.fromCharCode(65+i)}. ${o}</button>`).join('')}
+    <div class="feedback" id="qFeedback"></div>
+  `;
+}
+
+function ansQ(selected, correct, explanation) {
+  const fb = document.getElementById('qFeedback');
+  const opts = document.querySelectorAll('#quiz-content .option');
+  opts.forEach(o => o.style.pointerEvents = 'none');
+  opts[correct].classList.add('correct');
+  if (selected === correct) {
+    quizScore++;
+    fb.className = 'feedback ok';
+    fb.textContent = '✓ ' + explanation;
+  } else {
+    opts[selected].classList.add('wrong');
+    fb.className = 'feedback no';
+    fb.textContent = '✘ ' + explanation;
+  }
+  setTimeout(() => {
+    quizIndex++;
+    renderQuiz(quizIndex);
+  }, 2000);
+}
+
+/* ========== INITIALIZATION ========== */
+window.onload = function() {
+  initFlashcards();
+  initFinalQuiz();
+  updateProgress();
+};
+</script>
 </body>
 </html>
