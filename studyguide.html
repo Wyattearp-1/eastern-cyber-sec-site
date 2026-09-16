@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Phishing Awareness Simulation - EDUCATIONAL USE ONLY</title>
+<style>
+  :root {
+    --google-blue: #4285f4;
+    --google-green: #34a853;
+    --google-yellow: #fbbc05;
+    --google-red: #ea4335;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Arial', sans-serif; }
+  
+  /* 🚨 ETHICAL SIMULATION WATERMARKS - DO NOT REMOVE 🚨 */
+  body::before {
+    content: "🔒 PHISHING SIMULATION - EDUCATIONAL USE ONLY 🔒";
+    position: fixed; top: 0; left: 0; right: 0;
+    background: #ffcc00; color: #000;
+    text-align: center; font-weight: bold; font-size: 0.7rem;
+    padding: 4px; z-index: 99999;
+  }
+  body::after {
+    content: "This is NOT a real Google page. This is a cybersecurity training exercise.";
+    position: fixed; bottom: 0; left: 0; right: 0;
+    background: #333; color: white;
+    text-align: center; font-size: 0.65rem;
+    padding: 4px; z-index: 99999;
+  }
+  
+  body {
+    background: #f0f2f5; min-height: 100vh; padding-top: 25px;
+  }
+  
+  /* WARNING BANNER */
+  .sim-warning {
+    background: #fff3cd; border: 2px dashed #ffc107;
+    max-width: 500px; margin: 50px auto 20px;
+    padding: 15px; text-align: center; border-radius: 8px;
+    font-size: 0.8rem; color: #856404;
+  }
+  
+  .login-container {
+    max-width: 450px; margin: 30px auto;
+    background: white; border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12);
+    overflow: hidden;
+  }
+  
+  .logo-area {
+    text-align: center; padding: 35px 0 25px;
+  }
+  .logo-text {
+    font-size: 2rem; letter-spacing: -1px;
+  }
+  .logo-g { color: #4285f4; }
+  .logo-o1 { color: #ea4335; }
+  .logo-o2 { color: #fbbc05; }
+  .logo-o3 { color: #4285f4; }
+  .logo-l { color: #34a853; }
+  .logo-e { color: #ea4335; }
+  
+  .login-header {
+    text-align: center; padding: 0 30px 20px;
+  }
+  .login-header h2 { font-size: 1.7rem; margin-bottom: 10px; color: #202124; }
+  .login-header p { color: #5f6368; font-size: 1rem; }
+  
+  .form-area { padding: 0 30px 30px; }
+  
+  input[type="email"], input[type="password"] {
+    width: 100%; padding: 14px 15px;
+    border: 1px solid #dadce0; border-radius: 4px;
+    font-size: 1rem; margin-bottom: 10px;
+    transition: border 0.2s;
+  }
+  input:focus { outline: none; border-color: var(--google-blue); }
+  
+  .btn-primary {
+    width: 100%; background: var(--google-blue); color: white;
+    border: none; padding: 12px; border-radius: 4px;
+    font-size: 1rem; cursor: pointer; margin-top: 20px;
+  }
+  .btn-primary:hover { background: #3367d6; }
+  
+  .links {
+    display: flex; justify-content: space-between;
+    margin-top: 15px; font-size: 0.875rem;
+  }
+  .links a { color: var(--google-blue); text-decoration: none; }
+  
+  .fake-verify {
+    display: none; text-align: center; padding: 40px;
+  }
+  
+  /* REVEAL PAGE - THE TEACHING MOMENT */
+  .reveal-page {
+    display: none;
+    max-width: 600px; margin: 30px auto;
+    background: white; border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    padding: 40px;
+  }
+  .reveal-page h1 { 
+    font-size: 1.8rem; color: #ea4335; 
+    text-align: center; margin-bottom: 20px;
+  }
+  .reveal-page .emoji {
+    font-size: 3rem; text-align: center; display: block; margin: 20px 0;
+  }
+  .reveal-page p { line-height: 1.8; color: #333; margin: 15px 0; }
+  .reveal-page .highlight {
+    background: #fff3cd; padding: 3px 6px; border-radius: 3px; font-weight: bold;
+  }
+  .reveal-page .lesson-box {
+    background: #e8f5e9; border-left: 4px solid #4caf50;
+    padding: 20px; margin: 25px 0;
+  }
+  .reveal-page .lesson-box h3 { color: #2e7d32; margin-bottom: 10px; }
+  
+  .red-flag-list { margin: 15px 0 15px 20px; }
+  .red-flag-list li { margin: 10px 0; color: #5f6368; }
+  .red-flag-list strong { color: #d32f2f; }
+  
+  .btn-home {
+    background: var(--google-blue); color: white;
+    border: none; padding: 14px 40px; border-radius: 4px;
+    font-size: 1rem; cursor: pointer; margin: 30px auto 0;
+    display: block;
+  }
+  
+  .ethical-note {
+    font-size: 0.7rem; color: #888; text-align: center;
+    margin-top: 40px; padding: 20px;
+    background: #fafafa; border-top: 1px solid #eee;
+  }
+</style>
+</head>
+<body>
+
+<!-- PHASE 1: FAKE LOGIN (SIMULATION) -->
+<div id="loginPhase">
+  <div class="sim-warning">
+    ⚠️ <strong>EDUCATIONAL SIMULATION:</strong> This is a controlled phishing awareness test. No data is collected or stored. Refresh the page to reset.
+  </div>
+  
+  <div class="login-container">
+    <div class="logo-area">
+      <div class="logo-text">
+        <span class="logo-g">G</span><span class="logo-o1">o</span><span class="logo-o2">o</span>
+        <span class="logo-o3">g</span><span class="logo-l">l</span><span class="logo-e">e</span>
+      </div>
+    </div>
+    
+    <div class="login-header">
+      <h2>Sign in</h2>
+      <p>Use your @school.edu account for AP Cybersecurity class</p>
+    </div>
+    
+    <div class="form-area">
+      <input type="email" id="emailInput" placeholder="Email or phone" autocomplete="off">
+      <input type="password" id="passInput" placeholder="Enter your password" autocomplete="off">
+      
+      <div class="links">
+        <a href="#">Forgot email?</a>
+        <a href="#" onclick="submitLogin(); return false;">Next</a>
+      </div>
+    </div>
+  </div>
+  
+  <div class="fake-verify" id="fakeVerify">
+    <div style="font-size: 3rem;">🔄</div>
+    <p>Verifying credentials...</p>
+    <p style="color:#888;font-size:0.85rem;margin-top:10px;">(Simulation running...)</p>
+  </div>
+</div>
+
+<!-- PHASE 2: REVEAL & LESSON -->
+<div id="revealPage" class="reveal-page">
+  <span class="emoji">🎯</span>
+  <h1>You Fell For It!</h1>
+  
+  <p>This was a <strong>controlled phishing simulation</strong>. Congratulations on completing the training!</p>
+  
+  <div class="lesson-box">
+    <h3>🛡️ What Happened Here?</h3>
+    <p>You encountered a classic <strong>spear-phishing</strong> attack. Notice the subtle cues:</p>
+    <ul class="red-flag-list">
+      <li><strong>Urgency:</strong> "@school.edu account for AP Cybersecurity class" creates false specificity</li>
+      <li><strong>Familiar branding:</strong> Mimics a trusted interface to lower guard</li>
+      <li><strong>Context manipulation:</strong> Links the login to your current class to seem legitimate</li>
+    </ul>
+  </div>
+  
+  <div class="lesson-box" style="background:#fff8e1;border-left-color:#ff9800;">
+    <h3>🚩 Red Flags to Watch For:</h3>
+    <ul class="red-flag-list">
+      <li><strong>Check the URL:</strong> Was this really <code>accounts.google.com</code>? Or something lookalike?</li>
+      <li><strong>Unexpected urgency:</strong> "Verify now" or "Account suspended" messages often mean trouble</li>
+      <li><strong>Unsolicited requests:</strong> Legitimate services rarely ask you to log in via email/link</li>
+      <li><strong>Request for sensitive info:</strong> Real companies won't ask for passwords in forms they send you</li>
+    </ul>
+  </div>
+  
+  <p>In real-world scenarios, attackers could use this data to access your email, school accounts, or worse. This simulation helps build muscle memory for spotting these tricks.</p>
+  
+  <div class="lesson-box">
+    <h3>✅ How to Protect Yourself:</h3>
+    <ul class="red-flag-list" style="list-style:none;padding-left:0;">
+      <li>🔍 <strong>Always hover before clicking</strong> links to see the real destination</li>
+      <li>🔐 <strong>Enable MFA</strong> everywhere — even if they get your password, they still can't log in</li>
+      <li>🏢 <strong>When in doubt, navigate directly</strong> to the service instead of clicking links</li>
+      <li>📧 <strong>Report suspicious emails</strong> to your IT/security team</li>
+    </ul>
+  </div>
+  
+  <button class="btn-home" onclick="location.reload()">Return to Lesson</button>
+</div>
+
+<div class="ethical-note">
+  <strong>Ethical Use Notice:</strong> This simulation is designed for educational purposes only. 
+  Never use phishing techniques without explicit authorization from the target organization.
+  Unauthorized phishing is illegal and violates cybersecurity laws worldwide.
+</div>
+
+<script>
+// Simulated submission - NO DATA IS SAVED OR SENT ANYWHERE
+function submitLogin() {
+  const email = document.getElementById('emailInput').value;
+  const pass = document.getElementById('passInput').value;
+  
+  // Show loading animation
+  document.querySelector('.form-area').style.display = 'none';
+  document.querySelector('.fake-verify').style.display = 'block';
+  
+  // Simulate delay then reveal lesson
+  setTimeout(() => {
+    document.getElementById('loginPhase').style.display = 'none';
+    document.getElementById('revealPage').style.display = 'block';
+    document.querySelector('.sim-warning').style.display = 'none';
+    
+    console.log('⚠️ SIMULATION NOTICE: No credentials were captured or stored.');
+  }, 1500);
+}
+</script>
+
+</body>
+</html>
