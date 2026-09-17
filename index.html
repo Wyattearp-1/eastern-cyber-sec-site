@@ -1,702 +1,3080 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
+<html lang="en"><head><style>body{margin:0}</style><script>(function(){function n(a){try{window.parent.postMessage(JSON.stringify({type:"pointerlock",active:a}),"*")}catch(e){}}document.addEventListener("pointerlockchange",function(){n(document.pointerLockElement!==null)});document.addEventListener("pointerlockerror",function(){n(false)});})();</script><script>(function(){function s(l,m){try{window.parent.postMessage(JSON.stringify({type:"console_message",level:l,message:String(m)}),"*")}catch(e){}}var _l=console.log,_w=console.warn,_e=console.error;try{Object.defineProperty(console,"log",{value:function(){s("log",Array.from(arguments).join(" "));return _l.apply(console,arguments)},writable:false,configurable:false});Object.defineProperty(console,"warn",{value:function(){s("warn",Array.from(arguments).join(" "));return _w.apply(console,arguments)},writable:false,configurable:false});Object.defineProperty(console,"error",{value:function(){s("error",Array.from(arguments).join(" "));return _e.apply(console,arguments)},writable:false,configurable:false});}catch(e){console.log=function(){s("log",Array.from(arguments).join(" "));return _l.apply(console,arguments)};console.warn=function(){s("warn",Array.from(arguments).join(" "));return _w.apply(console,arguments)};console.error=function(){s("error",Array.from(arguments).join(" "));return _e.apply(console,arguments)};}window.onerror=function(m){s("error",m)};})();</script>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Eastern Cyber Security - Complete Study Guide</title>
+<title>Eastern Cyber Range</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&amp;family=IBM+Plex+Sans:wght@400;600&amp;family=IBM+Plex+Mono:wght@400;600&amp;display=swap" rel="stylesheet">
 <style>
-  :root {
-    --bg: #0f1220;
-    --panel: #1a1f35;
-    --accent: #7c6cff;
-    --accent2: #4cd6c0;
-    --text: #e8eaf6;
-    --muted: #9aa0c3;
-    --correct: #2ecc71;
-    --wrong: #ff5b77;
-    --radius: 14px;
-  }
-  * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', system-ui, sans-serif; }
-  body {
-    background: var(--bg);
-    color: var(--text);
-    min-height: 100vh;
-    padding-bottom: 60px;
-  }
-  
-  /* ========== NAVIGATION MENU ========== */
-  nav.main-nav {
-    position: sticky; top: 0; z-index: 1000;
-    background: linear-gradient(180deg, rgba(15,18,32,0.98), rgba(15,18,32,0.95));
-    backdrop-filter: blur(10px);
-    padding: 12px 20px;
-    border-bottom: 1px solid #2c3352;
-    overflow-x: auto;
-  }
-  nav.main-nav ul {
-    display: flex; justify-content: center; gap: 8px; flex-wrap: wrap;
-    list-style: none; max-width: 1000px; margin: 0 auto;
-  }
-  nav.main-nav li button {
-    background: var(--panel); color: var(--text);
-    border: 1px solid #2c3352; border-radius: 25px;
-    padding: 10px 20px; cursor: pointer; font-size: .9rem;
-    transition: all .2s; white-space: nowrap;
-  }
-  nav.main-nav li button:hover { border-color: var(--accent); transform: translateY(-1px); }
-  nav.main-nav li button.active {
-    background: var(--accent); border-color: var(--accent); color: #fff;
-    box-shadow: 0 4px 12px rgba(124,108,255,0.3);
-  }
-  
-  /* ========== HEADER ========== */
-  header {
-    text-align: center; padding: 40px 20px 20px;
-  }
-  header h1 { font-size: 2rem; }
-  header h1 span { color: var(--accent); }
-  header p { color: var(--muted); margin-top: 6px; font-size: 1.05rem; }
-  
-  .progress-bar {
-    width: 90%; max-width: 700px; margin: 18px auto 0;
-    height: 10px; background: #262c47; border-radius: 5px; overflow: hidden;
-  }
-  .progress-fill {
-    height: 100%; width: 0%;
-    background: linear-gradient(90deg, var(--accent), var(--accent2));
-    transition: width .4s ease;
-  }
-  .progress-label { text-align:center; color: var(--muted); font-size:.85rem; margin-top:6px; }
-  
-  /* ========== CONTENT SECTIONS ========== */
-  main {
-    max-width: 900px; margin: 20px auto; padding: 0 15px;
-  }
-  section.module { display: none; animation: fadeIn .3s; }
-  section.module.show { display: block; }
-  @keyframes fadeIn { from { opacity: 0; transform: translateY(8px);} to {opacity:1; transform:none;} }
-  
-  .module-header {
-    display: flex; justify-content: space-between; align-items: center;
-    margin-bottom: 20px; padding-bottom: 15px; border-bottom: 1px solid #2c3352;
-  }
-  .module-header h2 { color: var(--accent2); font-size: 1.5rem; }
-  .module-header .icon { font-size: 2rem; }
-  
-  /* ========== CONCEPT CARDS ========== */
-  .concept-card {
-    background: var(--panel); border: 1px solid #2c3352;
-    border-radius: var(--radius); padding: 20px 22px; margin-bottom: 16px;
-  }
-  .concept-card h3 { color: var(--accent2); margin-bottom: 8px; }
-  .concept-card p { color: #c7cbe6; line-height: 1.6; }
-  .tag {
-    display: inline-block; font-size: .72rem; background: #262c47;
-    padding: 3px 10px; border-radius: 12px; color: var(--muted); margin-top: 10px;
-  }
-  
-  /* ========== FLASHCARDS ========== */
-  .flashcard {
-    perspective: 1000px; height: 260px; margin: 25px auto; cursor: pointer;
-  }
-  .flashcard-inner {
-    position: relative; width: 100%; height: 100%;
-    transition: transform .55s;
-    transform-style: preserve-3d;
-  }
-  .flashcard.flipped .flashcard-inner { transform: rotateY(180deg); }
-  .fc-face {
-    position: absolute; inset: 0; backface-visibility: hidden;
-    background: var(--panel); border: 2px solid var(--accent);
-    border-radius: var(--radius);
-    display: flex; flex-direction: column; align-items: center; justify-content: center;
-    padding: 25px; text-align: center;
-  }
-  .fc-back { transform: rotateY(180deg); border-color: var(--accent2); }
-  .fc-face h2 { font-size: 1.3rem; margin-bottom: 10px; }
-  .fc-face p { color: #c7cbe6; line-height: 1.55; }
-  .fc-hint { position: absolute; bottom: 14px; font-size: .75rem; color: var(--muted); }
-  
-  .flash-controls { display:flex; justify-content:center; gap:12px; flex-wrap:wrap; margin-top:20px; }
-  .flash-controls button {
-    background: var(--accent); border: none; color: white;
-    padding: 10px 24px; border-radius: 30px; cursor: pointer; font-size: .95rem;
-  }
-  .flash-controls button.secondary { background: var(--panel); border: 1px solid #2c3352; }
-  .counter { text-align: center; color: var(--muted); margin-top: 14px; }
-  
-  /* ========== QUIZ ========== */
-  .quiz-box {
-    background: var(--panel); border: 1px solid #2c3352;
-    border-radius: var(--radius); padding: 25px;
-  }
-  .quiz-q { font-size: 1.15rem; margin-bottom: 18px; }
-  .option {
-    display: block; width: 100%; text-align: left;
-    background: #222844; color: var(--text);
-    border: 1px solid #2c3352; border-radius: 10px;
-    padding: 13px 18px; margin-bottom: 10px; cursor: pointer; font-size: .98rem;
-    transition: all .15s;
-  }
-  .option:hover { border-color: var(--accent); }
-  .option.correct { background: rgba(46,204,113,.15); border-color: var(--correct); }
-  .option.wrong { background: rgba(255,91,119,.15); border-color: var(--wrong); }
-  .feedback { min-height: 28px; margin-top: 10px; font-weight: 600; }
-  .feedback.ok { color: var(--correct); }
-  .feedback.no { color: var(--wrong); }
-  .result-score { font-size: 1.6rem; text-align: center; margin: 20px 0; }
-  .retry-btn {
-    display: block; margin: 15px auto; background: var(--accent2);
-    color: #0f1220; border: none; padding: 12px 32px;
-    border-radius: 30px; font-size: 1rem; cursor: pointer; font-weight: 700;
-  }
-  
-  /* ========== INTERACTIVE SCENARIO ========== */
-  .scenario-box {
-    background: var(--panel); border: 1px solid #2c3352;
-    border-radius: var(--radius); padding: 25px; margin-bottom: 20px;
-  }
-  .scenario-question { font-size: 1.2rem; margin-bottom: 20px; }
-  .scenario-option {
-    display: block; width: 100%; text-align: left;
-    background: #222844; color: var(--text);
-    border: 1px solid #2c3352; border-radius: 10px;
-    padding: 15px 20px; margin-bottom: 12px; cursor: pointer;
-    transition: all .2s;
-  }
-  .scenario-option:hover { border-color: var(--accent); transform: translateX(5px); }
-  .scenario-result {
-    background: #1a2a44; padding: 20px; border-radius: 10px;
-    margin-top: 20px; display: none; border-left: 4px solid var(--accent);
-  }
-  
-  /* ========== PASSWORD STRENGTH CHECKER ========== */
-  .password-checker {
-    background: var(--panel); border: 1px solid #2c3352;
-    border-radius: var(--radius); padding: 25px;
-  }
-  .password-input {
-    width: 100%; padding: 14px 15px;
-    border: 1px solid #dadce0; border-radius: 4px;
-    font-size: 1rem; margin-bottom: 15px;
-    background: #222844; color: var(--text);
-  }
-  .strength-meter {
-    height: 8px; background: #262c47; border-radius: 4px;
-    margin: 15px 0; overflow: hidden;
-  }
-  .strength-fill {
-    height: 100%; width: 0%;
-    transition: all .3s;
-    background: var(--wrong);
-  }
-  .strength-label { text-align: center; margin-top: 8px; font-weight: 600; }
-  .requirements-list { margin-top: 15px; font-size: .9rem; color: var(--muted); }
-  .req-item { margin: 5px 0; }
-  .req-item.check { color: var(--correct); }
-  .req-item.cross { color: var(--wrong); }
-  
-  /* ========== PHISHING SIMULATION STYLES ========== */
-  .phishing-container {
-    background: var(--panel); border-radius: var(--radius);
-    max-width: 500px; margin: 20px auto; padding: 30px;
-    border: 1px solid #2c3352;
-  }
-  .fake-logo { text-align: center; margin-bottom: 20px; }
-  .fake-logo h3 { font-size: 1.8rem; }
-  .fake-input {
-    width: 100%; padding: 12px; margin: 8px 0;
-    border: 1px solid #2c3352; border-radius: 6px;
-    background: #222844; color: var(--text);
-  }
-  .fake-btn {
-    width: 100%; background: var(--accent); color: white;
-    border: none; padding: 12px; border-radius: 6px;
-    font-size: 1rem; cursor: pointer; margin-top: 15px;
-  }
-  .learning-reveal {
-    display: none; background: var(--panel); border-radius: var(--radius);
-    max-width: 600px; margin: 20px auto; padding: 35px;
-    border: 2px solid var(--accent2);
-  }
-  .learning-reveal h3 { color: var(--correct); font-size: 1.6rem; text-align: center; margin-bottom: 15px; }
-  .red-flag { margin: 12px 0 12px 20px; color: var(--muted); }
-  .red-flag strong { color: var(--wrong); }
-  
-  /* ========== FOOTER ========== */
-  footer { text-align:center; color: var(--muted); font-size:.8rem; margin-top:40px; }
+:root{
+  /* Bristol Eastern — Blue & Grey, light theme */
+  --ink:#e8eaed;           /* page background — slightly darker than white */
+  --surface:#e8eaed;       /* main console background */
+  --panel:#d0d4da;         /* cards / boxes — grey */
+  --panel-2:#c2c7cf;       /* secondary panels — deeper grey */
+  --deep:#dde1e6;          /* inset areas (terminals, code outs) */
+  --line:#a8b0bc;          /* borders — neutral grey */
+  --text:#0f1a2e;          /* primary text */
+  --muted:#4a5c74;         /* secondary text */
+  --amber:#1a56c4;         /* Lancer blue accent (kept for buttons/links) */
+  --cyan:#5b6f8c;          /* cool grey secondary */
+  --silver:#7a8ba3;
+  --red:#c43c4e;
+  --green:#1a8f52;
+  --blue-deep:#0d2a6b;
+  --r-sm:6px; --r-md:10px;
+  --sans:'IBM Plex Sans', system-ui, sans-serif;
+  --display:'Space Grotesk', system-ui, sans-serif;
+  --mono:'IBM Plex Mono', ui-monospace, monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{background:var(--ink);color:var(--text);font-family:var(--sans);font-size:16px;line-height:1.6;min-height:100vh}
+button{font-family:inherit;font-size:inherit;color:inherit;cursor:pointer}
+input,textarea{font-family:inherit}
+:focus-visible{outline:2px solid var(--amber);outline-offset:2px}
+@media (prefers-reduced-motion: reduce){*{animation-duration:.01ms !important;transition-duration:.01ms !important}}
+
+/* ---------- cold open ---------- */
+#gate{position:fixed;inset:0;z-index:900;background:var(--surface);overflow-y:auto;padding:28px 16px 70px}
+.gate-wrap{max-width:720px;margin:0 auto}
+.kicker{font-family:var(--mono);font-size:.78rem;color:var(--amber)}
+.gate-title{font-family:var(--display);font-size:clamp(1.6rem,5vw,2.3rem);line-height:1.15;margin:6px 0 8px}
+.gate-sub{color:var(--muted);max-width:58ch;margin-bottom:22px}
+.mail{border:1px solid var(--line);border-radius:var(--r-md);overflow:hidden;background:var(--panel)}
+.mail-bar{display:flex;align-items:center;gap:8px;padding:9px 14px;background:var(--panel-2);border-bottom:1px solid var(--line);font-size:.8rem;color:var(--muted);font-family:var(--mono)}
+.dot{width:9px;height:9px;border-radius:50%;background:var(--line)}
+.mail-body{padding:22px 20px 26px}
+.mail-head{border-bottom:1px solid var(--line);padding-bottom:14px;margin-bottom:18px}
+.mail-subject{font-family:var(--display);font-size:1.15rem;margin-bottom:8px}
+.mail-meta{font-size:.85rem;color:var(--muted);font-family:var(--mono);line-height:1.9;word-break:break-word}
+.mail-body p{margin-bottom:14px;max-width:62ch}
+.flag{background:none;border:0;padding:0;color:inherit;font:inherit;text-align:left;border-bottom:1px dashed rgba(240,162,60,.45);transition:background .15s}
+.flag:hover{background:rgba(240,162,60,.12)}
+.flag.spotted{background:rgba(196,60,78,.12);border-bottom:1px solid var(--red);color:var(--red)}
+.flag-note{display:block;font-size:.82rem;color:var(--red);margin-top:4px;max-width:58ch}
+.attach{display:inline-flex;align-items:center;gap:8px;border:1px dashed var(--line);border-radius:var(--r-sm);padding:8px 12px;font-size:.85rem;font-family:var(--mono);color:var(--muted)}
+.hunt-bar{display:flex;flex-wrap:wrap;gap:10px 16px;align-items:center;justify-content:space-between;margin:18px 0;padding:12px 16px;border:1px solid var(--line);border-radius:var(--r-md);background:var(--panel)}
+.hunt-count{font-family:var(--mono);font-size:.9rem;color:var(--amber)}
+.hunt-hint{font-size:.85rem;color:var(--muted)}
+.choice-row{display:grid;gap:10px;grid-template-columns:1fr;margin-top:18px}
+@media(min-width:560px){.choice-row{grid-template-columns:1fr 1fr}}
+.choice{padding:14px 18px;border-radius:var(--r-md);border:1px solid var(--line);background:var(--panel-2);text-align:left;transition:border-color .15s,transform .15s}
+.choice:hover{border-color:var(--amber);transform:translateY(-2px)}
+.choice b{display:block;font-family:var(--display);margin-bottom:2px}
+.choice span{font-size:.85rem;color:var(--muted)}
+.browser{border:1px solid var(--line);border-radius:var(--r-md);overflow:hidden;background:var(--panel)}
+.urlbar{display:flex;align-items:center;gap:10px;padding:10px 14px;background:var(--panel-2);border-bottom:1px solid var(--line)}
+.urlbar .pill{flex:1;background:var(--ink);border:1px solid var(--line);border-radius:20px;padding:6px 14px;font-family:var(--mono);font-size:.8rem;color:var(--muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.insecure{color:var(--red);font-family:var(--mono);font-size:.76rem;white-space:nowrap}
+.portal{padding:38px 24px 32px;text-align:center}
+.portal-logo{font-family:var(--display);font-size:1.5rem;margin-bottom:4px}
+.portal-logo em{font-style:normal;color:var(--amber)}
+.small{font-size:.85rem;color:var(--muted)}
+.field{width:100%;max-width:340px;margin:0 auto 10px;display:block;padding:12px 14px;background:var(--surface);border:1px solid var(--line);border-radius:var(--r-sm);color:var(--text);font-size:1rem}
+.portal .go{max-width:340px;width:100%;margin:12px auto 0;display:block;background:var(--amber);color:#fff;border:0;border-radius:var(--r-sm);padding:12px;font-weight:600;font-family:var(--display)}
+.statusbar{font-family:var(--mono);font-size:.75rem;color:var(--muted);padding:7px 14px;border-top:1px solid var(--line);background:var(--panel-2);min-height:30px;word-break:break-all}
+.debrief-head{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:6px}
+.verdict{font-family:var(--display);font-size:clamp(1.5rem,4.5vw,2rem)}
+.score-chip{font-family:var(--mono);font-size:.85rem;padding:4px 10px;border-radius:20px;border:1px solid var(--amber);color:var(--amber)}
+.flag-list{list-style:none;margin:20px 0 0;display:grid;gap:10px}
+.flag-list li{border-left:3px solid var(--red);background:var(--panel);padding:12px 16px;border-radius:0 var(--r-sm) var(--r-sm) 0;opacity:0;transform:translateX(-8px);animation:slideIn .4s forwards}
+.flag-list li b{font-family:var(--display);display:block;margin-bottom:2px;color:var(--red)}
+.flag-list li.got{border-left-color:var(--green)}
+.flag-list li.got b{color:var(--green)}
+.flag-list li span{font-size:.9rem;color:var(--muted)}
+@keyframes slideIn{to{opacity:1;transform:none}}
+.primary{background:var(--amber);color:#fff;border:0;border-radius:var(--r-sm);padding:13px 26px;font-weight:600;font-family:var(--display);margin-top:24px}
+.ghost{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-sm);padding:11px 20px;color:var(--text)}
+.ghost:hover{border-color:var(--amber);color:var(--text)}
+
+/* ---------- console ---------- */
+#console{display:none;background:var(--surface);min-height:100vh}
+header.top{border-bottom:1px solid #0a2348;padding:18px 16px 0;background:#0d2a6b;color:#eef2f7}
+header.top .brand h1,header.top .clearance{color:#eef2f7}
+header.top .clearance{opacity:.9}
+header.top #scoreVal{color:#9ec1ff !important}
+header.top .mode-pill{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.25);color:#dce8f8}
+header.top .mode-pill.blue{border-color:#7eb0ff;color:#7eb0ff}
+header.top .mode-pill.red{border-color:#f08090;color:#f08090}
+header.top .team-toggle{border-color:rgba(255,255,255,.25)}
+header.top .team-toggle button{color:rgba(255,255,255,.7)}
+header.top .team-toggle button.on{background:#1a56c4;color:#fff}
+header.top .team-toggle button.on.red{background:var(--red);color:#fff}
+header.top .ghost{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.25);color:#dce8f8}
+header.top .ghost:hover{border-color:#fff;color:#fff}
+header.top nav.rail button{color:rgba(255,255,255,.65)}
+header.top nav.rail button:hover{color:#fff}
+header.top nav.rail button.on{color:#9ec1ff;border-bottom-color:#9ec1ff}
+header.top .meter{background:rgba(255,255,255,.15)}
+header.top .tick{color:#7dffa8}
+.top-inner{max-width:960px;margin:0 auto}
+.brand{display:flex;align-items:baseline;justify-content:space-between;gap:14px;flex-wrap:wrap}
+.brand h1{font-family:var(--display);font-size:1.25rem}
+.clearance{font-family:var(--mono);font-size:.8rem;color:var(--amber)}
+.meter{height:4px;background:#c5c9d0;border-radius:2px;overflow:hidden;margin-top:14px}
+.meter i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--amber),var(--silver));transition:width .5s ease}
+nav.rail{display:flex;gap:6px;overflow-x:auto;padding-top:14px;scrollbar-width:none}
+nav.rail::-webkit-scrollbar{display:none}
+nav.rail button{background:none;border:0;border-bottom:2px solid transparent;padding:10px 12px 12px;color:var(--muted);white-space:nowrap;font-size:.9rem}
+nav.rail button:hover{color:var(--text)}
+nav.rail button.on{color:var(--amber);border-bottom-color:var(--amber)}
+.tick{color:var(--green);font-family:var(--mono);font-size:.8rem}
+main{max-width:960px;margin:0 auto;padding:30px 16px 90px}
+.lab{display:none}
+.lab.on{display:block}
+.lab-head{margin-bottom:22px}
+.lab-head h2{font-family:var(--display);font-size:clamp(1.4rem,4vw,1.85rem);line-height:1.2}
+.lab-head p{color:var(--muted);max-width:66ch;margin-top:6px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:var(--r-md);padding:20px;box-shadow:0 1px 3px rgba(15,26,46,.08)}
+.card + .card{margin-top:16px}
+.card h3{font-family:var(--display);font-size:1.05rem;margin-bottom:8px}
+.card p{color:var(--text);max-width:68ch}
+.note{font-size:.88rem;color:var(--muted);max-width:68ch}
+.badge-card{background:linear-gradient(145deg,var(--panel),var(--panel-2));border:1px solid var(--line);border-radius:var(--r-md);padding:22px;display:flex;gap:18px;align-items:center;flex-wrap:wrap;box-shadow:0 1px 4px rgba(15,26,46,.08)}
+.badge-photo{width:58px;height:58px;border-radius:var(--r-sm);background:var(--amber);color:#fff;display:grid;place-items:center;font-family:var(--display);font-size:1.5rem;font-weight:700}
+.badge-card h3{font-family:var(--display);font-size:1.2rem}
+.mission-list{list-style:none;display:grid;gap:10px;margin-top:16px}
+.mission{display:flex;gap:14px;align-items:center;width:100%;text-align:left;background:var(--panel);border:1px solid var(--line);border-radius:var(--r-md);padding:14px 16px;transition:border-color .15s,transform .15s;box-shadow:0 1px 2px rgba(15,26,46,.04)}
+.mission:hover{border-color:var(--amber);transform:translateX(3px)}
+.mission .st{font-family:var(--mono);font-size:.78rem;color:var(--muted);min-width:62px}
+.mission.done .st{color:var(--green)}
+.mission b{font-family:var(--display);font-weight:500}
+.mission small{display:block;color:var(--muted);font-size:.84rem}
+.tray{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:18px;min-height:46px}
+.incident{background:var(--panel-2);border:1px solid var(--line);border-radius:var(--r-sm);padding:10px 14px;font-size:.9rem;text-align:left;transition:all .15s}
+.incident:hover{border-color:var(--amber)}
+.incident.sel{border-color:var(--amber);background:rgba(240,162,60,.15);transform:translateY(-2px)}
+.bins{display:grid;gap:12px;grid-template-columns:1fr}
+@media(min-width:640px){.bins{grid-template-columns:repeat(3,1fr)}}
+.bin{background:var(--panel-2);border:1px dashed var(--line);border-radius:var(--r-md);padding:14px;min-height:126px;text-align:left}
+.bin:hover{border-color:var(--amber);border-style:solid}
+.bin h4{font-family:var(--display);font-size:1rem;margin-bottom:2px}
+.bin .sub{font-size:.8rem;color:var(--muted);margin-bottom:10px}
+.bin ul{list-style:none;display:grid;gap:6px}
+.bin li{font-size:.83rem;padding:6px 9px;border-radius:4px;background:var(--panel);border-left:3px solid var(--green)}
+.bin li.bad{border-left-color:var(--red)}
+.term{background:var(--deep);border:1px solid var(--line);border-radius:var(--r-md);padding:18px;font-family:var(--mono);font-size:.86rem;line-height:1.75;min-height:190px;max-height:340px;overflow-y:auto;white-space:pre-wrap}
+.term .sys{color:var(--amber)}
+.term .warn{color:var(--amber)}
+.term .bad{color:var(--red)}
+.term .ok{color:var(--green)}
+.answer-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px}
+.answer-row input.in{flex:1;min-width:180px}
+.answer-row button{background:var(--panel-2);border:1px solid var(--line);border-radius:var(--r-sm);padding:11px 18px;font-family:var(--display)}
+.answer-row button:hover:not(:disabled){border-color:var(--cyan);color:var(--cyan)}
+.answer-row button:disabled{opacity:.35}
+.inbox{display:grid;gap:8px}
+.msg{display:grid;grid-template-columns:auto 1fr auto;gap:12px;align-items:center;text-align:left;background:var(--panel-2);border:1px solid var(--line);border-radius:var(--r-sm);padding:12px 14px}
+.msg:hover{border-color:var(--amber)}
+.msg.judged{opacity:.55}
+.from{font-family:var(--mono);font-size:.76rem;color:var(--muted);display:block;word-break:break-all}
+.msg .sub{font-size:.93rem}
+.mark{font-family:var(--mono);font-size:.76rem}
+.mark.right{color:var(--green)}
+.mark.wrong{color:var(--red)}
+.reader{margin-top:14px;border:1px solid var(--line);border-radius:var(--r-md);background:var(--panel-2);padding:18px;display:none}
+.headers{font-family:var(--mono);font-size:.78rem;color:var(--muted);background:var(--deep);border:1px solid var(--line);border-radius:var(--r-sm);padding:12px 14px;margin-bottom:14px;line-height:1.85;overflow-x:auto;white-space:pre}
+.verdict-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}
+.btn-red{background:rgba(196,60,78,.1);border:1px solid var(--red);color:var(--red);border-radius:var(--r-sm);padding:10px 18px}
+.btn-green{background:rgba(26,143,82,.1);border:1px solid var(--green);color:var(--green);border-radius:var(--r-sm);padding:10px 18px}
+.explain{margin-top:14px;padding:12px 14px;border-radius:var(--r-sm);background:var(--panel);border-left:3px solid var(--amber);font-size:.9rem;display:none}
+.row{display:grid;gap:16px}
+@media(min-width:640px){.row.two{grid-template-columns:1fr 1fr}}
+.lbl{display:block;font-size:.85rem;color:var(--muted);margin-bottom:6px}
+textarea.in,input.in{width:100%;background:var(--surface);border:1px solid var(--line);border-radius:var(--r-sm);color:var(--text);padding:11px 13px;font-family:var(--mono);font-size:.9rem;resize:vertical}
+.out{background:var(--deep);border:1px solid var(--line);border-radius:var(--r-sm);padding:12px 14px;font-family:var(--mono);font-size:.88rem;word-break:break-all;min-height:46px}
+input[type=range]{width:100%;accent-color:var(--amber)}
+.crack-list{font-family:var(--mono);font-size:.8rem;display:grid;gap:2px;max-height:230px;overflow-y:auto;margin-top:12px}
+.crack-list div{padding:3px 8px;border-radius:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.crack-list div.hit{background:rgba(90,209,143,.15);color:var(--green)}
+.hexdiff .diff{color:var(--red);font-weight:600}
+.hexdiff .same{color:var(--muted)}
+.bitbar{height:8px;background:#c5c9d0;border-radius:4px;overflow:hidden;margin-top:12px}
+.bitbar i{display:block;height:100%;background:var(--red);width:0;transition:width .3s}
+.strength{height:10px;background:#c5c9d0;border-radius:5px;overflow:hidden;margin:14px 0 10px}
+.strength i{display:block;height:100%;width:0;background:var(--red);transition:width .3s,background .3s}
+.crack-time{font-family:var(--display);font-size:clamp(1.4rem,5vw,2rem);line-height:1.2}
+.stat-row{display:flex;gap:22px;flex-wrap:wrap;margin-top:12px;font-family:var(--mono);font-size:.83rem;color:var(--muted)}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.chip{font-size:.78rem;font-family:var(--mono);padding:5px 11px;border-radius:20px;border:1px solid var(--line);color:var(--muted)}
+.chip.on{border-color:var(--green);color:var(--green)}
+.chip.alert{border-color:var(--red);color:var(--red)}
+.passphrase{font-family:var(--mono);font-size:1.05rem;color:var(--cyan);word-break:break-word}
+.hud{display:flex;gap:20px;flex-wrap:wrap;font-family:var(--mono);font-size:.84rem;color:var(--muted);margin-bottom:14px}
+.hud b{color:var(--text)}
+.timer{height:5px;background:#c5c9d0;border-radius:3px;overflow:hidden;margin-bottom:18px}
+.timer i{display:block;height:100%;background:var(--amber);width:100%}
+.threat{font-family:var(--display);font-size:1.12rem;margin-bottom:6px;max-width:62ch}
+footer{border-top:1px solid var(--line);padding:22px 16px;text-align:center;color:var(--muted);font-size:.82rem;background:transparent}
+.toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%) translateY(140%);background:var(--surface);border:1px solid var(--amber);box-shadow:0 8px 24px rgba(15,26,46,.15);padding:12px 20px;border-radius:30px;font-family:var(--mono);font-size:.84rem;z-index:950;transition:transform .35s;max-width:90vw;text-align:center}
+.toast.up{transform:translateX(-50%) translateY(0)}
+
+/* log lab specific */
+.filterbar{display:flex;gap:10px;align-items:center;margin-bottom:12px;flex-wrap:wrap}
+.filterbar input.in{flex:1;min-width:200px}
+.loglines{background:var(--deep);border:1px solid var(--line);border-radius:var(--r-md);padding:14px 16px;font-family:var(--mono);font-size:.82rem;line-height:1.8;max-height:340px;overflow-y:auto}
+.logline{padding:2px 6px;border-radius:3px;white-space:pre-wrap;word-break:break-word;transition:opacity .15s}
+.logline.dim{opacity:.22}
+.logline.flagged{background:rgba(240,89,107,.16);outline:1px solid rgba(240,89,107,.4)}
+.logline:hover{background:rgba(255,255,255,.04);cursor:pointer}
+.findings{display:grid;gap:12px;margin-top:18px}
+@media(min-width:640px){.findings{grid-template-columns:repeat(3,1fr)}}
+.f-field .lbl{margin-bottom:5px}
+.f-result{font-size:.8rem;margin-top:5px;font-family:var(--mono)}
+.f-result.right{color:var(--green)}
+.f-result.wrong{color:var(--red)}
+input.in.right{border-color:var(--green)}
+input.in.wrong{border-color:var(--red)}
+.modal-backdrop{display:none;position:fixed;inset:0;background:rgba(15,26,46,.45);z-index:970;align-items:center;justify-content:center;padding:20px}
+.modal-backdrop.on{display:flex}
+.modal-panel{background:var(--panel);border:1px solid var(--line);border-radius:var(--r-md);max-width:840px;width:100%;max-height:82vh;display:flex;flex-direction:column;padding:20px}
+.modal-panel h3{font-family:var(--display);margin-bottom:4px}
+.modal-panel textarea{flex:1;margin-top:12px;background:var(--deep);border:1px solid var(--line);border-radius:var(--r-sm);color:var(--text);font-family:var(--mono);font-size:.72rem;line-height:1.5;padding:14px;resize:none;min-height:280px}
+.modal-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px;align-items:center}
+
+/* ---- engagement: phone / push / channels / call UI ---- */
+.phone-shell{max-width:340px;margin:0 auto;background:var(--surface);border:2px solid var(--line);border-radius:28px;padding:14px 12px 20px;box-shadow:0 12px 40px rgba(0,0,0,.45)}
+.phone-notch{width:120px;height:8px;background:var(--line);border-radius:8px;margin:0 auto 14px}
+.push-list{display:grid;gap:10px;min-height:180px}
+.push{background:var(--panel-2);border:1px solid var(--line);border-radius:14px;padding:12px 14px;text-align:left;animation:slideIn .35s ease}
+.push .app{font-family:var(--mono);font-size:.72rem;color:var(--muted);margin-bottom:4px}
+.push .title{font-family:var(--display);font-size:.95rem;margin-bottom:2px}
+.push .body{font-size:.84rem;color:var(--text)}
+.push-actions{display:flex;gap:8px;margin-top:10px}
+.push-actions button{flex:1;border-radius:8px;padding:8px;border:1px solid var(--line);background:var(--panel);font-size:.82rem}
+.push-actions .deny{border-color:var(--red);color:var(--red)}
+.push-actions .allow{border-color:var(--green);color:var(--green)}
+.channel-tabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px}
+.channel-tabs button{background:var(--panel-2);border:1px solid var(--line);border-radius:20px;padding:6px 14px;font-size:.82rem;color:var(--muted)}
+.channel-tabs button.on{border-color:var(--amber);color:var(--amber)}
+.msg-queue{display:grid;gap:10px}
+.msg-card{background:var(--panel-2);border:1px solid var(--line);border-radius:var(--r-md);padding:14px 16px;text-align:left;cursor:pointer;transition:border-color .15s,transform .15s}
+.msg-card:hover{border-color:var(--amber);transform:translateX(3px)}
+.msg-card.done{opacity:.55}
+.msg-card .chan{font-family:var(--mono);font-size:.72rem;color:var(--muted)}
+.msg-card .preview{font-size:.92rem;margin-top:4px}
+.sms-bubble{background:var(--panel-2);border-radius:18px 18px 4px 18px;padding:12px 16px;max-width:90%;font-size:.92rem;line-height:1.5;margin:8px 0}
+.email-view .fromline{font-family:var(--mono);font-size:.8rem;color:var(--muted);margin-bottom:8px}
+.call-screen{background:linear-gradient(160deg,var(--panel-2),var(--panel));border:1px solid var(--line);border-radius:var(--r-md);padding:28px 20px;text-align:center;min-height:220px}
+.call-avatar{width:72px;height:72px;border-radius:50%;background:var(--amber);color:#fff;display:grid;place-items:center;font-family:var(--display);font-size:1.6rem;font-weight:700;margin:0 auto 12px}
+.call-name{font-family:var(--display);font-size:1.25rem}
+.call-status{font-family:var(--mono);font-size:.8rem;color:var(--muted);margin:6px 0 18px}
+.call-actions{display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
+.call-actions button{width:64px;height:64px;border-radius:50%;border:0;font-size:.75rem;font-family:var(--display)}
+.call-actions .hang{background:var(--red);color:#fff}
+.call-actions .answer{background:var(--green);color:#fff}
+.artifact-board{display:grid;gap:8px;grid-template-columns:1fr 1fr;margin-top:12px}
+@media(min-width:560px){.artifact-board{grid-template-columns:repeat(3,1fr)}}
+.artifact{background:var(--panel-2);border:1px dashed var(--line);border-radius:var(--r-sm);padding:12px;text-align:left;font-size:.85rem;cursor:pointer;transition:all .15s}
+.artifact:hover,.artifact.on{border-style:solid;border-color:var(--amber)}
+.artifact.found{border-color:var(--green);background:rgba(90,209,143,.1)}
+.inspect-email{background:var(--deep);border:1px solid var(--line);border-radius:var(--r-md);padding:16px;font-size:.9rem;line-height:1.7}
+.inspect-email .hl{background:rgba(240,162,60,.2);border-bottom:1px dashed var(--amber);cursor:pointer;padding:1px 3px;border-radius:3px}
+.inspect-email .hl.caught{background:rgba(90,209,143,.2);border-bottom-color:var(--green)}
+.live-feed{font-family:var(--mono);font-size:.82rem;background:var(--deep);border:1px solid var(--line);border-radius:var(--r-md);padding:14px;min-height:120px;max-height:220px;overflow-y:auto}
+.live-feed div{margin-bottom:6px}
+.live-feed .in{color:var(--cyan)}
+.live-feed .alert{color:var(--red)}
+.stepper{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0}
+.stepper .step{width:28px;height:28px;border-radius:50%;border:1px solid var(--line);display:grid;place-items:center;font-family:var(--mono);font-size:.75rem;color:var(--muted)}
+.stepper .step.on{border-color:var(--amber);color:var(--amber)}
+.stepper .step.done{border-color:var(--green);color:var(--green)}
+
+
+/* cipher bench engagement */
+.freq-bars{display:grid;grid-template-columns:repeat(13,1fr);gap:3px;margin-top:10px;align-items:end;height:72px}
+.freq-bars span{display:block;background:var(--cyan);border-radius:2px 2px 0 0;min-height:2px;opacity:.85}
+.freq-labels{display:grid;grid-template-columns:repeat(13,1fr);gap:3px;font-family:var(--mono);font-size:.65rem;color:var(--muted);text-align:center;margin-top:2px}
+.challenge-box{background:var(--deep);border:1px solid var(--line);border-radius:var(--r-md);padding:16px;font-family:var(--mono);font-size:.95rem;letter-spacing:.04em;word-break:break-word}
+.seal-row{display:grid;gap:10px;margin-top:12px}
+@media(min-width:640px){.seal-row{grid-template-columns:1fr auto;align-items:start}}
+.collision-grid{display:grid;gap:12px;margin-top:12px}
+@media(min-width:640px){.collision-grid{grid-template-columns:1fr 1fr}}
+.toy-hash{font-family:var(--mono);font-size:1.4rem;color:var(--cyan);letter-spacing:.15em}
+.wheel{display:flex;flex-wrap:wrap;gap:4px;margin-top:10px;font-family:var(--mono);font-size:.78rem}
+.wheel i{display:inline-grid;place-items:center;width:22px;height:22px;border-radius:4px;background:var(--panel-2);border:1px solid var(--line);font-style:normal}
+.wheel i.on{border-color:var(--amber);color:var(--amber);background:rgba(240,162,60,.12)}
+
+
+/* teacher / leaderboard / team / report / cert */
+.team-toggle{display:inline-flex;border:1px solid var(--line);border-radius:20px;overflow:hidden;font-family:var(--mono);font-size:.78rem}
+.team-toggle button{background:transparent;border:0;padding:6px 14px;color:var(--muted)}
+.team-toggle button.on{background:var(--amber);color:#fff}
+.team-toggle button.on.red{background:var(--red);color:#fff}
+.panel-grid{display:grid;gap:16px}
+@media(min-width:720px){.panel-grid.two{grid-template-columns:1fr 1fr}}
+.lb-table{width:100%;border-collapse:collapse;font-size:.88rem;margin-top:10px}
+.lb-table th,.lb-table td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line)}
+.lb-table th{font-family:var(--mono);font-size:.75rem;color:var(--muted);font-weight:500}
+.lb-table tr:hover td{background:rgba(255,255,255,.03)}
+.lb-table .me{color:var(--amber)}
+.teacher-lock{max-width:360px}
+.report-panel{border-left:3px solid var(--cyan);padding:14px 16px;background:var(--panel);border-radius:0 var(--r-sm) var(--r-sm) 0;margin-top:12px}
+.report-panel h4{font-family:var(--display);margin-bottom:6px}
+.report-panel li{margin:6px 0;color:var(--text);font-size:.9rem}
+.cert-wrap{text-align:center;margin-top:16px}
+.cert-wrap canvas{max-width:100%;border:1px solid var(--line);border-radius:var(--r-md);background:var(--deep)}
+.top-tools{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-top:10px}
+.mode-pill{font-family:var(--mono);font-size:.75rem;padding:4px 10px;border-radius:12px;border:1px solid var(--line);color:var(--muted);background:var(--surface)}
+.mode-pill.blue{border-color:var(--amber);color:var(--amber)}
+.mode-pill.red{border-color:var(--red);color:var(--red)}
+#aarFab{position:fixed;right:16px;bottom:16px;z-index:940;display:none;background:var(--surface);border:1px solid var(--amber);color:var(--amber);box-shadow:0 4px 16px rgba(15,26,46,.12);border-radius:24px;padding:10px 16px;font-family:var(--mono);font-size:.8rem;box-shadow:0 8px 24px rgba(0,0,0,.4)}
+#aarFab.on{display:block}
+#aarDrawer{display:none;position:fixed;right:0;top:0;bottom:0;width:min(400px,100%);background:var(--panel);border-left:1px solid var(--line);z-index:960;padding:20px;overflow-y:auto}
+#aarDrawer.on{display:block}
+#aarDrawer h3{font-family:var(--display);margin-bottom:8px}
+
 </style>
 </head>
 <body>
 
-<!-- NAVIGATION MENU -->
-<nav class="main-nav">
-  <ul>
-    <li><button onclick="showModule('intro', this)" class="active">🏠 Home</button></li>
-    <li><button onclick="showModule('cia', this)">🛡️ CIA Triad</button></li>
-    <li><button onclick="showModule('malware', this)">🦠 Malware</button></li>
-    <li><button onclick="showModule('phishing', this)">🎣 Phishing Lab</button></li>
-    <li><button onclick="showModule('crypto', this)">🔐 Crypto</button></li>
-    <li><button onclick="showModule('password', this)">🔑 Password Lab</button></li>
-    <li><button onclick="showModule('quiz', this)">✅ Final Quiz</button></li>
-  </ul>
-</nav>
+<!-- =============== COLD OPEN =============== -->
+<div id="gate">
+  <div class="gate-wrap">
 
-<!-- PROGRESS BAR -->
-<div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
-<div class="progress-label" id="progressLabel">Modules completed: 0 / 7</div>
+    <div id="stage-mail">
+      <div class="kicker">Eastern Cyber Range / entry check</div>
+      <h1 class="gate-title">Before you get access, read your mail.</h1>
+      <p class="gate-sub">One message is sitting in the practice inbox. Click anything in it that looks wrong, then decide what to do about it. Nothing here is real and nothing you type is stored.</p>
+
+      <div class="mail">
+        <div class="mail-bar"><span class="dot"></span><span class="dot"></span><span class="dot"></span> practice inbox — 1 unread</div>
+        <div class="mail-body">
+          <div class="mail-head">
+            <div class="mail-subject">Action required: your Eastern account will be suspended</div>
+            <div class="mail-meta">
+              from: IT Helpdesk &lt;<button class="flag" data-flag="sender">no-reply@eastern-cybersecuirty.net</button>&gt;<br>
+              to: undisclosed-recipients<br>
+              date: today, 3:14 AM
+            </div>
+          </div>
+          <p><button class="flag" data-flag="greeting">Dear Valued User,</button></p>
+          <p>Our security team detected an unrecognized sign-in on your student account. To keep your access you must confirm your identity <button class="flag" data-flag="urgency">within 24 hours or your account will be permanently deleted</button>.</p>
+          <p>Confirm here: <a href="#" id="phishLink" style="color:var(--cyan)">https://portal.easterncyber.edu/verify</a></p>
+          <p>Regards,<br>Eastern IT Helpdesk</p>
+          <p><button class="flag attach" data-flag="attach">Account_Verification.zip · 48 KB</button></p>
+        </div>
+        <div class="statusbar" id="statusbar">Hover the link to see where it actually goes.</div>
+      </div>
+
+      <div class="hunt-bar">
+        <span class="hunt-count" id="huntCount">Red flags spotted: 0 of 5</span>
+        <span class="hunt-hint">Click suspicious text to mark it.</span>
+      </div>
+
+      <div class="choice-row">
+        <button class="choice" onclick="gateChoice('report')"><b>Report as phishing</b><span>Send it to IT and delete it</span></button>
+        <button class="choice" onclick="gateChoice('open')"><b>Open the verification page</b><span>Sign in and sort it out</span></button>
+      </div>
+    </div>
+
+    <div id="stage-portal" style="display:none">
+      <div class="kicker">Eastern Cyber Range / entry check</div>
+      <h1 class="gate-title">You clicked the link.</h1>
+      <p class="gate-sub">Look at the window before you type anything. Two things here should stop you cold.</p>
+      <div class="browser">
+        <div class="urlbar">
+          <span class="insecure">not secure</span>
+          <span class="pill">http://eastern-cybersecuirty.net/portal/verify?id=8842</span>
+        </div>
+        <div class="portal">
+          <div class="portal-logo">Eastern<em>Portal</em></div>
+          <p class="small" style="margin-bottom:22px">Sign in to confirm your identity</p>
+          <input class="field" type="text" placeholder="Student email" id="bait1" autocomplete="off">
+          <input class="field" type="password" placeholder="Password" id="bait2" autocomplete="off">
+          <button class="go" onclick="gateChoice('submit')">Sign in</button>
+          <p class="small" style="margin-top:18px">Simulation only. Nothing you type leaves this page.</p>
+        </div>
+        <div class="statusbar">Practice environment — no data is sent anywhere.</div>
+      </div>
+      <div style="margin-top:18px"><button class="ghost" onclick="gateChoice('backout')">Wait — this is fake. Back out.</button></div>
+    </div>
+
+    <div id="stage-debrief" style="display:none">
+      <div class="kicker">Entry check complete</div>
+      <div class="debrief-head">
+        <span class="verdict" id="verdictText"></span>
+        <span class="score-chip" id="verdictChip"></span>
+      </div>
+      <p class="gate-sub" id="verdictSub"></p>
+      <ul class="flag-list" id="flagList"></ul>
+      <button class="primary" onclick="unlockConsole()">Unlock the range</button>
+    </div>
+
+  </div>
+</div>
+
+<!-- =============== CONSOLE =============== -->
+<div id="console">
+<header class="top">
+  <div class="top-inner">
+    <div class="brand">
+      <h1>Eastern Cyber Range</h1>
+      <span class="clearance" id="clearance">Clearance 0 / 10</span>
+      <span class="clearance" id="scoreVal" style="color:var(--amber)">Score 0</span>
+      <span class="mode-pill blue" id="modePill">BLUE TEAM</span>
+    </div>
+    <div class="top-tools">
+      <div class="team-toggle" title="Switch perspective">
+        <button type="button" id="btnBlue" class="on" onclick="setTeam('blue')">Blue</button>
+        <button type="button" id="btnRed" class="red" onclick="setTeam('red')">Red</button>
+      </div>
+      <button class="ghost" style="padding:6px 12px;font-size:.82rem" onclick="toggleAar()">After-action</button>
+      <button class="ghost" style="padding:6px 12px;font-size:.82rem" onclick="openLeaderboard()">Leaderboard</button>
+    </div>
+    <div class="meter"><i id="meterFill"></i></div>
+    <nav class="rail" id="rail">
+      <button data-lab="brief" class="on" onclick="go('brief',this)">Briefing</button>
+      <button data-lab="triage" onclick="go('triage',this)">Triage board</button>
+      <button data-lab="logs" onclick="go('logs',this)">Log analysis</button>
+      <button data-lab="malware" onclick="go('malware',this)">Diagnostics</button>
+      <button data-lab="inbox" onclick="go('inbox',this)">Inbox shift</button>
+      <button data-lab="crypto" onclick="go('crypto',this)">Cipher bench</button>
+      <button data-lab="keys" onclick="go('keys',this)">Key vault</button>
+      <button data-lab="mfa" onclick="go('mfa',this)">MFA station</button>
+      <button data-lab="scams" onclick="go('scams',this)">Scam desk</button>
+      <button data-lab="ai" onclick="go('ai',this)">AI threats</button>
+      <button data-lab="defend" onclick="go('defend',this)">Response drill</button>
+    </nav>
+  </div>
+</header>
 
 <main>
 
-  <!-- MODULE 1: INTRO -->
-  <section id="intro" class="module show">
-    <div class="module-header">
-      <h2>Welcome to Eastern Cyber Security</h2>
-      <span class="icon">🎯</span>
+  <section class="lab on" id="lab-brief">
+    <div class="badge-card">
+      <div class="badge-photo" id="badgeInitial">E</div>
+      <div style="flex:1;min-width:200px">
+        <h3 id="rankTitle">Trainee</h3>
+        <div class="note" id="rankNote">Ten labs open.</div>
+      </div>
     </div>
-    
-    <div class="concept-card">
-      <h3>Your Interactive Study Guide</h3>
-      <p>This site contains 7 interactive modules covering AP Cybersecurity Unit 1 fundamentals. Each module has:</p>
-      <ul style="margin-left: 25px; margin-top: 10px; color: #c7cbe6;">
-        <li>📖 Core concept explanations</li>
-        <li>🃏 Flashcards for memorization</li>
-        <li>✅ Quizzes for practice</li>
-        <li>🎮 Interactive scenarios & labs</li>
+
+    <ul class="mission-list" id="missionList"></ul>
+
+    <div class="card" style="margin-top:20px">
+      <h3>The three questions behind every lab here</h3>
+      <p>Security work keeps circling back to the same trio. Confidentiality asks who is allowed to see this. Integrity asks whether it has been changed behind our backs. Availability asks whether it still works when someone needs it. Every incident you sort and every log line you read lands on one of those three.</p>
+    </div>
+
+    <div class="card">
+      <h3>For class and for everyone else</h3>
+      <p>The range is built for students learning the craft, but the habits transfer directly to personal life: spotting phishing and everyday scams, turning on multi-factor authentication, choosing passwords that survive offline attacks, defending against AI-assisted social engineering, and knowing which control would have stopped an incident. Share the page with family or friends who will never take a cybersecurity course.</p>
+    </div>
+
+    <div class="card" style="margin-top:20px">
+      <h3>Leaderboard &amp; score codes</h3>
+      <p class="note">Scores stay in this browser. To send your result to another device (no server), copy a short <b>score code</b> and have the teacher import it. Room codes still group entries on a shared machine.</p>
+      <div class="row two" style="margin-top:12px">
+        <div>
+          <label class="lbl" for="playerName">Display name</label>
+          <input class="in" id="playerName" placeholder="your name or handle" autocomplete="nickname">
+        </div>
+        <div>
+          <label class="lbl" for="roomCode">Room code (optional)</label>
+          <input class="in" id="roomCode" placeholder="e.g. PERIOD3" autocomplete="off">
+        </div>
+      </div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:12px">
+        <button class="ghost" onclick="submitScore()">Submit to this device</button>
+        <button class="ghost" onclick="copyScoreCode()">Copy score code</button>
+        <button class="ghost" onclick="openLeaderboard()">View board</button>
+      </div>
+      <p class="note" id="lbBriefNote" style="margin-top:10px"></p>
+      <div id="scoreCodeBox" class="out" style="margin-top:10px;font-size:.95rem;letter-spacing:.04em;display:none"></div>
+    </div>
+
+    <div class="card" id="certCard" style="display:none;margin-top:20px">
+      <h3>Range certificate</h3>
+      <p class="note">You cleared every lab. Download a simple certificate for your records or portfolio.</p>
+      <div class="cert-wrap">
+        <canvas id="certCanvas" width="800" height="520"></canvas>
+      </div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:12px;justify-content:center">
+        <button class="primary" style="margin-top:0" onclick="downloadCert()">Download PNG</button>
+      </div>
+    </div>
+
+    <div style="margin-top:18px;display:flex;gap:10px;flex-wrap:wrap">
+      <button class="ghost" onclick="replayGate()">Replay the entry check</button>
+      <button class="ghost" onclick="wipeProgress()">Reset progress</button>
+      <button class="ghost" onclick="openSource()">View &amp; copy HTML source</button>
+      <button class="ghost" onclick="openTeacher()">Teacher mode</button>
+    </div>
+  </section>
+
+  <section class="lab" id="lab-triage">
+    <div class="lab-head">
+      <h2>Triage board</h2>
+      <p>Six incidents came in overnight. Tap an incident, then tap the goal it damages first. A couple of these are less obvious than they look.</p>
+    </div>
+    <div class="card">
+      <div class="tray" id="tray"></div>
+      <div class="bins">
+        <button class="bin" onclick="drop('C')"><h4>Confidentiality</h4><div class="sub">Someone saw what they shouldn't</div><ul id="bin-C"></ul></button>
+        <button class="bin" onclick="drop('I')"><h4>Integrity</h4><div class="sub">Something was changed or faked</div><ul id="bin-I"></ul></button>
+        <button class="bin" onclick="drop('A')"><h4>Availability</h4><div class="sub">Something stopped working</div><ul id="bin-A"></ul></button>
+      </div>
+      <p class="note" id="triageNote" style="margin-top:14px">Nothing sorted yet.</p>
+      <button class="ghost" style="margin-top:10px" onclick="initTriage()">Shuffle and retry</button>
+    </div>
+  </section>
+
+  <!-- LOG ANALYSIS -->
+  <section class="lab" id="lab-logs">
+    <div class="lab-head">
+      <h2>Log analysis</h2>
+      <p>A new incident lands every time you ask for one — auth, web, firewall, or wireless/captive-portal logs (including evil-twin patterns on public Wi-Fi). Type in the filter box to narrow what you're looking at, click any line to flag it, then fill in what you found.</p>
+    </div>
+    <div class="card">
+      <div class="hunt-bar" style="margin:0 0 16px">
+        <span class="hunt-count" id="caseTag">Case #0000</span>
+        <span class="hunt-hint" id="logStreak">Cases closed: 0 · Streak: 0</span>
+      </div>
+      <p class="note" id="caseBlurb" style="margin-bottom:14px"></p>
+      <div class="filterbar">
+        <input class="in" id="logFilter" placeholder="filter, e.g. Failed  or  203.0" autocomplete="off">
+        <button class="ghost" onclick="genLogCase()">New incident</button>
+      </div>
+      <div class="loglines" id="logLines"></div>
+
+      <div class="findings" id="findingsBox"></div>
+      <button class="ghost" style="margin-top:14px" onclick="checkFindings()">Submit findings</button>
+      <p class="note" id="logNote" style="margin-top:12px"></p>
+    </div>
+  </section>
+
+  <section class="lab" id="lab-malware">
+    <div class="lab-head">
+      <h2>Diagnostics terminal</h2>
+      <p>A machine is behaving badly. Symptoms stream in one line at a time. Type your call as soon as you think you have enough to go on — calling it early is the whole skill, and the terminal tells you how many symptoms you needed.</p>
+    </div>
+    <div class="card">
+      <div class="term" id="term">&gt; terminal idle</div>
+      <div class="answer-row">
+        <input class="in" id="diagGuess" placeholder="type the infection type, e.g. worm" autocomplete="off" disabled="">
+        <button id="diagSubmit" onclick="callIt()" disabled="">Call it</button>
+      </div>
+      <p class="note" id="diagNote" style="margin-top:14px"></p>
+      <button class="ghost" style="margin-top:10px" id="diagStart" onclick="startDiag()">Start intake</button>
+    </div>
+  </section>
+
+  <section class="lab" id="lab-inbox">
+    <div class="lab-head">
+      <h2>Inbox shift</h2>
+      <p>You're covering the helpdesk queue. Open each message, read the raw headers underneath it the way a mail client rarely shows you, and call it. Real queues mix genuine mail in with the fakes, so reporting everything costs you as much as missing one.</p>
+    </div>
+    <div class="card">
+      <div class="inbox" id="inbox"></div>
+      <div class="reader" id="reader"></div>
+      <p class="note" id="inboxNote" style="margin-top:14px"></p>
+      <button class="ghost" style="margin-top:10px" onclick="initInbox()">New shift</button>
+    </div>
+  </section>
+
+  <section class="lab" id="lab-crypto">
+    <div class="lab-head">
+      <h2>Cipher bench</h2>
+      <p>Break an intercepted message, watch a real hash avalanche, seal a note so tampering is obvious, and attack a deliberately weak hash until you force a collision.</p>
+    </div>
+
+    <div class="card">
+      <h3>Intercept challenge</h3>
+      <p class="note">An encrypted transmission just landed. Use the shift control and the frequency sketch (English loves E, T, A, O) to recover the plaintext. Submit when you can read it.</p>
+      <div class="hud" style="margin-top:8px">
+        <span>challenge <b id="ciphRound">1</b></span>
+        <span>solved <b id="ciphSolved">0</b></span>
+      </div>
+      <div class="challenge-box" id="interceptCt" style="margin-top:12px">—</div>
+      <label class="lbl" style="margin-top:14px" for="interceptShift">Try shift: <span id="interceptShiftVal">0</span></label>
+      <input type="range" id="interceptShift" min="0" max="25" value="0">
+      <div class="out" id="interceptPt" style="margin-top:10px">—</div>
+      <div style="margin-top:12px">
+        <div class="note" style="margin-bottom:4px">Letter frequency in the ciphertext</div>
+        <div class="freq-bars" id="freqBars"></div>
+        <div class="freq-labels" id="freqLabels"></div>
+      </div>
+      <div class="answer-row" style="margin-top:14px">
+        <button class="ghost" onclick="checkIntercept()">Submit decryption</button>
+        <button class="ghost" onclick="nextIntercept()">Skip / new intercept</button>
+      </div>
+      <p class="note" id="interceptNote" style="margin-top:12px"></p>
+    </div>
+
+    <div class="card">
+      <h3>Caesar playground</h3>
+      <p class="note">Type anything, spin the shift, and watch every letter move. Brute-force still works because there are only 25 keys — that is the lesson.</p>
+      <div class="row two" style="margin-top:16px">
+        <div>
+          <label class="lbl" for="caesarIn">Message</label>
+          <textarea class="in" id="caesarIn" rows="3">meet me behind the gym at four</textarea>
+          <label class="lbl" style="margin-top:12px" for="caesarShift">Shift: <span id="shiftVal">3</span></label>
+          <input type="range" id="caesarShift" min="0" max="25" value="3">
+          <div class="wheel" id="caesarWheel"></div>
+        </div>
+        <div>
+          <label class="lbl">Ciphertext</label>
+          <div class="out" id="caesarOut"></div>
+          <button class="ghost" style="margin-top:12px" onclick="bruteForce()">Break it without the key</button>
+          <div class="crack-list" id="crackList"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>Hash avalanche</h3>
+      <p class="note">SHA-256 turns any input into 64 hex characters and only runs one direction. Change one character and watch roughly half the digest flip — that unpredictability is why you cannot work backwards to the password.</p>
+      <label class="lbl" style="margin-top:16px" for="hashIn">Input</label>
+      <input class="in" id="hashIn" value="Eastern Cyber Range">
+      <label class="lbl" style="margin-top:12px">SHA-256 digest</label>
+      <div class="out hexdiff" id="hashOut"></div>
+      <div class="bitbar"><i id="bitFill"></i></div>
+      <p class="note" id="bitNote" style="margin-top:10px">Change one character and compare.</p>
+    </div>
+
+    <div class="card">
+      <h3>Integrity seal</h3>
+      <p class="note">Seal a short note with SHA-256. Then edit the note and re-check. If even one character changes, the seal breaks. This is how software updates and file integrity checks catch tampering.</p>
+      <label class="lbl" style="margin-top:12px" for="sealMsg">Message</label>
+      <textarea class="in" id="sealMsg" rows="2">Grades locked for term. Do not alter.</textarea>
+      <div class="seal-row">
+        <div>
+          <label class="lbl">Seal (SHA-256)</label>
+          <div class="out" id="sealHash" style="font-size:.78rem">—</div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:8px">
+          <button class="ghost" onclick="sealMessage()">Seal message</button>
+          <button class="ghost" onclick="verifySeal()">Verify seal</button>
+        </div>
+      </div>
+      <p class="note" id="sealNote" style="margin-top:12px">Seal a message, then change a single letter and verify again.</p>
+    </div>
+
+    <div class="card">
+      <h3>Collision playground (weak hash)</h3>
+      <p class="note">Real SHA-256 is 256 bits — finding a collision by chance is not realistic. Below is a toy 16-bit hash (only 65,536 buckets). Type two different inputs until their toy digests match. That is a collision, and it is why short hashes are dangerous.</p>
+      <div class="collision-grid">
+        <div>
+          <label class="lbl" for="colA">Input A</label>
+          <input class="in" id="colA" value="alpha" autocomplete="off">
+          <div class="toy-hash" id="hashA" style="margin-top:8px">----</div>
+        </div>
+        <div>
+          <label class="lbl" for="colB">Input B</label>
+          <input class="in" id="colB" value="bravo" autocomplete="off">
+          <div class="toy-hash" id="hashB" style="margin-top:8px">----</div>
+        </div>
+      </div>
+      <p class="note" id="colNote" style="margin-top:12px">Make the two digests identical while the inputs stay different.</p>
+      <button class="ghost" style="margin-top:8px" onclick="autoCollision()">Find a collision for me</button>
+    </div>
+  </section>
+
+  <section class="lab" id="lab-keys">
+    <div class="lab-head">
+      <h2>Key vault</h2>
+      <p>Type a password and watch how long a fast offline attack would need. The estimate assumes 100 billion guesses a second, which is roughly what rented GPUs do to a weakly hashed database.</p>
+    </div>
+
+    <div class="card">
+      <label class="lbl" for="pw">Test a password — this never leaves your browser</label>
+      <input class="in" id="pw" type="text" placeholder="try something you'd actually use" autocomplete="off">
+      <div class="strength"><i id="strFill"></i></div>
+      <div class="crack-time" id="crackTime">—</div>
+      <div class="stat-row">
+        <span>entropy <b id="entVal">0</b> bits</span>
+        <span>length <b id="lenVal">0</b></span>
+        <span>pool <b id="poolVal">0</b> characters</span>
+      </div>
+      <div class="chips" id="pwChips"></div>
+      <p class="note" id="pwWarn" style="margin-top:12px"></p>
+    </div>
+
+    <div class="card">
+      <h3>Passphrase generator</h3>
+      <p class="note">Five random words beat a mangled dictionary word, because length buys more than punctuation does. These are drawn from a <span id="listSize">0</span>-word list.</p>
+      <div class="passphrase" id="phrase" style="margin-top:14px">—</div>
+      <p class="note" id="phraseNote" style="margin-top:8px"></p>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:14px">
+        <button class="ghost" onclick="makePhrase()">Generate another</button>
+        <button class="ghost" onclick="testPhrase()">Send it to the tester</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="lab" id="lab-mfa">
+    <div class="lab-head">
+      <h2>MFA station</h2>
+      <p>Practice the habits that actually stop account takeovers: treating unexpected prompts as hostile, storing backup codes properly, and preferring strong second factors.</p>
+    </div>
+
+    <div class="card">
+      <h3>Push notification stream</h3>
+      <p class="note">Notifications will appear on the practice phone. Some are legitimate sign-ins you started. Others are an attacker who already has your password. Approve only what you initiated.</p>
+      <div class="hud" style="margin-top:10px">
+        <span>handled <b id="mfaHandled">0</b></span>
+        <span>correct <b id="mfaScore">0</b></span>
+        <span>lives <b id="mfaLives">♥♥♥</b></span>
+      </div>
+      <div class="phone-shell" style="margin-top:16px">
+        <div class="phone-notch"></div>
+        <div class="push-list" id="pushList">
+          <p class="note" style="text-align:center;padding:20px 0">Press Start duty to begin receiving prompts.</p>
+        </div>
+      </div>
+      <p class="note" id="mfaNote" style="margin-top:14px"></p>
+      <button class="ghost" style="margin-top:10px" id="mfaStart" onclick="startMfaDuty()">Start duty</button>
+    </div>
+
+    <div class="card">
+      <h3>Backup code wallet</h3>
+      <p class="note">Generate a practice set, “store” it, then simulate losing your phone and recovering with a code. Real codes should live offline or in a password manager — never only in screenshots.</p>
+      <div class="passphrase" id="backupCodes" style="margin-top:12px;font-size:.9rem">—</div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:12px">
+        <button class="ghost" onclick="genBackupCodes()">Generate codes</button>
+        <button class="ghost" id="btnStoreCodes" onclick="storeBackupCodes()" disabled="">Mark as stored offline</button>
+        <button class="ghost" id="btnUseCode" onclick="useBackupCode()" disabled="">I lost my phone — use a code</button>
+      </div>
+      <p class="note" id="backupNote" style="margin-top:10px"></p>
+    </div>
+  </section>
+
+  <section class="lab" id="lab-scams">
+    <div class="lab-head">
+      <h2>Scam desk</h2>
+      <p>A mixed queue of SMS, email, chat, and voicemail. Open each item, read it the way it would actually appear, then take an action. Real messages are mixed in on purpose.</p>
+    </div>
+    <div class="card">
+      <div class="hunt-bar" style="margin:0 0 14px">
+        <span class="hunt-count" id="scamTag">Queue idle</span>
+        <span class="hunt-hint" id="scamStreak">Handled: 0 · Correct: 0</span>
+      </div>
+      <div class="channel-tabs" id="scamTabs">
+        <button class="on" data-filter="all" onclick="filterScamChan(this)">All</button>
+        <button data-filter="sms" onclick="filterScamChan(this)">SMS</button>
+        <button data-filter="email" onclick="filterScamChan(this)">Email</button>
+        <button data-filter="chat" onclick="filterScamChan(this)">Chat</button>
+        <button data-filter="voice" onclick="filterScamChan(this)">Voicemail</button>
+      </div>
+      <div class="msg-queue" id="scamQueue"></div>
+      <div id="scamReader" style="display:none;margin-top:16px">
+        <div id="scamRender"></div>
+        <div class="verdict-row" style="margin-top:14px" id="scamActions">
+          <button class="btn-red" onclick="actScam('report')">Report as scam</button>
+          <button class="btn-green" onclick="actScam('safe')">Mark legitimate</button>
+          <button class="ghost" onclick="actScam('escalate')">Escalate to IT</button>
+        </div>
+        <div class="explain" id="scamExplain" style="display:none"></div>
+      </div>
+      <p class="note" id="scamNote" style="margin-top:14px"></p>
+      <button class="ghost" style="margin-top:10px" onclick="initScamQueue()">New queue</button>
+    </div>
+  </section>
+
+  <section class="lab" id="lab-ai">
+    <div class="lab-head">
+      <h2>AI threats</h2>
+      <p>Hostile AI makes social engineering cheaper and more personal. Work three short simulations: a cloned-voice call, an inspectable deepfake frame, and a spear-phish you mark up yourself.</p>
+    </div>
+
+    <div class="card">
+      <h3>1 · Incoming call</h3>
+      <p class="note">A call is about to ring. The voice will match someone in authority. Decide what to do under light time pressure.</p>
+      <div class="call-screen" id="callScreen">
+        <div class="call-avatar">P</div>
+        <div class="call-name" id="callName">Principal Hayes</div>
+        <div class="call-status" id="callStatus">Incoming call…</div>
+        <div class="call-actions" id="callActions">
+          <button class="answer" onclick="answerCall()">Accept</button>
+          <button class="hang" onclick="declineCall()">Decline</button>
+        </div>
+        <div id="callDialogue" style="display:none;margin-top:16px;text-align:left">
+          <div class="live-feed" id="callFeed"></div>
+          <div class="choice-row" style="margin-top:12px" id="callChoices"></div>
+        </div>
+      </div>
+      <p class="note" id="callNote" style="margin-top:12px"></p>
+      <button class="ghost" style="margin-top:8px" onclick="resetCall()">Reset call</button>
+    </div>
+
+    <div class="card">
+      <h3>2 · Spot the deepfake</h3>
+      <p class="note">This still is from an alleged live video call with a vendor. Click every artifact that looks synthetic. You need most of them to clear the frame.</p>
+      <div style="background:var(--deep);border:1px solid var(--line);border-radius:var(--r-md);padding:16px;margin-top:10px">
+        <div style="font-family:var(--display);margin-bottom:8px">Vendor call · “A. Mercer, Northline Supplies”</div>
+        <div class="artifact-board" id="artifactBoard"></div>
+      </div>
+      <p class="note" id="artifactNote" style="margin-top:12px">Click suspicious details on the frame.</p>
+      <button class="ghost" style="margin-top:8px" onclick="initArtifacts()">Reset frame</button>
+    </div>
+
+    <div class="card">
+      <h3>3 · Mark the spear-phish</h3>
+      <p class="note">Click every phrase that should make you suspicious. AI can research public details and write fluent prose — the tells are often urgency, secrecy, and mismatched process rather than bad grammar.</p>
+      <div class="inspect-email" id="spearEmail"></div>
+      <p class="note" id="spearNote" style="margin-top:12px">Flags found: <b id="spearCount">0</b> / <b id="spearTotal">0</b></p>
+      <button class="ghost" style="margin-top:8px" onclick="initSpear()">New message</button>
+    </div>
+
+    <div class="card">
+      <h3>Verification checklist</h3>
+      <ul class="mission-list" style="margin-top:8px">
+        <li class="mission" style="cursor:default"><span class="st">1</span><span><b>Slow it down</b><small>Real emergencies rarely require secrecy plus money or codes in the next ten minutes.</small></span></li>
+        <li class="mission" style="cursor:default"><span class="st">2</span><span><b>Call back on a known number</b><small>Do not use a number supplied in the suspicious message or call.</small></span></li>
+        <li class="mission" style="cursor:default"><span class="st">3</span><span><b>Ask something only the real person would know</b><small>Deepfakes still fail private shared context.</small></span></li>
+        <li class="mission" style="cursor:default"><span class="st">4</span><span><b>Prefer passkeys / hardware MFA</b><small>Phishing-resistant factors blunt many AI-assisted takeover paths.</small></span></li>
       </ul>
     </div>
-    
-    <div class="concept-card">
-      <h3>How to Use This Site</h3>
-      <p>1️⃣ Start with any module using the navigation bar above<br>
-      2️⃣ Read through the concepts<br>
-      3️⃣ Flip flashcards to test yourself<br>
-      4️⃣ Complete quizzes for immediate feedback<br>
-      5️⃣ Your progress saves automatically!</p>
-      <span class="tag">Tip: Try the Phishing Lab - it's memorable!</span>
-    </div>
-    
-    <div class="concept-card">
-      <h3>Unit 1 Topics Covered</h3>
-      <p>CIA Triad · Threats & Malware · Social Engineering · Cryptography · Authentication · Network Defense · Password Security</p>
-    </div>
   </section>
 
-  <!-- MODULE 2: CIA TRIAD -->
-  <section id="cia" class="module">
-    <div class="module-header">
-      <h2>The CIA Triad</h2>
-      <span class="icon">🛡️</span>
+  <section class="lab" id="lab-defend">
+    <div class="lab-head">
+      <h2>Response drill</h2>
+      <p>Incidents arrive on a clock. Type the control that would have stopped it — start typing for suggestions, or just know the name. Three misses ends the shift.</p>
     </div>
-    
-    <div class="concept-card">
-      <h3>What is the CIA Triad?</h3>
-      <p>Three core goals of information security that guide all security decisions:</p>
-      <table style="width:100%; margin-top:15px; border-collapse: collapse;">
-        <tr><td style="padding:12px; border-bottom:1px solid #2c3352;"><strong>Confidentiality</strong></td><td style="padding:12px; border-bottom:1px solid #2c3352;">Only authorized access (encryption, access controls)</td></tr>
-        <tr><td style="padding:12px; border-bottom:1px solid #2c3352;"><strong>Integrity</strong></td><td style="padding:12px; border-bottom:1px solid #2c3352;">Data stays accurate & unaltered (hashing, checksums)</td></tr>
-        <tr><td style="padding:12px;"><strong>Availability</strong></td><td style="padding:12px;">Systems accessible when needed (backups, redundancy)</td></tr>
-      </table>
-      <span class="tag">★ Exam favorite!</span>
-    </div>
-    
-    <!-- FLASHCARDS FOR CIA -->
-    <div id="cia-flashcards">
-      <!-- Dynamic flashcard container -->
-    </div>
-    
-    <!-- QUIZ FOR CIA -->
-    <div class="quiz-box" id="cia-quiz">
-      <div class="quiz-q">Which CIA principle protects data from unauthorized viewing?</div>
-      <button class="option" onclick="quizCheck(this, false, 'Wrong! That affects integrity.')">Integrity</button>
-      <button class="option" onclick="quizCheck(this, true, 'Correct! Confidentiality ensures only authorized access.')">Confidentiality</button>
-      <button class="option" onclick="quizCheck(this, false, 'Wrong! That's about uptime.')">Availability</button>
-      <div class="feedback"></div>
-    </div>
-  </section>
-
-  <!-- MODULE 3: MALWARE -->
-  <section id="malware" class="module">
-    <div class="module-header">
-      <h2>Threats & Malware</h2>
-      <span class="icon">🦠</span>
-    </div>
-    
-    <div class="concept-card">
-      <h3>Common Malware Types</h3>
-      <p><strong>Virus</strong> — Attaches to files, needs user action to spread<br>
-      <strong>Worm</strong> — Self-replicates across networks without a host<br>
-      <strong>Trojan</strong> — Disguised as legitimate software<br>
-      <strong>Ransomware</strong> — Encrypts data, demands payment<br>
-      <strong>Spyware/Keylogger</strong> — Secretly records activity & credentials</p>
-    </div>
-    
-    <!-- INTERACTIVE SCENARIO -->
-    <div class="scenario-box">
-      <div class="scenario-question">🎬 Scenario: You find a USB drive labeled "Bonus Payroll" in the parking lot. What do you do?</div>
-      <button class="scenario-option" onclick="scenarioResult(this, false)">Plug it into my computer to see what's on it</button>
-      <button class="scenario-option" onclick="scenarioResult(this, true)">Turn it in to IT/security without plugging it in</button>
-      <button class="scenario-option" onclick="scenarioResult(this, false)">Take it home and look at the files</button>
-      <div class="scenario-result"></div>
-    </div>
-  </section>
-
-  <!-- MODULE 4: PHISHING LAB -->
-  <section id="phishing" class="module">
-    <div class="module-header">
-      <h2>Phishing Simulation Lab</h2>
-      <span class="icon">🎣</span>
-    </div>
-    
-    <div class="concept-card">
-      <h3>Test Your Skills</h3>
-      <p>This is a <strong>controlled simulation</strong>. You'll encounter a realistic phishing attempt. Can you spot it before entering credentials?</p>
-      <span class="tag">⚠️ Educational use only - no data is collected</span>
-    </div>
-    
-    <!-- FAKE LOGIN -->
-    <div class="phishing-container" id="phishingLogin">
-      <div class="fake-logo">
-        <h3><span style="color:#4285f4">G</span><span style="color:#ea4335">o</span><span style="color:#fbbc05">o</span><span style="color:#4285f4">g</span><span style="color:#34a853">l</span><span style="color:#ea4335">e</span></h3>
+    <div class="card">
+      <div class="hud">
+        <span>round <b id="dRound">—</b></span>
+        <span>score <b id="dScore">0</b></span>
+        <span>lives <b id="dLives">♥♥♥</b></span>
       </div>
-      <input type="email" class="fake-input" placeholder="Email or phone" id="fakeEmail">
-      <input type="password" class="fake-input" placeholder="Password" id="fakePass">
-      <button class="fake-btn" onclick="triggerPhishingLesson()">Next</button>
-      <p style="text-align:center;color:#888;font-size:0.75rem;margin-top:15px;">Simulation mode active - no credentials stored</p>
-    </div>
-    
-    <!-- LEARNING REVEAL -->
-    <div class="learning-reveal" id="phishingReveal">
-      <span style="font-size:3rem;display:block;text-align:center;">🎯</span>
-      <h3>You Caught It!</h3>
-      <p>This was a phishing simulation. Whether you entered credentials or spotted it first, here's what to watch for:</p>
-      <div class="red-flag"><strong>🚩 Check the URL</strong> — Always verify you're on the real domain</div>
-      <div class="red-flag"><strong>🚩 Unexpected urgency</strong> — "Verify now" or "Account locked" = suspicious</div>
-      <div class="red-flag"><strong>🚩 Unsolicited login requests</strong> — Companies rarely send direct login links</div>
-      <div class="red-flag"><strong>🚩 Hover before clicking</strong> — See the actual destination URL</div>
-      <button class="fake-btn" onclick="document.getElementById('phishingReveal').style.display='none';document.getElementById('phishingLogin').style.display='block';">Try Again</button>
-    </div>
-  </section>
-
-  <!-- MODULE 5: CRYPTOGRAPHY -->
-  <section id="crypto" class="module">
-    <div class="module-header">
-      <h2>Cryptography Basics</h2>
-      <span class="icon">🔐</span>
-    </div>
-    
-    <div class="concept-card">
-      <h3>Types of Encryption</h3>
-      <table style="width:100%; margin-top:15px; border-collapse: collapse;">
-        <tr><td style="padding:12px; border-bottom:1px solid #2c3352;"><strong>Symmetric</strong></td><td style="padding:12px; border-bottom:1px solid #2c3352;">One shared key (fast, key distribution is hard)</td></tr>
-        <tr><td style="padding:12px;"><strong>Asymmetric</strong></td><td style="padding:12px;">Public/Private key pair (slower, solves key distribution)</td></tr>
-      </table>
-      <p style="margin-top:15px;"><strong>Hashing</strong> — One-way function for integrity verification (NOT reversible)</p>
-    </div>
-    
-    <!-- INTERACTIVE: SYMMETRIC VS ASYMMETRIC -->
-    <div class="scenario-box">
-      <div class="scenario-question">🧩 Match the scenario to the encryption type</div>
-      <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:15px;">
-        <button class="scenario-option" onclick="scenarioResult(this, true)">AES-GCM for file encryption</button>
-        <button class="scenario-option" onclick="scenarioResult(this, true)">RSA for HTTPS certificates</button>
-        <button class="scenario-option" onclick="scenarioResult(this, true)">SHA-256 for password hashing</button>
+      <div class="timer"><i id="dTimer"></i></div>
+      <div id="dBody">
+        <p class="note">Ten incidents, eight seconds each.</p>
+        <button class="primary" onclick="startDrill()">Start the drill</button>
       </div>
-      <div class="scenario-result" style="background:#1a3a2a;border-color:var(--correct);"></div>
-    </div>
-  </section>
-
-  <!-- MODULE 6: PASSWORD LAB -->
-  <section id="password" class="module">
-    <div class="module-header">
-      <h2>Password Strength Checker</h2>
-      <span class="icon">🔑</span>
-    </div>
-    
-    <div class="concept-card">
-      <h3>Strong Password Requirements</h3>
-      <p>A good password should have:<br>
-      ✓ At least 12 characters<br>
-      ✓ Mix of uppercase & lowercase letters<br>
-      ✓ Numbers included<br>
-      ✓ Special symbols (!@#$%^&*)<br>
-      ✓ No common words or personal info</p>
-    </div>
-    
-    <!-- PASSWORD STRENGTH METER -->
-    <div class="password-checker">
-      <input type="text" class="password-input" placeholder="Type a password to test strength..." id="passwordInput">
-      <div class="strength-meter">
-        <div class="strength-fill" id="strengthFill"></div>
-      </div>
-      <div class="strength-label" id="strengthLabel">Strength: None</div>
-      <div class="requirements-list">
-        <div class="req-item" id="req1">❌ Length ≥ 12 characters</div>
-        <div class="req-item" id="req2">❌ Has uppercase letters</div>
-        <div class="req-item" id="req3">❌ Has numbers</div>
-        <div class="req-item" id="req4">❌ Has special characters</div>
-      </div>
-    </div>
-  </section>
-
-  <!-- MODULE 7: FINAL QUIZ -->
-  <section id="quiz" class="module">
-    <div class="module-header">
-      <h2>Final Comprehensive Quiz</h2>
-      <span class="icon">✅</span>
-    </div>
-    
-    <div class="quiz-box" id="finalQuiz">
-      <!-- Dynamic quiz content -->
     </div>
   </section>
 
 </main>
 
-<footer>Made with 💜 · Eastern Cyber Security Study Guide · Progress saves automatically</footer>
+<footer>Eastern Cyber Range — practice environment. Progress and leaderboards stay in your browser (GitHub Pages friendly). Teacher mode is password-gated on-device only.</footer>
+</div>
+
+<div class="toast" id="toast"></div>
+<datalist id="controlsList"></datalist>
+
+<button type="button" id="aarFab" onclick="toggleAar()">After-action report</button>
+<div id="aarDrawer">
+  <h3>After-action report</h3>
+  <p class="note">Toggle anytime. Entries appear as you clear labs. Nothing is uploaded.</p>
+  <div id="aarBody" class="report-panel" style="margin-top:14px">
+    <p class="note">No labs cleared yet.</p>
+  </div>
+  <div class="modal-row" style="margin-top:16px">
+    <button class="ghost" onclick="copyAar()">Copy report</button>
+    <button class="ghost" onclick="toggleAar(false)">Close</button>
+    <label class="note" style="display:flex;align-items:center;gap:8px;cursor:pointer">
+      <input type="checkbox" id="aarAuto" checked="" onchange="state.aarOn=this.checked;save()"> Show floating button
+    </label>
+  </div>
+</div>
+
+<div class="modal-backdrop" id="lbModal">
+  <div class="modal-panel" style="max-width:560px">
+    <h3>Leaderboard</h3>
+    <p class="note">Room: <b id="lbRoomLabel">local</b> — this browser. Cross-device: copy a score code → import below.</p>
+    <div style="overflow:auto;max-height:40vh;margin-top:10px">
+      <table class="lb-table" id="lbTable">
+        <thead><tr><th>#</th><th>Name</th><th>Score</th><th>Clearance</th><th>Team</th></tr></thead>
+        <tbody id="lbBody"></tbody>
+      </table>
+    </div>
+    <label class="lbl" style="margin-top:14px" for="importCodeBox">Import score code(s)</label>
+    <textarea class="in" id="importCodeBox" rows="2" placeholder="Paste one code, or several separated by spaces/newlines"></textarea>
+    <div class="modal-row">
+      <button class="ghost" onclick="submitScore()">Submit my score</button>
+      <button class="ghost" onclick="copyScoreCode()">Copy my code</button>
+      <button class="ghost" onclick="importScoreCodes()">Import codes</button>
+      <button class="ghost" onclick="exportLb()">Export JSON</button>
+      <button class="ghost" onclick="closeLb()">Close</button>
+      <span class="note" id="lbStatus"></span>
+    </div>
+  </div>
+</div>
+
+<div class="modal-backdrop" id="teacherModal">
+  <div class="modal-panel" style="max-width:520px">
+    <h3>Teacher mode</h3>
+    <div id="teacherGate" class="teacher-lock">
+      <p class="note">Password-protected controls for classroom use. Client-side only — not strong security; do not reuse a real password.</p>
+      <label class="lbl" for="teacherPw">Password</label>
+      <input class="in" id="teacherPw" type="password" placeholder="teacher password" autocomplete="current-password">
+      <button class="primary" style="margin-top:12px" onclick="tryTeacherLogin()">Unlock</button>
+      <p class="note" id="teacherGateNote" style="margin-top:10px"></p>
+    </div>
+    <div id="teacherPanel" style="display:none">
+      <p class="note">Unlocked. Changes apply on this browser only unless you export.</p>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:12px">
+        <button class="ghost" onclick="teacherRevealAll()">Reveal all lab answers</button>
+        <button class="ghost" onclick="teacherClearBoard()">Clear room leaderboard</button>
+        <button class="ghost" onclick="teacherExportCsv()">Export scores CSV</button>
+        <button class="ghost" onclick="teacherForceCert()">Preview certificate</button>
+        <button class="ghost" onclick="wipeProgress()">Reset student progress</button>
+      </div>
+      <label class="lbl" style="margin-top:16px" for="teacherImportBox">Import student score codes</label>
+      <textarea class="in" id="teacherImportBox" rows="3" placeholder="Paste codes from students — one per line or separated by spaces"></textarea>
+      <button class="ghost" style="margin-top:8px" onclick="teacherImportCodes()">Import to room board</button>
+      <div class="report-panel" id="teacherHints" style="margin-top:14px;display:none"></div>
+      <p class="note" id="teacherNote" style="margin-top:12px"></p>
+      <button class="ghost" style="margin-top:12px" onclick="closeTeacher()">Close</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal-backdrop" id="srcModal">
+  <div class="modal-panel">
+    <h3>Page source</h3>
+    <p class="note">This is the full HTML for the page as it loaded — copy it to reuse or edit elsewhere. It won't reflect progress or answers typed after load.</p>
+    <textarea id="srcText" readonly="" wrap="off"></textarea>
+    <div class="modal-row">
+      <button class="primary" style="margin-top:0" onclick="copySource()">Copy to clipboard</button>
+      <button class="ghost" onclick="closeSource()">Close</button>
+      <span class="note" id="srcStatus"></span>
+    </div>
+  </div>
+</div>
 
 <script>
-/* ========== MODULE NAVIGATION ========== */
-function showModule(id, btn) {
-  document.querySelectorAll('.module').forEach(m => m.classList.remove('show'));
-  document.querySelectorAll('.main-nav button').forEach(b => b.classList.remove('active'));
-  document.getElementById(id).classList.add('show');
-  btn.classList.add('active');
-  updateProgress();
+/* ---------- capture pristine source before anything below mutates the DOM ---------- */
+var ORIGINAL_SOURCE = '<!DOCTYPE html>\n' + document.documentElement.outerHTML;
+
+function openSource(){
+  document.getElementById('srcText').value = ORIGINAL_SOURCE;
+  document.getElementById('srcStatus').textContent = '';
+  document.getElementById('srcModal').classList.add('on');
+}
+function closeSource(){
+  document.getElementById('srcModal').classList.remove('on');
+}
+function copySource(){
+  var box = document.getElementById('srcText');
+  var status = document.getElementById('srcStatus');
+  function fallback(){
+    box.focus(); box.select();
+    try {
+      if (document.execCommand('copy')) { status.textContent = 'Copied.'; return; }
+    } catch (e) {}
+    status.textContent = 'Couldn\u2019t copy automatically — text is selected, press Ctrl/Cmd+C.';
+  }
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(ORIGINAL_SOURCE).then(function(){
+      status.textContent = 'Copied.';
+    }).catch(fallback);
+  } else {
+    fallback();
+  }
 }
 
-/* ========== PROGRESS TRACKING ========== */
-let completedModules = JSON.parse(localStorage.getItem('completedModules') || '[]');
-function updateProgress() {
-  const total = 7;
-  const pct = Math.round((completedModules.length / total) * 100);
-  document.getElementById('progressFill').style.width = pct + '%';
-  document.getElementById('progressLabel').textContent = 
-    `Modules completed: ${completedModules.length} / ${total}`;
-}
-
-/* ========== FLASHCARD SYSTEM ========== */
-const flashcards = {
-  cia: [
-    ["What does C stand for in CIA triad?", "Confidentiality - only authorized access"],
-    ["What does I stand for in CIA triad?", "Integrity - data stays accurate & unaltered"],
-    ["What does A stand for in CIA triad?", "Availability - systems accessible when needed"]
-  ],
-  malware: [
-    ["Virus vs. Worm?", "Virus needs host file, worm spreads independently"],
-    ["What is ransomware?", "Encrypts data & demands payment to unlock"],
-    ["Trojan Horse definition?", "Malware disguised as legitimate software"]
-  ],
-  crypto: [
-    ["Symmetric vs. Asymmetric?", "Symmetric: 1 shared key | Asymmetric: Public/Private key pair"],
-    ["Is hashing encryption?", "No! Hashing is one-way, cannot be reversed"],
-    ["What does SHA-256 do?", "Creates unique hash for integrity verification"]
-  ]
+/* ---------- storage (best effort) ---------- */
+var KEY = 'ecr.v5';
+var LB_KEY = 'ecr.leaderboard.v1';
+var state = {
+  cleared: [], gatePassed: false, points: 0, logSolved: 0, logStreak: 0,
+  team: 'blue', aarOn: true, playerName: '', roomCode: '',
+  aar: [], teacher: false
 };
+try {
+  var raw = localStorage.getItem(KEY);
+  if (raw) {
+    var p = JSON.parse(raw);
+    state.cleared = p.cleared || [];
+    state.gatePassed = !!p.gatePassed;
+    state.points = p.points || 0;
+    state.logSolved = p.logSolved || 0;
+    state.logStreak = p.logStreak || 0;
+    state.team = p.team === 'red' ? 'red' : 'blue';
+    state.aarOn = p.aarOn !== false;
+    state.playerName = p.playerName || '';
+    state.roomCode = p.roomCode || '';
+    state.aar = Array.isArray(p.aar) ? p.aar : [];
+  }
+} catch (e) {}
+function save(){ try { localStorage.setItem(KEY, JSON.stringify({
+  cleared: state.cleared, gatePassed: state.gatePassed, points: state.points,
+  logSolved: state.logSolved, logStreak: state.logStreak, team: state.team,
+  aarOn: state.aarOn, playerName: state.playerName, roomCode: state.roomCode, aar: state.aar
+})); } catch(e){} }
+function addPoints(n){
+  state.points += n; save();
+  var el = document.getElementById('scoreVal');
+  if (el) el.textContent = 'Score ' + state.points;
+}
 
-let currentFC = { cia: 0, malware: 0, crypto: 0 };
-const fcKeys = ['cia', 'malware', 'crypto'];
+function toast(msg){
+  var t = document.getElementById('toast');
+  t.textContent = msg; t.classList.add('up');
+  clearTimeout(t._t); t._t = setTimeout(function(){ t.classList.remove('up'); }, 2800);
+}
 
-function initFlashcards() {
-  fcKeys.forEach(key => {
-    const container = document.getElementById(`${key}-flashcards`);
-    if (!container) return;
-    container.innerHTML = `
-      <div class="flashcard" onclick="flipFC('${key}')">
-        <div class="flashcard-inner">
-          <div class="fc-face"><h2 id="fc-${key}-front"></h2><div class="fc-hint">Click to flip</div></div>
-          <div class="fc-face fc-back"><p id="fc-${key}-back"></p></div>
-        </div>
-      </div>
-      <div class="flash-controls">
-        <button class="secondary" onclick="prevFC(event,'${key}')">← Prev</button>
-        <button onclick="flipFC('${key}')">Flip</button>
-        <button onclick="nextFC(event,'${key}')">Next →</button>
-      </div>
-      <div class="counter" id="fc-counter-${key}"></div>
-    `;
-    renderFC(key);
+/* ---------- cold open ---------- */
+var FLAGS = {
+  sender:  ['The sender domain is misspelled', 'eastern-cybersecuirty.net swaps two letters in "security". Lookalike domains cost a few dollars and read as correct at a glance.'],
+  greeting:['It never uses your name', 'A school that has your account also has your name. "Dear Valued User" means the same message went to thousands of addresses at once.'],
+  urgency: ['A deadline doing your thinking for you', 'Permanent deletion in 24 hours exists to stop you checking with anyone. No real IT department deletes student accounts overnight.'],
+  attach:  ['A zip attachment you did not ask for', 'Archives hide what is inside them from scanners and from you. Nothing about confirming an account requires a download.'],
+  link:    ['The link text and the destination disagree', 'It displayed portal.easterncyber.edu and pointed somewhere else entirely. Hovering a link and reading the status bar costs one second.']
+};
+var spotted = {};
+var spottedCount = 0;
+
+Array.prototype.forEach.call(document.querySelectorAll('#stage-mail .flag'), function(btn){
+  btn.addEventListener('click', function(){ markFlag(btn.dataset.flag, btn); });
+});
+var phishLink = document.getElementById('phishLink');
+var statusbar = document.getElementById('statusbar');
+function showDest(){ statusbar.textContent = 'http://eastern-cybersecuirty.net/portal/verify?id=8842'; statusbar.style.color = 'var(--red)'; }
+phishLink.addEventListener('mouseenter', showDest);
+phishLink.addEventListener('focus', showDest);
+phishLink.addEventListener('mouseleave', function(){ statusbar.textContent = 'Hover the link to see where it actually goes.'; statusbar.style.color = ''; });
+phishLink.addEventListener('click', function(e){
+  e.preventDefault(); showDest(); markFlag('link', phishLink);
+  toast('Marked — the link text and the real address are not the same thing.');
+});
+
+function markFlag(id, el){
+  if (spotted[id]) return;
+  spotted[id] = true; spottedCount++;
+  addPoints(5);
+  if (el.tagName === 'BUTTON'){
+    el.classList.add('spotted');
+    var note = document.createElement('span');
+    note.className = 'flag-note';
+    note.textContent = FLAGS[id][0];
+    el.parentNode.insertBefore(note, el.nextSibling);
+  }
+  document.getElementById('huntCount').textContent = 'Red flags spotted: ' + spottedCount + ' of 5';
+}
+
+function gateChoice(what){
+  if (what === 'open'){
+    document.getElementById('stage-mail').style.display = 'none';
+    document.getElementById('stage-portal').style.display = 'block';
+    window.scrollTo(0,0);
+    return;
+  }
+  showDebrief(what);
+}
+
+function showDebrief(path){
+  document.getElementById('stage-mail').style.display = 'none';
+  document.getElementById('stage-portal').style.display = 'none';
+  document.getElementById('stage-debrief').style.display = 'block';
+  window.scrollTo(0,0);
+
+  var found = spottedCount, verdict, sub, chip;
+  if (path === 'report'){
+    addPoints(25);
+    verdict = 'You reported it.';
+    chip = found >= 4 ? 'clean catch' : 'good instinct';
+    sub = 'That is the whole job. You did not click, you did not type, and the next person in the queue gets warned. ' +
+      (found >= 4 ? 'You had the receipts too — ' + found + ' of the five tells marked before you decided.'
+                  : 'You marked ' + found + ' of the five tells. Here is the full list, including the ones you walked straight past.');
+  } else if (path === 'backout'){
+    addPoints(15);
+    verdict = 'You stopped at the door.';
+    chip = 'close one';
+    sub = 'The page was already open but nothing was typed, so this counts as a save. The address bar is usually the last honest thing on a phishing page, which makes checking it there a habit worth keeping.';
+  } else {
+    verdict = 'Credentials submitted.';
+    chip = 'caught';
+    sub = 'On a real page your account now belongs to someone else, along with anything it unlocks. This happens to careful people constantly, which is why the tells below are worth memorising rather than feeling bad about.';
+  }
+  document.getElementById('verdictText').textContent = verdict;
+  document.getElementById('verdictChip').textContent = chip;
+  document.getElementById('verdictSub').textContent = sub;
+
+  var list = document.getElementById('flagList');
+  list.innerHTML = '';
+  Object.keys(FLAGS).forEach(function(k, i){
+    var li = document.createElement('li');
+    if (spotted[k]) li.className = 'got';
+    li.style.animationDelay = (i * 90) + 'ms';
+    var b = document.createElement('b');
+    b.textContent = (spotted[k] ? 'You spotted it — ' : '') + FLAGS[k][0];
+    var s = document.createElement('span');
+    s.textContent = FLAGS[k][1];
+    li.appendChild(b); li.appendChild(s);
+    list.appendChild(li);
   });
 }
 
-function renderFC(key) {
-  document.getElementById(`fc-${key}-front`).textContent = flashcards[key][currentFC[key]][0];
-  document.getElementById(`fc-${key}-back`).innerHTML = `<strong>${flashcards[key][currentFC[key]][1]}</strong>`;
-  document.getElementById(`fc-counter-${key}`).textContent = `${key.toUpperCase()} Card ${currentFC[key]+1}/${flashcards[key].length}`;
+function unlockConsole(){
+  state.gatePassed = true; save();
+  document.getElementById('gate').style.display = 'none';
+  document.getElementById('console').style.display = 'block';
+  window.scrollTo(0,0);
 }
 
-function flipFC(key) {
-  const card = document.querySelector(`#${key}-flashcards .flashcard`);
-  card.classList.toggle('flipped');
+function replayGate(){
+  spotted = {}; spottedCount = 0;
+  Array.prototype.forEach.call(document.querySelectorAll('#stage-mail .flag-note'), function(n){ n.remove(); });
+  Array.prototype.forEach.call(document.querySelectorAll('#stage-mail .flag'), function(b){ b.classList.remove('spotted'); });
+  document.getElementById('huntCount').textContent = 'Red flags spotted: 0 of 5';
+  document.getElementById('bait1').value = '';
+  document.getElementById('bait2').value = '';
+  document.getElementById('stage-debrief').style.display = 'none';
+  document.getElementById('stage-portal').style.display = 'none';
+  document.getElementById('stage-mail').style.display = 'block';
+  document.getElementById('console').style.display = 'none';
+  document.getElementById('gate').style.display = 'block';
+  window.scrollTo(0,0);
 }
 
-function nextFC(e, key) {
-  e.stopPropagation();
-  currentFC[key] = (currentFC[key] + 1) % flashcards[key].length;
-  renderFC(key);
-  document.querySelector(`#${key}-flashcards .flashcard`).classList.remove('flipped');
-}
-
-function prevFC(e, key) {
-  e.stopPropagation();
-  currentFC[key] = (currentFC[key] - 1 + flashcards[key].length) % flashcards[key].length;
-  renderFC(key);
-  document.querySelector(`#${key}-flashcards .flashcard`).classList.remove('flipped');
-}
-
-/* ========== QUIZ SYSTEM ========== */
-function quizCheck(btn, correct, feedback) {
-  const parent = btn.parentElement;
-  parent.querySelectorAll('.option').forEach(o => o.style.pointerEvents = 'none');
-  const fb = parent.querySelector('.feedback');
-  fb.textContent = feedback;
-  fb.className = 'feedback ' + (correct ? 'ok' : 'no');
-  btn.classList.add(correct ? 'correct' : 'wrong');
-}
-
-/* ========== SCENARIO SYSTEM ========== */
-function scenarioResult(btn, correct) {
-  const parent = btn.parentElement;
-  const resultDiv = parent.querySelector('.scenario-result');
-  if (correct) {
-    resultDiv.style.display = 'block';
-    resultDiv.innerHTML = '<strong>✓ Good choice!</strong> This is the recommended security response.';
-    resultDiv.style.borderColor = 'var(--correct)';
-    resultDiv.style.background = '#1a3a2a';
-  } else {
-    resultDiv.style.display = 'block';
-    resultDiv.innerHTML = '<strong>✗ Risky!</strong> This could expose you to malware or data theft. Trustworthy actions involve reporting unknown devices to IT.';
-    resultDiv.style.borderColor = 'var(--wrong)';
-    resultDiv.style.background = '#3a1a1a';
-  }
-}
-
-/* ========== PHISHING LAB ========== */
-function triggerPhishingLesson() {
-  document.getElementById('phishingLogin').style.display = 'none';
-  document.getElementById('phishingReveal').style.display = 'block';
-}
-
-/* ========== PASSWORD STRENGTH CHECKER ========== */
-const pwd = document.getElementById('passwordInput');
-if (pwd) {
-  pwd.addEventListener('input', checkPassword);
-}
-
-function checkPassword() {
-  const val = pwd.value;
-  const fill = document.getElementById('strengthFill');
-  const label = document.getElementById('strengthLabel');
-  const req1 = document.getElementById('req1');
-  const req2 = document.getElementById('req2');
-  const req3 = document.getElementById('req3');
-  const req4 = document.getElementById('req4');
-  
-  let score = 0;
-  req1.className = 'req-item' + (val.length >= 12 ? ' check' : '');
-  req2.className = 'req-item' + (/[A-Z]/.test(val) ? ' check' : '');
-  req3.className = 'req-item' + (/[0-9]/.test(val) ? ' check' : '');
-  req4.className = 'req-item' + (/[^A-Za-z0-9]/.test(val) ? ' check' : '');
-  
-  if (val.length >= 12) score += 25;
-  if (/[A-Z]/.test(val)) score += 25;
-  if (/[0-9]/.test(val)) score += 25;
-  if (/[^A-Za-z0-9]/.test(val)) score += 25;
-  
-  fill.style.width = score + '%';
-  if (score <= 25) {
-    fill.style.background = 'var(--wrong)';
-    label.textContent = 'Strength: Weak';
-  } else if (score <= 50) {
-    fill.style.background = '#f39c12';
-    label.textContent = 'Strength: Fair';
-  } else if (score <= 75) {
-    fill.style.background = '#3498db';
-    label.textContent = 'Strength: Good';
-  } else {
-    fill.style.background = 'var(--correct)';
-    label.textContent = 'Strength: Strong!';
-  }
-}
-
-/* ========== FINAL COMPREHENSIVE QUIZ ========== */
-const finalQuiz = [
-  { q: "Which CIA principle ensures data hasn't been altered?", opts: ["Confidentiality","Integrity","Availability"], a: 1,
-    ex: "Integrity guarantees data remains unchanged." },
-  { q: "What malware spreads without user action?", opts: ["Virus","Worm","Trojan"], a: 1,
-    ex: "Worms self-replicate across networks." },
-  { q: "Encryption that uses one shared key is called?", opts: ["Symmetric","Asymmetric","Hashing"], a: 0,
-    ex: "Symmetric encryption uses a single shared secret key." },
-  { q: "What authentication factor is a fingerprint?", opts: ["Something you know","Something you have","Something you are"], a: 2,
-    ex: "Biometrics are something you ARE." },
-  { q: "Best response to unexpected USB drive?", opts: ["Plug it in","Report to IT","Throw it away"], a: 1,
-    ex: "Unknown devices could contain malware." }
+/* ---------- navigation and progress ---------- */
+var LABS = [
+  ['triage','Triage board','Sort six incidents by what they actually damage'],
+  ['logs','Log analysis','Read a raw auth log and pull out the attack'],
+  ['malware','Diagnostics','Read the symptoms, type the infection'],
+  ['inbox','Inbox shift','Clear a helpdesk queue, headers included'],
+  ['crypto','Cipher bench','Break intercepts, seal messages, force a hash collision'],
+  ['keys','Key vault','Time an offline attack against your own password'],
+  ['mfa','MFA station','Enable a second factor and spot fake prompts'],
+  ['scams','Scam desk','Classify everyday scams beyond email phishing'],
+  ['ai','AI threats','Defend against deepfakes, voice clones, and AI phishing'],
+  ['defend','Response drill','Ten incidents, eight seconds each']
 ];
+var RANKS = ['Trainee','Analyst I','Analyst II','Responder','Senior responder','Investigator','Shift lead','Range captain','AI-aware','Range cleared'];
 
-function initFinalQuiz() {
-  const box = document.getElementById('finalQuiz');
-  box.innerHTML = `
-    <div style="text-align:center;margin-bottom:20px;">
-      <p style="color:var(--muted);">Test your knowledge across all topics</p>
-    </div>
-    <div id="quiz-content"></div>
-  `;
-  renderQuiz(0);
+function go(id, btn){
+  Array.prototype.forEach.call(document.querySelectorAll('.lab'), function(l){ l.classList.remove('on'); });
+  Array.prototype.forEach.call(document.querySelectorAll('#rail button'), function(b){ b.classList.remove('on'); });
+  document.getElementById('lab-' + id).classList.add('on');
+  btn.classList.add('on');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-let quizIndex = 0, quizScore = 0;
+function clearLab(id, label){
+  if (state.cleared.indexOf(id) > -1) return;
+  state.cleared.push(id);
+  pushAar(id, label);
+  save(); refreshProgress();
+  toast('Cleared: ' + label);
+}
 
-function renderQuiz(idx) {
-  const content = document.getElementById('quiz-content');
-  if (idx >= finalQuiz.length) {
-    const pct = Math.round(quizScore / finalQuiz.length * 100);
-    const msg = pct === 100 ? "🏆 Perfect! You're exam ready!" :
-                pct >= 70 ? "👏 Great job! Review the weak spots." :
-                "📚 Keep studying and try again!";
-    content.innerHTML = `
-      <div style="text-align:center;padding:30px;">
-        <div class="result-score">${quizScore} / ${finalQuiz.length} (${pct}%)</div>
-        <p style="color:var(--muted);">${msg}</p>
-        <button class="retry-btn" onclick="initFinalQuiz();quizIndex=0;quizScore=0;">Restart Quiz</button>
-      </div>
-    `;
+function refreshProgress(){
+  var n = state.cleared.length, total = LABS.length;
+  document.getElementById('clearance').textContent = 'Clearance ' + n + ' / ' + total;
+  document.getElementById('scoreVal').textContent = 'Score ' + state.points;
+  document.getElementById('meterFill').style.width = (n / total * 100) + '%';
+  document.getElementById('rankTitle').textContent = RANKS[n];
+  document.getElementById('rankNote').textContent = n === total
+    ? 'Every lab cleared. Replay the entry check and see how fast you find all five tells now.'
+    : (total - n) + (total - n === 1 ? ' lab still open.' : ' labs still open.');
+  document.getElementById('badgeInitial').textContent = n === total ? '\u2605' : 'E';
+
+  Array.prototype.forEach.call(document.querySelectorAll('#rail button'), function(b){
+    var t = b.querySelector('.tick');
+    if (t) t.remove();
+    if (state.cleared.indexOf(b.dataset.lab) > -1){
+      var s = document.createElement('span');
+      s.className = 'tick'; s.textContent = ' \u2713';
+      b.appendChild(s);
+    }
+  });
+
+  var ml = document.getElementById('missionList');
+  ml.innerHTML = '';
+  LABS.forEach(function(L){
+    var done = state.cleared.indexOf(L[0]) > -1;
+    var li = document.createElement('li');
+    var btn = document.createElement('button');
+    btn.className = 'mission' + (done ? ' done' : '');
+    btn.innerHTML = '<span class="st">' + (done ? 'cleared' : 'open') + '</span><span><b></b><small></small></span>';
+    btn.querySelector('b').textContent = L[1];
+    btn.querySelector('small').textContent = L[2];
+    btn.onclick = function(){ go(L[0], document.querySelector('#rail button[data-lab="' + L[0] + '"]')); };
+    li.appendChild(btn); ml.appendChild(li);
+  });
+  drawCertificate(false);
+  renderAar();
+  applyTeamUI();
+  var fab = document.getElementById('aarFab');
+  if (fab) fab.classList.toggle('on', state.aarOn !== false && state.gatePassed);
+}
+
+function wipeProgress(){
+  state = { cleared: [], gatePassed: false, points: 0, logSolved: 0, logStreak: 0, team: state.team || 'blue', aarOn: state.aarOn !== false, playerName: state.playerName || '', roomCode: state.roomCode || '', aar: [], teacher: false };
+  save(); refreshProgress();
+  updateLogStreak();
+  toast('Progress reset.');
+}
+
+/* ---------- lab: triage board ---------- */
+var INCIDENTS = [
+  ['A backup drive is left in a taxi, unencrypted','C','Nothing broke and nothing changed, but the data is now readable by a stranger.'],
+  ['Ransomware encrypts the shared drive','A','The files still exist and are unaltered. Nobody can reach them, so availability takes the first hit.'],
+  ['A student edits their own grade in the portal','I','The record still exists and is still online. It is simply no longer true.'],
+  ['A flood of traffic knocks the school site offline','A','Denial of service. No secrets leak and no data changes; the service just stops answering.'],
+  ['A fake login page harvests staff passwords','C','Those credentials were meant to be known only to their owners.'],
+  ['A software update is swapped for a tampered build','I','Users receive something the vendor never shipped. That is an integrity failure before it is anything else.'],
+  ['A disgruntled admin quietly changes grades on their way out','I','The system still runs fine and nobody outside sees anything. The records are just no longer true.'],
+  ['An unpatched server is knocked over by a single crafted packet','A','One packet, one crash. The exploit itself is almost incidental — what matters is that the service goes down.'],
+  ['A misconfigured cloud bucket leaves transcripts world-readable','C','No attacker required. A permissions mistake exposed something that should have stayed private.']
+];
+var tray = [], selected = null;
+
+function initTriage(){
+  tray = INCIDENTS.map(function(x,i){ return { id:i, text:x[0], ans:x[1], why:x[2] }; });
+  for (var i = tray.length - 1; i > 0; i--){ var j = Math.floor(Math.random()*(i+1)); var t = tray[i]; tray[i] = tray[j]; tray[j] = t; }
+  selected = null;
+  ['C','I','A'].forEach(function(b){ document.getElementById('bin-'+b).innerHTML = ''; });
+  document.getElementById('triageNote').textContent = 'Nothing sorted yet.';
+  renderTray();
+}
+function renderTray(){
+  var t = document.getElementById('tray');
+  t.innerHTML = '';
+  if (!tray.length){ t.innerHTML = '<span class="note">Board clear.</span>'; return; }
+  tray.forEach(function(inc){
+    var b = document.createElement('button');
+    b.className = 'incident' + (selected === inc.id ? ' sel' : '');
+    b.textContent = inc.text;
+    b.onclick = function(){ selected = (selected === inc.id ? null : inc.id); renderTray(); };
+    t.appendChild(b);
+  });
+}
+function drop(bin){
+  if (selected === null){ toast('Pick an incident first.'); return; }
+  var idx = -1;
+  for (var i = 0; i < tray.length; i++){ if (tray[i].id === selected) { idx = i; break; } }
+  if (idx < 0) return;
+  var inc = tray[idx];
+  var right = inc.ans === bin;
+  var li = document.createElement('li');
+  if (!right) li.className = 'bad';
+  li.textContent = inc.text;
+  document.getElementById('bin-' + inc.ans).appendChild(li);
+  var names = { C:'confidentiality', I:'integrity', A:'availability' };
+  document.getElementById('triageNote').innerHTML = right
+    ? '<span style="color:var(--green)">Right.</span> ' + inc.why
+    : '<span style="color:var(--red)">Not quite — that one belongs under ' + names[inc.ans] + '.</span> ' + inc.why;
+  if (right) addPoints(10);
+  tray.splice(idx,1);
+  selected = null;
+  renderTray();
+  if (!tray.length){
+    document.getElementById('triageNote').innerHTML += ' <strong>Board cleared.</strong>';
+    clearLab('triage','Triage board');
+  }
+}
+
+/* ---------- lab: log analysis ---------- */
+var ATTACK_IPS = ['203.0.113.', '198.51.100.', '192.0.2.'];
+var DECOY_IPS = ['10.0.0.14','10.0.0.22','10.0.0.9','10.0.0.31'];
+var DECOY_USERS = ['jsmith','mreyes','kpatel','twalsh'];
+var VICTIM_USERS = ['admin','root','deploy','backup','svc-web'];
+var COMPANIES = ['Northfield ISD','Cascade Retail','Harbor Credit Union','Bluepeak Clinic','Meridian Logistics','Ashgrove University'];
+var current = null;
+var lastLogType = null;
+
+function pad(n){ return (n < 10 ? '0' : '') + n; }
+function caseNum(){ return '#' + (2000 + Math.floor(Math.random()*7999)); }
+function pick(arr){ return arr[Math.floor(Math.random()*arr.length)]; }
+
+/* ----- case type 1: SSH brute force (auth log) ----- */
+function genSSHCase(){
+  var attackerIP = pick(ATTACK_IPS) + (Math.floor(Math.random()*200)+10);
+  var victim = pick(VICTIM_USERS);
+  var failCount = 8 + Math.floor(Math.random()*8);
+  var hour = 2 + Math.floor(Math.random()*3), min = Math.floor(Math.random()*50);
+  var lines = [];
+  function stamp(){ var l = 'Jan ' + (10+Math.floor(Math.random()*5)) + ' ' + pad(hour) + ':' + pad(min) + ':' + pad(Math.floor(Math.random()*60)); min++; if (min>59){min=0;hour++;} return l; }
+
+  for (var i = 0; i < 2; i++){
+    lines.push(stamp() + ' srv sshd[' + (1000+Math.floor(Math.random()*9000)) + ']: Accepted password for ' + pick(DECOY_USERS) + ' from ' + pick(DECOY_IPS) + ' port ' + (49000+Math.floor(Math.random()*900)) + ' ssh2');
+  }
+  var failPool = ['admin','root','test','user','guest','oracle',victim];
+  for (var f = 0; f < failCount; f++){
+    var guess = f === failCount - 1 ? victim : pick(failPool);
+    lines.push(stamp() + ' srv sshd[' + (1000+Math.floor(Math.random()*9000)) + ']: Failed password for ' +
+      (Math.random() < 0.3 ? 'invalid user ' : '') + guess + ' from ' + attackerIP + ' port ' + (49000+Math.floor(Math.random()*900)) + ' ssh2');
+    if (Math.random() < 0.3){
+      lines.push(stamp() + ' srv sshd[' + (1000+Math.floor(Math.random()*9000)) + ']: Accepted password for ' + pick(DECOY_USERS) + ' from ' + pick(DECOY_IPS) + ' port ' + (49000+Math.floor(Math.random()*900)) + ' ssh2');
+    }
+  }
+  lines.push(stamp() + ' srv sshd[' + (1000+Math.floor(Math.random()*9000)) + ']: Accepted password for ' + victim + ' from ' + attackerIP + ' port ' + (49000+Math.floor(Math.random()*900)) + ' ssh2');
+  lines.push(stamp() + ' srv sshd[' + (1000+Math.floor(Math.random()*9000)) + ']: pam_unix(sshd:session): session opened for user ' + victim + ' by (uid=0)');
+
+  return {
+    type: 'ssh',
+    blurb: 'SSH auth log from a jump box at ' + pick(COMPANIES) + '. Something logged in that shouldn\u2019t have.',
+    lines: lines,
+    fields: [
+      { id:'f1', label:'Attacking IP address', placeholder:'e.g. 203.0.113.44',
+        check: function(v){ return v === attackerIP; } },
+      { id:'f2', label:'Failed attempts before the successful login', placeholder:'a number',
+        check: function(v){ return v === String(failCount); } },
+      { id:'f3', label:'Username that was compromised', placeholder:'e.g. admin',
+        check: function(v){ return v.toLowerCase() === victim.toLowerCase(); } }
+    ],
+    solvedMsg: 'All three confirmed. That is a full incident write-up: source, scope, and what it cost the account.',
+    hintMsg: 'Keep filtering — try the word "Failed" to isolate the attempts, or search the IP once you spot it repeating.'
+  };
+}
+
+/* ----- case type 2: web attack (access log) ----- */
+var WEB_TECHNIQUES = [
+  { name:'sql injection', accept:['sql injection','sqli','sql-injection'],
+    payloads: function(){ return ["/product?id=17%20OR%201=1--","/login.php?user=admin'--","/search?q=1%27%20UNION%20SELECT%20NULL--"]; } },
+  { name:'path traversal', accept:['path traversal','directory traversal','path-traversal'],
+    payloads: function(){ return ["/../../../../etc/passwd","/download?file=..%2F..%2F..%2Fetc%2Fshadow","/img/../../../boot.ini"]; } }
+];
+function genWebCase(){
+  var attackerIP = pick(ATTACK_IPS) + (Math.floor(Math.random()*200)+10);
+  var custIP1 = pick(DECOY_IPS), custIP2 = pick(DECOY_IPS.filter(function(x){return x!==custIP1;}));
+  var tech = pick(WEB_TECHNIQUES);
+  var payloads = tech.payloads();
+  var attackCount = 2 + Math.floor(Math.random()*(payloads.length-1));
+  var hour = 3, min = Math.floor(Math.random()*40);
+  function stamp(){ var l = '[14/Jan/2026:' + pad(hour) + ':' + pad(min) + ':' + pad(Math.floor(Math.random()*60)) + ' +0000]'; min++; if (min>59){min=0;hour++;} return l; }
+
+  var lines = [];
+  lines.push(custIP1 + ' - - ' + stamp() + ' "GET /product?id=17 HTTP/1.1" 200 512');
+  for (var i = 0; i < attackCount; i++){
+    lines.push(attackerIP + ' - - ' + stamp() + ' "GET ' + payloads[i % payloads.length] + ' HTTP/1.1" 500 210');
+  }
+  lines.push(custIP2 + ' - - ' + stamp() + ' "POST /cart/add HTTP/1.1" 302 0');
+  lines.push(custIP1 + ' - - ' + stamp() + ' "GET /checkout HTTP/1.1" 200 1830');
+  if (Math.random() < 0.6) lines.push(attackerIP + ' - - ' + stamp() + ' "GET /wp-admin/setup-config.php HTTP/1.1" 404 96');
+  lines.push(custIP2 + ' - - ' + stamp() + ' "GET /about HTTP/1.1" 200 980');
+  // shuffle keeping readability reasonable
+  for (var s = lines.length - 1; s > 0; s--){ var j = Math.floor(Math.random()*(s+1)); var t = lines[s]; lines[s]=lines[j]; lines[j]=t; }
+  var badCount = attackCount + (lines.length && lines.some(function(l){return l.indexOf('wp-admin')>-1;}) ? 1 : 0);
+
+  return {
+    type: 'web',
+    blurb: 'Web server access log from ' + pick(COMPANIES) + '\u2019s storefront. One address is not shopping.',
+    lines: lines,
+    fields: [
+      { id:'f1', label:'Attacking IP address', placeholder:'e.g. 203.0.113.44',
+        check: function(v){ return v === attackerIP; } },
+      { id:'f2', label:'Malicious requests from that address', placeholder:'a number',
+        check: function(v){ return v === String(badCount); } },
+      { id:'f3', label:'Attack technique', placeholder:'e.g. sql injection',
+        check: function(v){ return tech.accept.indexOf(v.toLowerCase()) > -1; } }
+    ],
+    solvedMsg: 'Confirmed. Same address, same technique, repeated until something 500\u2019d instead of 404\u2019d — that is how you find the one that worked.',
+    hintMsg: 'Filter by the suspicious IP once you spot it, then count how many of its requests return a 500 instead of a normal 200 or 302.'
+  };
+}
+
+/* ----- case type 3: port scan (firewall log) ----- */
+function genScanCase(){
+  var attackerIP = pick(ATTACK_IPS) + (Math.floor(Math.random()*200)+10);
+  var targetIP = '10.0.0.' + (5 + Math.floor(Math.random()*40));
+  var portPool = [21,22,23,25,80,110,143,443,445,3306,3389,8080];
+  for (var s = portPool.length - 1; s > 0; s--){ var j = Math.floor(Math.random()*(s+1)); var t = portPool[s]; portPool[s]=portPool[j]; portPool[j]=t; }
+  var scanPorts = portPool.slice(0, 6 + Math.floor(Math.random()*3));
+  var hour = 14, min = Math.floor(Math.random()*40), sec = 0;
+  function stamp(){ var l = pad(hour)+':'+pad(min)+':'+pad(sec); sec++; if (sec>59){sec=0;min++;} return l; }
+
+  var lines = [];
+  scanPorts.forEach(function(port){
+    lines.push(stamp() + ' DROP TCP ' + attackerIP + ':' + (40000+Math.floor(Math.random()*9000)) + ' -> ' + targetIP + ':' + port);
+  });
+  lines.push(stamp() + ' ALLOW TCP ' + pick(DECOY_IPS) + ':' + (50000+Math.floor(Math.random()*900)) + ' -> 93.184.216.34:443');
+  lines.push(stamp() + ' ALLOW UDP ' + pick(DECOY_IPS) + ':' + (50000+Math.floor(Math.random()*900)) + ' -> 8.8.8.8:53');
+  for (var s2 = lines.length - 1; s2 > 0; s2--){ var j2 = Math.floor(Math.random()*(s2+1)); var t2 = lines[s2]; lines[s2]=lines[j2]; lines[j2]=t2; }
+
+  return {
+    type: 'scan',
+    blurb: 'Firewall drop log from ' + pick(COMPANIES) + '\u2019s edge router. One host got a lot of unwanted attention.',
+    lines: lines,
+    fields: [
+      { id:'f1', label:'Scanning IP address', placeholder:'e.g. 203.0.113.44',
+        check: function(v){ return v === attackerIP; } },
+      { id:'f2', label:'Distinct ports probed', placeholder:'a number',
+        check: function(v){ return v === String(scanPorts.length); } },
+      { id:'f3', label:'Internal host being scanned', placeholder:'e.g. 10.0.0.8',
+        check: function(v){ return v === targetIP; } }
+    ],
+    solvedMsg: 'That is a port scan: one source, one target, ports tried in a burst until the map is complete. Nothing was breached yet — this is the reconnaissance before the attempt.',
+    hintMsg: 'Every DROP line shares a source and a destination host — only the destination port changes. Filter by "DROP" to clear away the ALLOW noise first.'
+  };
+}
+
+
+/* ----- case type 4: public Wi-Fi / captive portal / evil twin ----- */
+function genWifiCase(){
+  var attackerAP = pick(['FreeAirport_WiFi','CoffeeShop_Guest','Hotel_Conference','CityLibrary_Free']);
+  var legitAP = pick(['Eastern-Student','Eastern-Guest','Airport_Official']);
+  function macOUI(a,b,c){ return a+':'+b+':'+c+':'+ (10+Math.floor(Math.random()*80)) + ':' + (10+Math.floor(Math.random()*80)) + ':' + (10+Math.floor(Math.random()*80)); }
+  var victimMAC = macOUI('a4','83','e7');
+  var evilMAC = macOUI('00','0c','f1');
+  var portalIP = '192.168.' + (1+Math.floor(Math.random()*3)) + '.1';
+  var hour = 9 + Math.floor(Math.random()*6), min = Math.floor(Math.random()*40), sec = 0;
+  function stamp(){ var l = pad(hour)+':'+pad(min)+':'+pad(sec); sec += 3 + Math.floor(Math.random()*8); if (sec>59){sec=sec%60;min++;} if(min>59){min=0;hour++;} return l; }
+
+  var lines = [];
+  lines.push(stamp() + ' ASSOC client ' + victimMAC + ' -> AP "' + legitAP + '" signal=-58dBm');
+  lines.push(stamp() + ' DHCP client ' + victimMAC + ' obtained 10.10.4.' + (20+Math.floor(Math.random()*50)));
+  lines.push(stamp() + ' DNS query from ' + victimMAC + ' for portal.easterncyber.edu -> OK');
+  // deauth / roam to evil twin
+  lines.push(stamp() + ' DEAUTH ' + victimMAC + ' reason=unspecified count=12 (possible flood)');
+  lines.push(stamp() + ' ASSOC client ' + victimMAC + ' -> AP "' + attackerAP + '" signal=-41dBm bssid=' + evilMAC);
+  lines.push(stamp() + ' DHCP client ' + victimMAC + ' obtained 10.99.0.' + (5+Math.floor(Math.random()*40)) + ' via ' + portalIP);
+  lines.push(stamp() + ' HTTP captive portal redirect ' + victimMAC + ' -> http://' + portalIP + '/login (cleartext)');
+  lines.push(stamp() + ' POST ' + victimMAC + ' -> ' + portalIP + '/login form fields=username,password (unencrypted)');
+  lines.push(stamp() + ' DNS query from ' + victimMAC + ' for mail.easterncyber.edu -> spoofed answer ' + portalIP);
+  lines.push(stamp() + ' ASSOC client ' + pick(['b8:27:eb:11:22:33','3c:22:fb:44:55:66']) + ' -> AP "' + legitAP + '" signal=-62dBm');
+
+  for (var s = lines.length - 1; s > 0; s--){ var j = Math.floor(Math.random()*(s+1)); var t = lines[s]; lines[s]=lines[j]; lines[j]=t; }
+
+  return {
+    type: 'wifi',
+    blurb: 'Wireless association log from ' + pick(COMPANIES) + ' edge. A client left a known network and authenticated somewhere it should not have — classic public Wi\u2011Fi / evil-twin territory.',
+    lines: lines,
+    fields: [
+      { id:'f1', label:'Suspicious / attacker AP name', placeholder:'e.g. FreeAirport_WiFi',
+        check: function(v){ return v.trim().toLowerCase() === attackerAP.toLowerCase(); } },
+      { id:'f2', label:'Client MAC that was targeted', placeholder:'e.g. a4:83:e7:…',
+        check: function(v){ return v.trim().toLowerCase().replace(/-/g,':') === victimMAC.toLowerCase(); } },
+      { id:'f3', label:'Attack pattern', placeholder:'e.g. evil twin',
+        check: function(v){
+          var x = v.toLowerCase();
+          return ['evil twin','evil-twin','rogue ap','rogue access point','captive portal','deauth','deauthentication','wifi phishing','public wifi'].some(function(k){ return x.indexOf(k) > -1; });
+        } }
+    ],
+    solvedMsg: 'That sequence is an evil-twin / hostile captive-portal pattern: deauth from a known AP, reassoc to a lookalike, cleartext credential post, DNS spoof. On public Wi\u2011Fi prefer cellular, a known VPN, or sites with strict HTTPS + cert pinning — and never type school passwords into a portal you did not expect.',
+    hintMsg: 'Filter for DEAUTH or ASSOC. Look for a client that leaves a known SSID and joins an open-looking network, then posts credentials in cleartext.'
+  };
+}
+
+var LOGCASE_GENS = { ssh: genSSHCase, web: genWebCase, scan: genScanCase, wifi: genWifiCase };
+var CASE_LABELS = { ssh:'Auth log', web:'Access log', scan:'Firewall log', wifi:'Wi-Fi / captive portal' };
+
+function genLogCase(){
+  var types = Object.keys(LOGCASE_GENS).filter(function(t){ return t !== lastLogType; });
+  var type = pick(types);
+  lastLogType = type;
+  current = LOGCASE_GENS[type]();
+  current._blueBlurb = current.blurb;
+  current._redBlurb = 'Red team view: study how this activity would appear in logs you are trying not to leave. ' + current.blurb;
+  document.getElementById('caseTag').textContent = 'Case ' + caseNum() + ' \u2014 ' + CASE_LABELS[type];
+  document.getElementById('caseBlurb').textContent = state.team === 'red' ? current._redBlurb : current._blueBlurb;
+  renderLog();
+  renderFindings();
+  document.getElementById('logFilter').value = '';
+  document.getElementById('logNote').textContent = '';
+}
+
+function renderFindings(){
+  var box = document.getElementById('findingsBox');
+  box.innerHTML = current.fields.map(function(f){
+    return '<div class="f-field"><label class="lbl" for="' + f.id + '">' + f.label + '</label>' +
+      '<input class="in" id="' + f.id + '" placeholder="' + f.placeholder + '" autocomplete="off">' +
+      '<div class="f-result" id="' + f.id + 'Result"></div></div>';
+  }).join('');
+}
+
+function renderLog(){
+  var box = document.getElementById('logLines');
+  box.innerHTML = '';
+  current.lines.forEach(function(text){
+    var d = document.createElement('div');
+    d.className = 'logline';
+    d.textContent = text;
+    d.dataset.text = text.toLowerCase();
+    d.onclick = function(){ d.classList.toggle('flagged'); };
+    box.appendChild(d);
+  });
+  applyLogFilter();
+}
+function applyLogFilter(){
+  var q = document.getElementById('logFilter').value.toLowerCase().trim();
+  Array.prototype.forEach.call(document.querySelectorAll('#logLines .logline'), function(d){
+    d.classList.toggle('dim', q.length > 0 && d.dataset.text.indexOf(q) === -1);
+  });
+}
+document.getElementById('logFilter').addEventListener('input', applyLogFilter);
+
+function updateLogStreak(){
+  document.getElementById('logStreak').textContent = 'Cases closed: ' + state.logSolved + ' \u00b7 Streak: ' + state.logStreak;
+}
+
+function checkFindings(){
+  var allRight = true;
+  current.fields.forEach(function(f){
+    var input = document.getElementById(f.id);
+    var result = document.getElementById(f.id + 'Result');
+    var val = input.value.trim();
+    var ok = f.check(val);
+    input.classList.remove('right','wrong');
+    if (ok){
+      input.classList.add('right'); result.textContent = 'correct'; result.className = 'f-result right';
+      addPoints(10);
+    } else {
+      input.classList.add('wrong'); result.textContent = 'not quite'; result.className = 'f-result wrong';
+      allRight = false;
+    }
+  });
+  document.getElementById('logNote').textContent = allRight ? current.solvedMsg : current.hintMsg;
+  if (allRight){
+    addPoints(20);
+    state.logSolved++; state.logStreak++; save();
+    updateLogStreak();
+    clearLab('logs','Log analysis');
+  } else {
+    state.logStreak = 0; save();
+    updateLogStreak();
+  }
+}
+
+/* ---------- lab: diagnostics ---------- */
+var CASES = [
+  { name:'worm', accept:['worm'], sym:['host 14 opened 3,100 outbound SMB connections in 40 seconds',
+                      'identical binary now present on hosts 15 through 61',
+                      'no user on any affected host opened an attachment'],
+    tell:'Nobody clicked anything and it is already on 47 machines. Self-propagation across a network is the worm signature.' },
+  { name:'ransomware', accept:['ransomware'], sym:['file extensions across the share rewritten to .lockd',
+                            'README_RESTORE.txt written into every directory',
+                            'volume shadow copies deleted'],
+    tell:'Encryption, a ransom note, and destroyed backups. Deleting the shadow copies is the giveaway — it removes the cheap way out.' },
+  { name:'trojan', accept:['trojan','trojan horse'], sym:['user installed FreeGradeCalc.exe from a search ad',
+                        'the calculator works exactly as advertised',
+                        'the same process opened a reverse shell to an unknown host'],
+    tell:'It does the advertised job and something else underneath. The disguise is the definition.' },
+  { name:'keylogger', accept:['keylogger','spyware'], sym:['no files modified, no network slowdown',
+                           'a hidden process reading raw keyboard input',
+                           'a small encrypted upload leaves the host every night'],
+    tell:'Quiet, tiny, and reading input. It is not breaking anything, it is copying what you type.' },
+  { name:'virus', accept:['virus'], sym:['a shared spreadsheet macro was modified on disk',
+                       'the macro appends itself to every workbook opened afterwards',
+                       'spread stops on machines where nobody opened the file'],
+    tell:'It rides inside a host file and only moves when a person opens it. No user, no spread.' }
+];
+var dq = [], dIdx = 0, dStep = 0, dScore = 0, dTimerId = null;
+
+function startDiag(){
+  clearInterval(dTimerId);
+  dq = CASES.slice().sort(function(){ return Math.random() - 0.5; });
+  dIdx = 0; dScore = 0;
+  document.getElementById('diagStart').textContent = 'Restart intake';
+  nextCase();
+}
+function nextCase(){
+  clearInterval(dTimerId);
+  var term = document.getElementById('term');
+  var guessEl = document.getElementById('diagGuess'), subEl = document.getElementById('diagSubmit');
+  if (dIdx >= dq.length){
+    term.innerHTML = '<span class="ok">&gt; intake complete — ' + dScore + ' of ' + dq.length + ' hosts identified</span>';
+    guessEl.disabled = true; subEl.disabled = true; guessEl.value = '';
+    document.getElementById('diagNote').textContent = dScore === dq.length
+      ? 'Five for five. You are reading symptoms instead of guessing labels.'
+      : 'Run it again — the order is shuffled every time, so there is no sequence to memorise.';
+    clearLab('malware','Diagnostics');
     return;
   }
-  const item = finalQuiz[idx];
-  content.innerHTML = `
-    <div style="color:var(--muted);font-size:.85rem;margin-bottom:8px;">Question ${idx+1}/${finalQuiz.length}</div>
-    <div class="quiz-q">${item.q}</div>
-    ${item.opts.map((o,i) => `<button class="option" onclick="ansQ(${i},${item.a},'${item.ex.replace(/'/g,"\\'")}');">${String.fromCharCode(65+i)}. ${o}</button>`).join('')}
-    <div class="feedback" id="qFeedback"></div>
-  `;
+  var c = dq[dIdx];
+  dStep = 0;
+  term.innerHTML = '<span class="sys">&gt; host ' + (dIdx+1) + ' of ' + dq.length + ' — streaming telemetry</span>\n';
+  guessEl.disabled = false; subEl.disabled = false; guessEl.value = ''; guessEl.focus();
+  document.getElementById('diagNote').textContent = 'Type your call whenever you are ready.';
+  dTimerId = setInterval(function(){
+    if (dStep >= c.sym.length){ clearInterval(dTimerId); return; }
+    term.innerHTML += '<span class="warn">  ' + c.sym[dStep] + '</span>\n';
+    dStep++;
+    term.scrollTop = term.scrollHeight;
+  }, 1800);
 }
-
-function ansQ(selected, correct, explanation) {
-  const fb = document.getElementById('qFeedback');
-  const opts = document.querySelectorAll('#quiz-content .option');
-  opts.forEach(o => o.style.pointerEvents = 'none');
-  opts[correct].classList.add('correct');
-  if (selected === correct) {
-    quizScore++;
-    fb.className = 'feedback ok';
-    fb.textContent = '✓ ' + explanation;
+document.getElementById('diagGuess').addEventListener('keydown', function(e){ if (e.key === 'Enter') callIt(); });
+function callIt(){
+  var guessEl = document.getElementById('diagGuess'), subEl = document.getElementById('diagSubmit');
+  var guess = guessEl.value.trim().toLowerCase();
+  if (!guess) return;
+  clearInterval(dTimerId);
+  var c = dq[dIdx], term = document.getElementById('term');
+  var early = dStep < c.sym.length;
+  var right = c.accept.indexOf(guess) > -1;
+  if (right){
+    dScore++;
+    addPoints(Math.max(10, 30 - dStep*10));
+    term.innerHTML += '<span class="ok">&gt; ' + guess + ' — confirmed' +
+      (early ? ' (called on ' + dStep + ' symptom' + (dStep === 1 ? '' : 's') + ')' : '') + '</span>\n';
   } else {
-    opts[selected].classList.add('wrong');
-    fb.className = 'feedback no';
-    fb.textContent = '✘ ' + explanation;
+    term.innerHTML += '<span class="bad">&gt; ' + guess + ' — wrong, it was ' + c.name + '</span>\n';
   }
-  setTimeout(() => {
-    quizIndex++;
-    renderQuiz(quizIndex);
-  }, 2000);
+  term.innerHTML += '  ' + c.tell + '\n';
+  term.scrollTop = term.scrollHeight;
+  guessEl.disabled = true; subEl.disabled = true;
+  document.getElementById('diagNote').textContent = 'Next host in a moment.';
+  dIdx++;
+  setTimeout(nextCase, 3000);
 }
 
-/* ========== INITIALIZATION ========== */
-window.onload = function() {
-  initFlashcards();
-  initFinalQuiz();
-  updateProgress();
+/* ---------- lab: inbox shift ---------- */
+var MAIL = [
+  { from:'registrar@easternhs.edu', subj:'Spring schedule window opens Monday',
+    headers:'Return-Path: <registrar@easternhs.edu>\nReceived: from mail.easternhs.edu (mail.easternhs.edu [198.51.100.200])\nSPF: pass   DKIM: pass   DMARC: pass',
+    body:'Course selection opens Monday at 8 AM in the portal you normally use. No link is included in this message — sign in the way you always do. Questions go to your counselor.',
+    phish:false, why:'SPF, DKIM and DMARC all pass, meaning the message actually originated from Eastern\u2019s own mail server. No link, no urgency, no attachment.' },
+  { from:'security-alert@paypa1.com', subj:'Unusual sign-in blocked — confirm identity',
+    headers:'Return-Path: <bounce@mkt-relay-77.ru>\nReceived: from mkt-relay-77.ru (unknown [185.220.101.44])\nSPF: fail   DKIM: none   DMARC: fail',
+    body:'We blocked a sign-in from a new device. Confirm your identity in the next 2 hours or your account will be limited. Click here to restore access.',
+    phish:true, why:'SPF and DMARC both fail — the server sending this has no authorization to speak for that domain. The domain itself also swaps a 1 for an l.' },
+  { from:'coach.reyes@easternhs.edu', subj:'Practice moved to 4:30',
+    headers:'Return-Path: <coach.reyes@easternhs.edu>\nReceived: from mail.easternhs.edu (mail.easternhs.edu [198.51.100.200])\nSPF: pass   DKIM: pass   DMARC: pass',
+    body:'Field is being lined tomorrow so practice shifts to 4:30. Bring both jerseys. Reply if you cannot make it.',
+    phish:false, why:'Authenticated, mundane, and asking for nothing but a reply. Most mail is boring, and boring is itself a signal.' },
+  { from:'it-support@easternhs.edu.helpdesk-secure.net', subj:'Mandatory password reset within 24 hours',
+    headers:'Return-Path: <bounce@helpdesk-secure.net>\nReceived: from helpdesk-secure.net (helpdesk-secure.net [91.203.44.12])\nSPF: fail   DKIM: none   DMARC: fail',
+    body:'All students must reset their password using the secure form below. Failure to comply will result in loss of access to all school systems.',
+    phish:true, why:'Read the domain from the right: the real owner is helpdesk-secure.net, and easternhs.edu is decoration bolted on the front. The headers confirm it never touched Eastern\u2019s mail server.' },
+  { from:'no-reply@github.com', subj:'A new SSH key was added to your account',
+    headers:'Return-Path: <no-reply@github.com>\nReceived: from mail-sor-f41.github.com (mail-sor-f41.github.com [140.82.113.41])\nSPF: pass   DKIM: pass   DMARC: pass',
+    body:'A key labelled laptop-2026 was added. If this was you, no action is needed. If it was not, review your security log.',
+    phish:false, why:'Fully authenticated, and it is a notification about something that already happened rather than a request to click anything.' },
+  { from:'principal.hayes@easternhs.edu', subj:'quick favour - stuck in a meeting',
+    headers:'Return-Path: <p.hayes2026@outlook-mail.co>\nReceived: from outlook-mail.co (unknown [102.89.14.201])\nSPF: fail   DKIM: none   DMARC: fail',
+    body:'I am stuck in a meeting and cannot take calls. I need you to pick up four $100 gift cards for the staff raffle and send me the codes. I will reimburse you today. Please do not mention this to anyone yet.',
+    phish:true, why:'The display name says Principal Hayes but the Return-Path is a free outlook-mail.co address that has nothing to do with the school, and every check fails. Gift cards plus secrecy plus an unreachable authority figure is the classic pattern underneath.' }
+];
+var inboxState = [], openIdx = null;
+
+function initInbox(){
+  inboxState = MAIL.map(function(m){
+    return { from:m.from, subj:m.subj, headers:m.headers, body:m.body, phish:m.phish, why:m.why, judged:false, right:false };
+  });
+  openIdx = null;
+  document.getElementById('reader').style.display = 'none';
+  document.getElementById('inboxNote').textContent = '';
+  renderInbox();
+}
+function renderInbox(){
+  var box = document.getElementById('inbox');
+  box.innerHTML = '';
+  inboxState.forEach(function(m, i){
+    var b = document.createElement('button');
+    b.className = 'msg' + (m.judged ? ' judged' : '');
+    b.innerHTML = '<span style="font-family:var(--mono);color:var(--muted)">' + (m.judged ? '\u00b7' : '\u25cf') + '</span>' +
+      '<span><span class="from"></span><span class="sub"></span></span>' +
+      '<span class="mark ' + (m.judged ? (m.right ? 'right' : 'wrong') : '') + '">' +
+      (m.judged ? (m.right ? 'correct' : 'missed') : 'open') + '</span>';
+    b.querySelector('.from').textContent = m.from;
+    b.querySelector('.sub').textContent = m.subj;
+    b.onclick = function(){ openMsg(i); };
+    box.appendChild(b);
+  });
+}
+function openMsg(i){
+  openIdx = i;
+  var m = inboxState[i];
+  var r = document.getElementById('reader');
+  r.style.display = 'block';
+  r.innerHTML = '<div class="from"></div><div class="headers"></div><h3 style="font-family:var(--display);margin-bottom:10px"></h3>' +
+    '<p style="color:var(--text)"></p>' +
+    (m.judged ? '' : '<div class="verdict-row"><button class="btn-red" onclick="judge(true)">Report as phishing</button><button class="btn-green" onclick="judge(false)">Looks legitimate</button></div>') +
+    '<div class="explain" id="explain"></div>';
+  r.querySelector('.from').textContent = 'from ' + m.from;
+  r.querySelector('.headers').textContent = m.headers;
+  r.querySelector('h3').textContent = m.subj;
+  r.querySelector('p').textContent = m.body;
+  if (m.judged){
+    var ex = document.getElementById('explain');
+    ex.style.display = 'block';
+    ex.textContent = m.why;
+  }
+}
+function judge(saidPhish){
+  var m = inboxState[openIdx];
+  m.judged = true;
+  m.right = (saidPhish === m.phish);
+  if (m.right) addPoints(10);
+  var ex = document.getElementById('explain');
+  ex.style.display = 'block';
+  var head = m.right
+    ? (m.phish ? 'Correct — that one was fake.' : 'Correct — that one was genuine.')
+    : (m.phish ? 'Missed — that one was fake.' : 'Over-reported — that one was genuine.');
+  ex.innerHTML = '<b style="color:' + (m.right ? 'var(--green)' : 'var(--red)') + '"></b><br><span></span>';
+  ex.querySelector('b').textContent = head;
+  ex.querySelector('span').textContent = m.why;
+  var vr = document.querySelector('#reader .verdict-row');
+  if (vr) vr.remove();
+  renderInbox();
+  var done = 0, got = 0;
+  inboxState.forEach(function(x){ if (x.judged){ done++; if (x.right) got++; } });
+  var note = 'Handled ' + done + ' of ' + inboxState.length + ' — ' + got + ' called correctly.';
+  if (done === inboxState.length){
+    note += got === inboxState.length
+      ? ' Shift cleared with a perfect record.'
+      : ' Shift cleared. The misses are the interesting ones — reread those headers.';
+    clearLab('inbox','Inbox shift');
+  }
+  document.getElementById('inboxNote').textContent = note;
+}
+
+/* ---------- lab: cipher bench ---------- */
+
+/* ---------- lab: cipher bench ---------- */
+var cIn = document.getElementById('caesarIn'), cShift = document.getElementById('caesarShift');
+
+function caesar(txt, n){
+  return txt.replace(/[a-z]/gi, function(ch){
+    var base = ch <= 'Z' ? 65 : 97;
+    return String.fromCharCode((ch.charCodeAt(0) - base + n + 26) % 26 + base);
+  });
+}
+
+function renderCaesarWheel(shift){
+  var w = document.getElementById('caesarWheel');
+  if (!w) return;
+  var html = '';
+  for (var i = 0; i < 26; i++){
+    var from = String.fromCharCode(97 + i);
+    var to = String.fromCharCode(97 + (i + shift) % 26);
+    html += '<i class="' + (i === 0 || i === 4 || i === 19 ? 'on' : '') + '" title="' + from + ' → ' + to + '">' + to + '</i>';
+  }
+  w.innerHTML = html;
+}
+
+function renderCaesar(){
+  var shift = +cShift.value;
+  document.getElementById('shiftVal').textContent = shift;
+  document.getElementById('caesarOut').textContent = caesar(cIn.value, shift) || '\u2014';
+  renderCaesarWheel(shift);
+}
+if (cIn) cIn.addEventListener('input', renderCaesar);
+if (cShift) cShift.addEventListener('input', renderCaesar);
+
+var COMMON_WORDS = ['the','and','meet','attack','password','gym','four','you','that','with','behind','grades','locked','school','please','from','this','have','will','your'];
+function bruteForce(){
+  var ct = caesar(cIn.value, +cShift.value);
+  var list = document.getElementById('crackList');
+  list.innerHTML = '';
+  for (var k = 1; k <= 25; k++){
+    var guess = caesar(ct, -k);
+    var lower = ' ' + guess.toLowerCase() + ' ';
+    var hit = COMMON_WORDS.some(function(w){ return lower.indexOf(' ' + w + ' ') > -1; });
+    var d = document.createElement('div');
+    if (hit) d.className = 'hit';
+    d.textContent = (k < 10 ? '0' : '') + k + '  ' + guess.slice(0, 70);
+    list.appendChild(d);
+  }
+  addPoints(10);
+  cryptoProgress.brute = true;
+  maybeClearCrypto();
+}
+
+/* Intercept challenge */
+var INTERCEPTS = [
+  { pt: 'meet me behind the gym at four', shift: 7 },
+  { pt: 'change your password after class', shift: 11 },
+  { pt: 'the exam key is under the plant', shift: 4 },
+  { pt: 'do not trust the attachment', shift: 15 },
+  { pt: 'backup the grades before friday', shift: 9 },
+  { pt: 'report phishing to the help desk', shift: 13 }
+];
+var interceptIdx = 0, interceptSolved = 0, currentIntercept = null;
+
+function loadIntercept(){
+  currentIntercept = INTERCEPTS[interceptIdx % INTERCEPTS.length];
+  interceptIdx++;
+  var ct = caesar(currentIntercept.pt, currentIntercept.shift);
+  document.getElementById('interceptCt').textContent = ct;
+  document.getElementById('interceptShift').value = 0;
+  document.getElementById('interceptShiftVal').textContent = '0';
+  document.getElementById('interceptPt').textContent = ct;
+  document.getElementById('interceptNote').textContent = 'Adjust the shift until English appears, then submit.';
+  document.getElementById('ciphRound').textContent = ((interceptIdx - 1) % INTERCEPTS.length) + 1;
+  renderFreq(ct);
+}
+function renderFreq(text){
+  var counts = {};
+  var letters = 'abcdefghijklmnopqrstuvwxyz';
+  for (var i = 0; i < 26; i++) counts[letters[i]] = 0;
+  var only = text.toLowerCase().replace(/[^a-z]/g, '');
+  for (var j = 0; j < only.length; j++) counts[only[j]]++;
+  var max = 1;
+  for (var k = 0; k < 26; k++) if (counts[letters[k]] > max) max = counts[letters[k]];
+  var bars = document.getElementById('freqBars');
+  var labels = document.getElementById('freqLabels');
+  bars.innerHTML = '';
+  labels.innerHTML = '';
+  // show first 13 then next 13 via two rows? simple: all 26 in one row is tight — use 13+13
+  // We'll show A-M on first visual by packing 26 into CSS 13 cols is wrong; use 26 cols via style
+  bars.style.gridTemplateColumns = 'repeat(26,1fr)';
+  labels.style.gridTemplateColumns = 'repeat(26,1fr)';
+  for (var i = 0; i < 26; i++){
+    var h = Math.max(2, Math.round(counts[letters[i]] / max * 68));
+    var s = document.createElement('span');
+    s.style.height = h + 'px';
+    if ('etaoin'.indexOf(letters[i]) >= 0) s.style.background = 'var(--amber)';
+    bars.appendChild(s);
+    var lab = document.createElement('span');
+    lab.textContent = letters[i];
+    labels.appendChild(lab);
+  }
+}
+function onInterceptShift(){
+  var s = +document.getElementById('interceptShift').value;
+  document.getElementById('interceptShiftVal').textContent = s;
+  var ct = document.getElementById('interceptCt').textContent;
+  // decode by shifting backward
+  document.getElementById('interceptPt').textContent = caesar(ct, -s);
+}
+document.getElementById('interceptShift').addEventListener('input', onInterceptShift);
+
+function checkIntercept(){
+  if (!currentIntercept) return;
+  var guess = document.getElementById('interceptPt').textContent.trim().toLowerCase().replace(/\s+/g, ' ');
+  var target = currentIntercept.pt.toLowerCase().replace(/\s+/g, ' ');
+  // also accept if shift matches
+  var shiftUsed = +document.getElementById('interceptShift').value;
+  var ok = (guess === target) || (shiftUsed === currentIntercept.shift);
+  if (ok){
+    interceptSolved++;
+    addPoints(20);
+    document.getElementById('ciphSolved').textContent = interceptSolved;
+    document.getElementById('interceptNote').innerHTML = '<span style="color:var(--green)">Decrypted.</span> Shift was ' + currentIntercept.shift + '. Frequency peaks often line up with E/T/A once the key is right.';
+    cryptoProgress.intercept = true;
+    maybeClearCrypto();
+    setTimeout(loadIntercept, 1600);
+  } else {
+    document.getElementById('interceptNote').innerHTML = '<span style="color:var(--red)">Not readable yet.</span> Watch the frequency bars — in English, E is usually the tallest. Try shifts until common words appear.';
+  }
+}
+function nextIntercept(){
+  loadIntercept();
+}
+
+/* Hash avalanche */
+var hIn = document.getElementById('hashIn');
+var lastHash = null;
+function sha256(str){
+  if (!window.crypto || !window.crypto.subtle) return Promise.resolve(null);
+  return crypto.subtle.digest('SHA-256', new TextEncoder().encode(str)).then(function(buf){
+    return Array.prototype.map.call(new Uint8Array(buf), function(b){
+      return ('0' + b.toString(16)).slice(-2);
+    }).join('');
+  }).catch(function(){ return null; });
+}
+function renderHash(){
+  sha256(hIn.value).then(function(h){
+    var out = document.getElementById('hashOut');
+    if (!h){ out.textContent = 'SHA-256 needs a secure page context, so this panel is idle here.'; return; }
+    if (lastHash){
+      var diff = 0, html = '';
+      for (var i = 0; i < h.length; i++){
+        var same = h[i] === lastHash[i];
+        if (!same) diff++;
+        html += '<span class="' + (same ? 'same' : 'diff') + '">' + h[i] + '</span>';
+      }
+      out.innerHTML = html;
+      var pct = Math.round(diff / h.length * 100);
+      document.getElementById('bitFill').style.width = pct + '%';
+      document.getElementById('bitNote').textContent = pct + '% of the digest changed from your previous input. A single-character edit should move roughly half of it.';
+      cryptoProgress.hash = true;
+      maybeClearCrypto();
+    } else {
+      out.textContent = h;
+    }
+    lastHash = h;
+  });
+}
+if (hIn) hIn.addEventListener('input', renderHash);
+
+/* Integrity seal */
+var sealedHash = null, sealedText = null;
+function sealMessage(){
+  var msg = document.getElementById('sealMsg').value;
+  sha256(msg).then(function(h){
+    if (!h){
+      document.getElementById('sealNote').textContent = 'SHA-256 unavailable in this context.';
+      return;
+    }
+    sealedHash = h;
+    sealedText = msg;
+    document.getElementById('sealHash').textContent = h;
+    document.getElementById('sealNote').textContent = 'Sealed. Now change the message and click Verify — the seal should fail.';
+    addPoints(8);
+    cryptoProgress.seal = true;
+    maybeClearCrypto();
+  });
+}
+function verifySeal(){
+  if (!sealedHash){
+    document.getElementById('sealNote').textContent = 'Seal a message first.';
+    return;
+  }
+  var msg = document.getElementById('sealMsg').value;
+  sha256(msg).then(function(h){
+    if (h === sealedHash){
+      document.getElementById('sealNote').innerHTML = '<span style="color:var(--green)">Seal intact.</span> Message matches what was sealed.';
+    } else {
+      document.getElementById('sealNote').innerHTML = '<span style="color:var(--red)">Seal broken.</span> Even a one-character edit produces a completely different digest. That is integrity detection.';
+      addPoints(8);
+      cryptoProgress.seal = true;
+      maybeClearCrypto();
+    }
+  });
+}
+
+/* Toy 16-bit hash + collision */
+function toyHash(str){
+  // FNV-1a inspired 16-bit
+  var h = 0x811c;
+  for (var i = 0; i < str.length; i++){
+    h ^= str.charCodeAt(i);
+    h = (h * 0x0101) & 0xffff;
+  }
+  return ('0000' + h.toString(16)).slice(-4);
+}
+function renderToy(){
+  var a = document.getElementById('colA').value;
+  var b = document.getElementById('colB').value;
+  var ha = toyHash(a), hb = toyHash(b);
+  document.getElementById('hashA').textContent = ha;
+  document.getElementById('hashB').textContent = hb;
+  if (a !== b && ha === hb){
+    document.getElementById('colNote').innerHTML = '<span style="color:var(--green)">Collision!</span> Different inputs, same toy digest. With only 16 bits this is easy — with 256 bits it is not.';
+    document.getElementById('hashA').style.color = 'var(--green)';
+    document.getElementById('hashB').style.color = 'var(--green)';
+    addPoints(20);
+    cryptoProgress.collision = true;
+    maybeClearCrypto();
+  } else {
+    document.getElementById('hashA').style.color = '';
+    document.getElementById('hashB').style.color = '';
+    document.getElementById('colNote').textContent = a === b
+      ? 'Inputs must be different for it to count as a collision.'
+      : 'Make the two digests identical while the inputs stay different.';
+  }
+}
+document.getElementById('colA').addEventListener('input', renderToy);
+document.getElementById('colB').addEventListener('input', renderToy);
+
+function autoCollision(){
+  // birthday-style search for demo
+  var seen = {};
+  var n = 0;
+  while (n < 200000){
+    var s = 'x' + n.toString(36);
+    var h = toyHash(s);
+    if (seen[h] && seen[h] !== s){
+      document.getElementById('colA').value = seen[h];
+      document.getElementById('colB').value = s;
+      renderToy();
+      toast('Collision found after ~' + n + ' probes');
+      return;
+    }
+    seen[h] = s;
+    n++;
+  }
+  document.getElementById('colNote').textContent = 'No collision in search window — try again.';
+}
+
+var cryptoProgress = { intercept:false, brute:false, hash:false, seal:false, collision:false };
+function maybeClearCrypto(){
+  var keys = Object.keys(cryptoProgress);
+  var done = keys.filter(function(k){ return cryptoProgress[k]; }).length;
+  if (done >= 3) clearLab('crypto','Cipher bench');
+}
+
+
+/* ---------- lab: key vault ---------- */
+var WORDS = ['anchor','basil','cobalt','drift','ember','fathom','glacier','harbor','ivory','jetty','kindle','lantern','marrow','nomad','orchid','pewter','quarry','ripple','saddle','thistle','umber','vellum','walnut','yarrow','zephyr','bramble','cinder','dapple','elmwood','granite','hollow','indigo','juniper','kestrel','lichen','mistral','nettle','plover','quartz','rowan','sable','tundra','upland','verdant','willow','xenon','yonder','zircon','antler','beacon','current','estuary','fjord','gully','heath','isthmus','knoll','meadow','pollen','ravine'];
+document.getElementById('listSize').textContent = WORDS.length;
+
+var COMMON_PW = ['password','123456','qwerty','letmein','iloveyou','admin','welcome','monkey','dragon','football','abc123','p@ssw0rd','eastern','changeme','sunshine','princess'];
+var pwEl = document.getElementById('pw');
+
+function poolSize(s){
+  var p = 0;
+  if (/[a-z]/.test(s)) p += 26;
+  if (/[A-Z]/.test(s)) p += 26;
+  if (/[0-9]/.test(s)) p += 10;
+  if (/[^A-Za-z0-9]/.test(s)) p += 33;
+  return p;
+}
+function humanTime(sec){
+  if (sec < 1) return 'instantly';
+  if (sec > 3.2e16) return 'far past the age of the universe';
+  if (sec > 3.2e11) return 'longer than recorded history';
+  var units = [[1,'seconds'],[60,'minutes'],[3600,'hours'],[86400,'days'],[31557600,'years']];
+  for (var i = units.length - 1; i >= 0; i--){
+    if (sec >= units[i][0]){
+      var v = sec / units[i][0];
+      var shown = v >= 1e6 ? v.toExponential(1) : v < 10 ? v.toFixed(1) : Math.round(v).toLocaleString();
+      return shown + ' ' + units[i][1];
+    }
+  }
+  return Math.round(sec) + ' seconds';
+}
+function scorePw(){
+  var v = pwEl.value;
+  var pool = poolSize(v);
+  var ent = v.length ? v.length * Math.log(pool || 1) / Math.log(2) : 0;
+  var low = v.toLowerCase();
+  var isCommon = COMMON_PW.some(function(c){
+    return low === c || (low.length > 0 && low.replace(/[0-9!@#$%^&*._-]/g,'') === c);
+  });
+  if (isCommon) ent = Math.min(ent, 12);
+  var patterned = /(.)\1{2,}/.test(v) || /^(012|123|234|345|456|567|678|789|abc|qwe|asd)/i.test(v);
+  if (patterned) ent -= 8;
+  if (ent < 0) ent = 0;
+
+  var seconds = Math.pow(2, ent) / 1e11 / 2;
+  document.getElementById('entVal').textContent = ent.toFixed(0);
+  document.getElementById('lenVal').textContent = v.length;
+  document.getElementById('poolVal').textContent = pool;
+  document.getElementById('crackTime').textContent = v.length ? humanTime(seconds) : '\u2014';
+
+  var fill = document.getElementById('strFill');
+  fill.style.width = Math.min(100, ent / 80 * 100) + '%';
+  fill.style.background = ent < 28 ? 'var(--red)' : ent < 45 ? 'var(--amber)' : ent < 65 ? 'var(--cyan)' : 'var(--green)';
+
+  var chips = [
+    ['12+ characters', v.length >= 12],
+    ['upper and lower', /[a-z]/.test(v) && /[A-Z]/.test(v)],
+    ['a digit', /[0-9]/.test(v)],
+    ['a symbol', /[^A-Za-z0-9]/.test(v)]
+  ];
+  var html = chips.map(function(c){
+    return '<span class="chip' + (c[1] ? ' on' : '') + '">' + c[0] + '</span>';
+  }).join('');
+  if (isCommon) html += '<span class="chip alert">on every wordlist</span>';
+  document.getElementById('pwChips').innerHTML = html;
+
+  document.getElementById('pwWarn').textContent = isCommon
+    ? 'This one lives in the first few thousand guesses of any real attack, so the checkboxes above stop meaning anything. Attackers run the list before they bother with brute force.'
+    : patterned ? 'Runs and repeated characters shrink the real search space well below what the raw length suggests.'
+    : (v.length && v.length < 12) ? 'Length is doing more work here than any symbol you could add. Each extra character multiplies the attacker\u2019s workload.'
+    : '';
+  if (ent > 60){
+    if (state.cleared.indexOf('keys') === -1) addPoints(15);
+    clearLab('keys','Key vault');
+  }
+}
+pwEl.addEventListener('input', scorePw);
+
+function makePhrase(){
+  var picks = [];
+  for (var i = 0; i < 5; i++) picks.push(WORDS[Math.floor(Math.random() * WORDS.length)]);
+  document.getElementById('phrase').textContent = picks.join('-');
+  var ent = 5 * Math.log(WORDS.length) / Math.log(2);
+  document.getElementById('phraseNote').textContent =
+    'About ' + ent.toFixed(0) + ' bits from this ' + WORDS.length + '-word list. A real diceware list holds 7,776 words, which would make the same five picks worth roughly 65 bits — and every extra word buys more than any symbol you sprinkle in.';
+}
+function testPhrase(){
+  if (document.getElementById('phrase').textContent === '\u2014') makePhrase();
+  pwEl.value = document.getElementById('phrase').textContent;
+  scorePw();
+  pwEl.scrollIntoView({ behavior:'smooth', block:'center' });
+}
+
+/* ---------- lab: response drill ---------- */
+var CONTROLS = {
+  mfa:    ['Multi-factor authentication','A stolen password alone stops being enough'],
+  backups:['Offline backups','Restore instead of paying'],
+  patch:  ['Patch management','Close the hole the exploit needs'],
+  crypt:  ['Encryption at rest','Stolen hardware yields nothing readable'],
+  least:  ['Least privilege','Accounts reach only what the job needs'],
+  filter: ['Email filtering','Fewer fakes reach a human at all'],
+  logs2:  ['Log monitoring','Notice it while it is still happening'],
+  seg:    ['Network segmentation','Stop it spreading past one subnet']
 };
-</script>
-</body>
-</html>
+(function(){
+  var dl = document.getElementById('controlsList');
+  Object.keys(CONTROLS).forEach(function(k){
+    var o = document.createElement('option');
+    o.value = CONTROLS[k][0];
+    dl.appendChild(o);
+  });
+})();
+var DRILL = [
+  ['A staff password turns up in a leaked database dump and the attacker logs straight in','mfa'],
+  ['Ransomware encrypts the file server and demands payment','backups'],
+  ['A worm spreads using a vulnerability the vendor fixed eight months ago','patch'],
+  ['A laptop is stolen from a car with a student records export still on it','crypt'],
+  ['A compromised library account is used to read HR files','least'],
+  ['Staff keep receiving convincing invoice fraud messages','filter'],
+  ['An intruder browsed the network for six weeks before anyone noticed','logs2'],
+  ['One infected lab machine spreads to every device in the building','seg'],
+  ['An attacker reuses a password from a breached shopping site to enter the portal','mfa'],
+  ['A contractor wipes a database on their last day','backups'],
+  ['A former employee\u2019s account still opens every door two months after they left','least'],
+  ['A zero-day is patched by the vendor but nobody has installed the fix in three weeks','patch'],
+  ['A single compromised workstation is used to probe every other machine on the same floor','seg'],
+  ['A phishing kit convincingly clones the staff login page pixel for pixel','mfa']
+];
+var drill = [], dr = 0, drScore = 0, drLives = 3, drTick = null;
+
+function startDrill(){
+  clearInterval(drTick);
+  drill = DRILL.slice().sort(function(){ return Math.random() - 0.5; });
+  dr = 0; drScore = 0; drLives = 3;
+  nextDrill();
+}
+function nextDrill(){
+  clearInterval(drTick);
+  var body = document.getElementById('dBody');
+  var bar = document.getElementById('dTimer');
+  if (drLives <= 0 || dr >= drill.length){
+    bar.style.transition = 'none'; bar.style.width = '0%';
+    body.innerHTML = '<p class="threat"></p><p class="note"></p><button class="primary" onclick="startDrill()">Run it again</button>';
+    body.querySelector('.threat').textContent = drLives <= 0 ? 'Shift over.' : 'Drill complete.';
+    body.querySelector('.note').textContent = drScore + ' of ' + drill.length + ' handled correctly.';
+    if (dr >= drill.length && drScore >= 7) clearLab('defend','Response drill');
+    return;
+  }
+  var threat = drill[dr][0], ans = drill[dr][1];
+  document.getElementById('dRound').textContent = (dr+1) + '/' + drill.length;
+  document.getElementById('dScore').textContent = drScore;
+  document.getElementById('dLives').textContent = '\u2665'.repeat(drLives) + '\u2661'.repeat(3 - drLives);
+
+  body.innerHTML = '<p class="threat"></p><p class="note">Type the control that answers this.</p>' +
+    '<div class="answer-row"><input class="in" id="drillGuess" list="controlsList" placeholder="start typing..." autocomplete="off">' +
+    '<button id="drillSubmit">Lock in</button></div>';
+  body.querySelector('.threat').textContent = threat;
+  var gEl = document.getElementById('drillGuess'), sEl = document.getElementById('drillSubmit');
+  gEl.focus();
+  sEl.onclick = function(){ answerDrill(gEl.value, ans, body); };
+  gEl.addEventListener('keydown', function(e){ if (e.key === 'Enter') answerDrill(gEl.value, ans, body); });
+
+  bar.style.transition = 'none'; bar.style.width = '100%';
+  var left = 9000;
+  setTimeout(function(){ bar.style.transition = 'width 9s linear'; bar.style.width = '0%'; }, 40);
+  drTick = setInterval(function(){
+    left -= 200;
+    if (left <= 0){ clearInterval(drTick); answerDrill(null, ans, body); }
+  }, 200);
+}
+function answerDrill(typed, ans, body){
+  clearInterval(drTick);
+  var right = false;
+  if (typed){
+    var low = typed.trim().toLowerCase();
+    right = low === ans.toLowerCase() || low === CONTROLS[ans][0].toLowerCase();
+  }
+  if (right){ drScore++; addPoints(20); } else drLives--;
+
+  var gEl = document.getElementById('drillGuess'), sEl = document.getElementById('drillSubmit');
+  if (gEl){ gEl.disabled = true; gEl.classList.add(right ? 'right' : 'wrong'); }
+  if (sEl) sEl.disabled = true;
+
+  var msg = document.createElement('p');
+  msg.className = 'note';
+  msg.style.marginTop = '12px';
+  msg.textContent = right
+    ? 'Right — ' + CONTROLS[ans][1].toLowerCase() + '.'
+    : (typed ? 'Not quite. ' : 'Out of time. ') + 'The answer was ' + CONTROLS[ans][0] + ' — ' + CONTROLS[ans][1].toLowerCase() + '.';
+  body.appendChild(msg);
+  dr++;
+  setTimeout(nextDrill, 2100);
+}
+
+
+
+/* ---------- lab: MFA station (push duty) ---------- */
+var MFA_PUSHES = [
+  { app:'School Portal', title:'Sign-in request', body:'Chrome on Windows · City Library Wi-Fi', legit:false },
+  { app:'Authenticator', title:'Approve sign-in?', body:'You just tapped “Sign in” on your laptop', legit:true },
+  { app:'Banking', title:'New device login', body:'iPhone · Unknown location · Now', legit:false },
+  { app:'Authenticator', title:'Approve sign-in?', body:'Firefox on your home PC — you initiated this', legit:true },
+  { app:'School Portal', title:'Verify it is you', body:'Sign-in from Moscow · 03:14 AM', legit:false },
+  { app:'Authenticator', title:'Approve sign-in?', body:'Password manager autofill on your phone', legit:true },
+  { app:'Helpdesk', title:'Support verification', body:'Agent requests your current 6-digit code', legit:false },
+  { app:'Authenticator', title:'Approve sign-in?', body:'Edge · after you reset your password', legit:true }
+];
+var mfaQueue = [], mfaScore = 0, mfaHandled = 0, mfaLives = 3, mfaTimer = null, mfaActive = false;
+var backupStored = false, backupCodesList = [], backupUsed = false;
+
+function startMfaDuty(){
+  clearTimeout(mfaTimer);
+  mfaQueue = MFA_PUSHES.slice().sort(function(){ return Math.random() - 0.5; });
+  mfaScore = 0; mfaHandled = 0; mfaLives = 3; mfaActive = true;
+  document.getElementById('mfaScore').textContent = '0';
+  document.getElementById('mfaHandled').textContent = '0';
+  document.getElementById('mfaLives').textContent = '♥♥♥';
+  document.getElementById('mfaNote').textContent = 'Duty started. Only approve prompts you deliberately caused.';
+  document.getElementById('mfaStart').textContent = 'Restart duty';
+  document.getElementById('pushList').innerHTML = '';
+  nextPush();
+}
+function nextPush(){
+  if (!mfaActive) return;
+  if (mfaLives <= 0 || mfaQueue.length === 0){
+    mfaActive = false;
+    var el = document.getElementById('pushList');
+    el.innerHTML = '<p class="note" style="text-align:center;padding:16px 0">' +
+      (mfaLives <= 0 ? 'Duty ended — too many dangerous approvals.' : 'Queue clear.') +
+      '</p>';
+    document.getElementById('mfaNote').textContent = mfaScore + ' correct of ' + mfaHandled + ' handled.' +
+      (mfaScore >= 5 && mfaLives > 0 ? ' Station cleared.' : ' Try again and treat unexpected prompts as hostile.');
+    if (mfaScore >= 5 && mfaLives > 0) clearLab('mfa','MFA station');
+    return;
+  }
+  var p = mfaQueue.shift();
+  var box = document.getElementById('pushList');
+  box.innerHTML = '';
+  var d = document.createElement('div');
+  d.className = 'push';
+  d.innerHTML = '<div class="app"></div><div class="title"></div><div class="body"></div><div class="push-actions"></div>';
+  d.querySelector('.app').textContent = p.app + ' · now';
+  d.querySelector('.title').textContent = p.title;
+  d.querySelector('.body').textContent = p.body;
+  var actions = d.querySelector('.push-actions');
+  var b1 = document.createElement('button'); b1.className = 'allow'; b1.textContent = 'Approve';
+  var b2 = document.createElement('button'); b2.className = 'deny'; b2.textContent = 'Deny';
+  b1.onclick = function(){ resolvePush(p, true); };
+  b2.onclick = function(){ resolvePush(p, false); };
+  actions.appendChild(b1); actions.appendChild(b2);
+  box.appendChild(d);
+}
+function resolvePush(p, approved){
+  mfaHandled++;
+  var correct = (approved === p.legit);
+  if (correct){ mfaScore++; addPoints(12); }
+  else {
+    mfaLives--;
+    if (approved && !p.legit) toast('You approved an attacker prompt');
+    else if (!approved && p.legit) toast('That one was actually you');
+  }
+  document.getElementById('mfaScore').textContent = mfaScore;
+  document.getElementById('mfaHandled').textContent = mfaHandled;
+  document.getElementById('mfaLives').textContent = '♥'.repeat(Math.max(0,mfaLives)) + '♡'.repeat(3 - Math.max(0,mfaLives));
+  document.getElementById('mfaNote').textContent = correct
+    ? (p.legit ? 'Correct — that matched an action you took.' : 'Correct — unexpected prompt denied.')
+    : (p.legit ? 'That sign-in was yours. Denying your own prompts trains you to ignore real ones, but approving strangers is worse.'
+               : 'That prompt was hostile. Approving it hands the session to whoever stole the password.');
+  document.getElementById('pushList').innerHTML = '<p class="note" style="text-align:center;padding:12px 0">Next prompt…</p>';
+  mfaTimer = setTimeout(nextPush, 1100);
+}
+function genBackupCodes(){
+  backupCodesList = [];
+  for (var i = 0; i < 8; i++){
+    var n = Math.floor(Math.random()*1e8).toString().padStart(8,'0');
+    backupCodesList.push(n.slice(0,4) + '-' + n.slice(4));
+  }
+  backupStored = false; backupUsed = false;
+  document.getElementById('backupCodes').textContent = backupCodesList.join('   ');
+  document.getElementById('btnStoreCodes').disabled = false;
+  document.getElementById('btnUseCode').disabled = true;
+  document.getElementById('backupNote').textContent = 'Practice codes only. Next: mark them as stored offline (print or password manager).';
+  addPoints(3);
+}
+function storeBackupCodes(){
+  if (!backupCodesList.length) return;
+  backupStored = true;
+  document.getElementById('btnStoreCodes').disabled = true;
+  document.getElementById('btnUseCode').disabled = false;
+  document.getElementById('backupNote').textContent = 'Stored. If you lose the phone, you can still recover.';
+  addPoints(5);
+}
+function useBackupCode(){
+  if (!backupStored || backupUsed) return;
+  backupUsed = true;
+  var code = backupCodesList.shift();
+  document.getElementById('backupCodes').textContent = backupCodesList.length ? backupCodesList.join('   ') : '(all codes used)';
+  document.getElementById('btnUseCode').disabled = true;
+  document.getElementById('backupNote').textContent = 'Used code ' + code + ' to sign in on a new device. Revoke the old authenticator and generate a fresh set.';
+  addPoints(8);
+  if (mfaScore >= 4) clearLab('mfa','MFA station');
+}
+
+/* ---------- lab: Scam desk (multi-channel queue) ---------- */
+var SCAM_ITEMS = [
+  { chan:'sms', from:'+1 (800) 554-0199', preview:'Your package could not be delivered…',
+    body:'Your package could not be delivered. Pay a $2.99 redelivery fee: bit.ly/redeliv884',
+    scam:true, why:'Carriers do not collect small fees via random shortened links in SMS. The goal is card data or malware.' },
+  { chan:'email', from:'registrar@easternhs.edu', preview:'Spring schedule window opens Monday',
+    body:'Course selection opens Monday at 8 AM in the portal you normally use. No link is included — sign in the way you always do.',
+    scam:false, why:'Known sender, expected topic, no link or urgency. Boring is often legitimate.' },
+  { chan:'chat', from:'A. Mercer (LinkedIn)', preview:'Loved your profile — $500 signing bonus…',
+    body:'We loved your profile. Complete this 10-minute form and we will send a $500 signing bonus via gift cards.',
+    scam:true, why:'Real employers do not pay signing bonuses in gift cards or start with unsolicited forms asking for personal data.' },
+  { chan:'voice', from:'Unknown · 02:14', preview:'Microsoft Support — virus warning',
+    body:'[Voicemail] This is Microsoft Support. Your computer has a virus. Call us back at this number and allow remote access so we can remove it.',
+    scam:true, why:'Microsoft does not cold-call about viruses. Unsolicited remote-access requests are a classic tech-support scam.' },
+  { chan:'email', from:'coach.reyes@easternhs.edu', preview:'Practice moved to 4:30',
+    body:'Field is being lined tomorrow so practice shifts to 4:30. Bring both jerseys. Reply if you cannot make it.',
+    scam:false, why:'Authenticated internal sender, mundane logistics, no links or money requests.' },
+  { chan:'sms', from:'+1 (208) 555-0147', preview:'Grandma, I am stuck overseas…',
+    body:'Grandma, I am stuck overseas and my phone is dying. Please wire $800 to this Western Union code. Do not tell Mom.',
+    scam:true, why:'Emergency family wire + secrecy is the classic pattern. Verify through other relatives before sending money.' },
+  { chan:'chat', from:'Finance Bot', preview:'Paste the code that just went to your phone',
+    body:'I am locked out and the auditor is waiting. Paste the one-time code that just went to your phone.',
+    scam:true, why:'No legitimate process asks you to relay a live MFA code in chat. Treat it as hostile.' },
+  { chan:'email', from:'no-reply@github.com', preview:'A new SSH key was added',
+    body:'A key labelled laptop-2026 was added to your account. If this was you, no action is needed. If not, review your security log.',
+    scam:false, why:'Notification about something that already happened, from a real domain pattern, no demand to click and “verify”.' },
+  { chan:'voice', from:'Unknown · 11:02', preview:'Your car warranty is expiring',
+    body:'[Voicemail] This is your auto warranty center. Your coverage expires today. Press 1 or call back immediately to renew.',
+    scam:true, why:'Unsolicited warranty robocalls are nearly always scams. Hang up; do not press buttons.' },
+  { chan:'sms', from:'School Alert', preview:'Snow day tomorrow — official notice',
+    body:'Eastern HS: Classes cancelled tomorrow due to ice. Official notice. Do not reply. Info on the school site.',
+    scam:false, why:'Matches how many districts send alerts: short, no links to enter passwords, points you to the official site you already know.' }
+];
+var scamState = [], scamFilter = 'all', scamOpen = null, scamHandled = 0, scamCorrect = 0;
+
+function initScamQueue(){
+  scamState = SCAM_ITEMS.map(function(m,i){
+    return Object.assign({}, m, { id:i, done:false, right:false });
+  }).sort(function(){ return Math.random() - 0.5; });
+  scamHandled = 0; scamCorrect = 0; scamOpen = null;
+  document.getElementById('scamStreak').textContent = 'Handled: 0 · Correct: 0';
+  document.getElementById('scamReader').style.display = 'none';
+  document.getElementById('scamNote').textContent = '';
+  document.getElementById('scamTag').textContent = 'Queue loaded · ' + scamState.length + ' items';
+  renderScamQueue();
+}
+function filterScamChan(btn){
+  Array.prototype.forEach.call(document.querySelectorAll('#scamTabs button'), function(b){ b.classList.remove('on'); });
+  btn.classList.add('on');
+  scamFilter = btn.dataset.filter;
+  renderScamQueue();
+}
+function renderScamQueue(){
+  var box = document.getElementById('scamQueue');
+  box.innerHTML = '';
+  scamState.forEach(function(m){
+    if (scamFilter !== 'all' && m.chan !== scamFilter) return;
+    var b = document.createElement('button');
+    b.className = 'msg-card' + (m.done ? ' done' : '');
+    b.innerHTML = '<div class="chan"></div><div class="preview"></div>';
+    b.querySelector('.chan').textContent = m.chan.toUpperCase() + ' · ' + m.from;
+    b.querySelector('.preview').textContent = m.preview;
+    b.onclick = function(){ openScam(m.id); };
+    box.appendChild(b);
+  });
+}
+function openScam(id){
+  var m = null;
+  for (var i=0;i<scamState.length;i++) if (scamState[i].id === id) m = scamState[i];
+  if (!m) return;
+  scamOpen = m;
+  var reader = document.getElementById('scamReader');
+  reader.style.display = 'block';
+  var rend = document.getElementById('scamRender');
+  if (m.chan === 'sms'){
+    rend.innerHTML = '<div class="chan">SMS · ' + m.from + '</div><div class="sms-bubble"></div>';
+    rend.querySelector('.sms-bubble').textContent = m.body;
+  } else if (m.chan === 'email'){
+    rend.innerHTML = '<div class="email-view"><div class="fromline"></div><div style="font-family:var(--display);margin:8px 0"></div><p style="color:var(--text)"></p></div>';
+    rend.querySelector('.fromline').textContent = 'From: ' + m.from;
+    rend.querySelector('div[style]').textContent = m.preview;
+    rend.querySelector('p').textContent = m.body;
+  } else if (m.chan === 'chat'){
+    rend.innerHTML = '<div class="chan">Chat · ' + m.from + '</div><div class="sms-bubble" style="border-radius:18px 18px 18px 4px"></div>';
+    rend.querySelector('.sms-bubble').textContent = m.body;
+  } else {
+    rend.innerHTML = '<div class="chan">Voicemail · ' + m.from + '</div><div class="live-feed"><div class="in"></div></div>';
+    rend.querySelector('.in').textContent = m.body;
+  }
+  var ex = document.getElementById('scamExplain');
+  ex.style.display = 'none';
+  document.getElementById('scamActions').style.display = m.done ? 'none' : 'flex';
+  if (m.done){
+    ex.style.display = 'block';
+    ex.innerHTML = '<b style="color:' + (m.right ? 'var(--green)' : 'var(--red)') + '">' +
+      (m.right ? 'Correct.' : 'Not quite.') + '</b> ' + m.why;
+  }
+}
+function actScam(action){
+  if (!scamOpen || scamOpen.done) return;
+  var m = scamOpen;
+  var saidScam = (action === 'report' || action === 'escalate');
+  // escalate on legit is mild over-report; still count carefully
+  var right = (saidScam === m.scam);
+  if (action === 'escalate' && m.scam) right = true;
+  if (action === 'escalate' && !m.scam) right = false;
+  m.done = true; m.right = right;
+  scamHandled++;
+  if (right){ scamCorrect++; addPoints(12); }
+  document.getElementById('scamStreak').textContent = 'Handled: ' + scamHandled + ' · Correct: ' + scamCorrect;
+  var ex = document.getElementById('scamExplain');
+  ex.style.display = 'block';
+  var head = right ? 'Correct.' : 'Not quite.';
+  if (action === 'escalate') head = right ? 'Escalated appropriately.' : 'Over-escalated a legitimate message.';
+  ex.innerHTML = '<b style="color:' + (right ? 'var(--green)' : 'var(--red)') + '">' + head + '</b> ' + m.why;
+  document.getElementById('scamActions').style.display = 'none';
+  renderScamQueue();
+  var pending = scamState.filter(function(x){ return !x.done; }).length;
+  document.getElementById('scamNote').textContent = pending ? (pending + ' left in queue.') : 'Queue clear.';
+  if (scamHandled >= 7 && scamCorrect >= 5) clearLab('scams','Scam desk');
+}
+
+/* ---------- lab: AI threats (simulations) ---------- */
+var callPhase = 'idle';
+function resetCall(){
+  callPhase = 'ringing';
+  document.getElementById('callName').textContent = 'Principal Hayes';
+  document.getElementById('callStatus').textContent = 'Incoming call…';
+  document.getElementById('callActions').style.display = 'flex';
+  document.getElementById('callDialogue').style.display = 'none';
+  document.getElementById('callFeed').innerHTML = '';
+  document.getElementById('callChoices').innerHTML = '';
+  document.getElementById('callNote').textContent = '';
+}
+function declineCall(){
+  if (callPhase !== 'ringing') return;
+  callPhase = 'declined';
+  document.getElementById('callStatus').textContent = 'Declined';
+  document.getElementById('callActions').style.display = 'none';
+  document.getElementById('callNote').textContent = 'Safe default. Now verify independently if you expected a call from them.';
+  addPoints(10);
+  maybeClearAi();
+}
+function answerCall(){
+  if (callPhase !== 'ringing') return;
+  callPhase = 'talking';
+  document.getElementById('callStatus').textContent = 'Connected · voice matches public samples';
+  document.getElementById('callActions').style.display = 'none';
+  document.getElementById('callDialogue').style.display = 'block';
+  var feed = document.getElementById('callFeed');
+  feed.innerHTML = '<div class="in">Caller: I am in a closed meeting and cannot text. I need you to buy four $100 gift cards for a staff emergency and read me the codes. Do not tell anyone yet — it is a surprise.</div>';
+  var box = document.getElementById('callChoices');
+  box.innerHTML = '';
+  [
+    { t:'Buy the cards and read the codes', ok:false, w:'Voice clones make “it sounds like them” unreliable. Gift cards + secrecy + urgency is the scam pattern.' },
+    { t:'Hang up and call the principal on a known number', ok:true, w:'Out-of-band callback defeats cloned audio. Use a directory or prior contact, not a callback number from the suspicious call.' },
+    { t:'Ask for the meeting room number as a test', ok:false, w:'Attackers can improvise or research public schedules. Independent callback is stronger than trivia.' }
+  ].forEach(function(c){
+    var b = document.createElement('button');
+    b.className = 'choice';
+    b.innerHTML = '<b></b>';
+    b.querySelector('b').textContent = c.t;
+    b.onclick = function(){
+      document.getElementById('callNote').innerHTML = (c.ok ? '<span style="color:var(--green)">Good.</span> ' : '<span style="color:var(--red)">Risky.</span> ') + c.w;
+      box.innerHTML = '';
+      if (c.ok){ addPoints(15); maybeClearAi(); }
+      callPhase = 'done';
+    };
+    box.appendChild(b);
+  });
+}
+
+var ARTIFACTS = [
+  { id:'light', label:'Face lighting does not match the room', real:true },
+  { id:'lips', label:'Lip movement slightly off on consonants', real:true },
+  { id:'blink', label:'Unnatural blink rate / long stares', real:true },
+  { id:'ear', label:'Earring vanishes for one frame', real:true },
+  { id:'tie', label:'Normal office tie color', real:false },
+  { id:'bg', label:'Background warps when they lean', real:true },
+  { id:'logo', label:'Company logo looks standard', real:false },
+  { id:'hair', label:'Hair strands smear on motion', real:true }
+];
+var artFound = {};
+function initArtifacts(){
+  artFound = {};
+  var board = document.getElementById('artifactBoard');
+  board.innerHTML = '';
+  ARTIFACTS.forEach(function(a){
+    var d = document.createElement('button');
+    d.className = 'artifact';
+    d.textContent = a.label;
+    d.onclick = function(){
+      if (artFound[a.id]) return;
+      artFound[a.id] = true;
+      if (a.real){
+        d.classList.add('found');
+        addPoints(4);
+      } else {
+        d.classList.add('on');
+        d.style.borderColor = 'var(--red)';
+        toast('That detail is normal — not an artifact');
+      }
+      var need = ARTIFACTS.filter(function(x){ return x.real; }).length;
+      var got = ARTIFACTS.filter(function(x){ return x.real && artFound[x.id]; }).length;
+      document.getElementById('artifactNote').textContent = 'Artifacts found: ' + got + ' / ' + need +
+        (got >= need - 1 ? ' · Frame cleared enough for credit.' : '');
+      if (got >= need - 1) maybeClearAi();
+    };
+    board.appendChild(d);
+  });
+  document.getElementById('artifactNote').textContent = 'Click suspicious details on the frame.';
+}
+
+var SPEAR_BANK = [
+  {
+    parts: [
+      { t:'Hi Jordan, ', f:false },
+      { t:'great work on the Cascade presentation yesterday', f:true, w:'Public or semi-public detail used for false familiarity' },
+      { t:'. I need you to ', f:false },
+      { t:'process a confidential vendor payment today before 4 PM', f:true, w:'Urgency + payment + confidentiality' },
+      { t:'. Use the updated account details in ', f:false },
+      { t:'this sheet', f:true, w:'Unexpected attachment / external details for payment change' },
+      { t:'. ', f:false },
+      { t:'Do not loop in finance yet', f:true, w:'Secrecy / bypass of normal process' },
+      { t:' — I am in meetings. Thanks, Director Hale', f:false }
+    ]
+  },
+  {
+    parts: [
+      { t:'Colleague, your badge log shows you in early. ', f:true, w:'Creepy personal surveillance detail to build false authority' },
+      { t:'Please ', f:false },
+      { t:'reply with the VPN one-time code you just received', f:true, w:'Request to relay a live MFA code' },
+      { t:' so I can finish the audit. ', f:false },
+      { t:'This overrides the usual ticket process', f:true, w:'Bypass of normal verification process' },
+      { t:'.', f:false }
+    ]
+  }
+];
+var spearIdx = 0, spearCaught = {};
+function initSpear(){
+  spearCaught = {};
+  var item = SPEAR_BANK[spearIdx % SPEAR_BANK.length];
+  spearIdx++;
+  var box = document.getElementById('spearEmail');
+  box.innerHTML = '';
+  var total = 0;
+  item.parts.forEach(function(p, i){
+    if (p.f){
+      total++;
+      var s = document.createElement('span');
+      s.className = 'hl';
+      s.textContent = p.t;
+      s.dataset.i = i;
+      s.onclick = function(){
+        if (spearCaught[i]) return;
+        spearCaught[i] = true;
+        s.classList.add('caught');
+        addPoints(6);
+        toast(p.w);
+        updateSpearCount(total);
+      };
+      box.appendChild(s);
+    } else {
+      box.appendChild(document.createTextNode(p.t));
+    }
+  });
+  document.getElementById('spearTotal').textContent = total;
+  document.getElementById('spearCount').textContent = '0';
+  document.getElementById('spearNote').childNodes[0].textContent = 'Flags found: ';
+}
+function updateSpearCount(total){
+  var n = Object.keys(spearCaught).length;
+  document.getElementById('spearCount').textContent = n;
+  if (n >= total){
+    document.getElementById('spearNote').innerHTML = 'Flags found: <b>' + n + '</b> / <b>' + total + '</b> · Message fully marked.';
+    maybeClearAi();
+  }
+}
+
+var aiProgress = { call:false, art:false, spear:false };
+function maybeClearAi(){
+  // Heuristic credit toward clearing the lab
+  aiProgress.call = aiProgress.call || callPhase === 'declined' || callPhase === 'done';
+  var need = ARTIFACTS.filter(function(x){ return x.real; }).length;
+  var got = ARTIFACTS.filter(function(x){ return x.real && artFound[x.id]; }).length;
+  if (got >= need - 1) aiProgress.art = true;
+  if (Object.keys(spearCaught).length >= 3) aiProgress.spear = true;
+  if (aiProgress.call && aiProgress.art && aiProgress.spear) clearLab('ai','AI threats');
+}
+
+
+
+/* ---------- team mode (red / blue) ---------- */
+function setTeam(t){
+  state.team = t === 'red' ? 'red' : 'blue';
+  save();
+  applyTeamUI();
+  toast(state.team === 'red' ? 'Red team perspective' : 'Blue team perspective');
+}
+function applyTeamUI(){
+  var blue = state.team !== 'red';
+  var b = document.getElementById('btnBlue'), r = document.getElementById('btnRed'), pill = document.getElementById('modePill');
+  if (b){ b.classList.toggle('on', blue); }
+  if (r){ r.classList.toggle('on', !blue); r.classList.toggle('red', true); }
+  if (pill){
+    pill.textContent = blue ? 'BLUE TEAM' : 'RED TEAM';
+    pill.className = 'mode-pill ' + (blue ? 'blue' : 'red');
+  }
+  // light flavor on lab heads that exist
+  document.body.dataset.team = state.team;
+  var blurb = document.getElementById('caseBlurb');
+  if (blurb && current && current._blueBlurb){
+    blurb.textContent = blue ? current._blueBlurb : (current._redBlurb || current._blueBlurb);
+  }
+}
+
+/* ---------- after-action report ---------- */
+var AAR_TIPS = {
+  triage: 'You practiced sorting impact into confidentiality, integrity, and availability.',
+  logs: 'You pulled attacker identity and scope from raw log lines — including Wi-Fi/evil-twin patterns.',
+  malware: 'You called infection types from symptoms instead of waiting for a full signature.',
+  inbox: 'You used headers (SPF/DKIM/DMARC) instead of display names alone.',
+  crypto: 'You broke a classical cipher, sealed integrity with a hash, and saw why short hashes collide.',
+  keys: 'You measured offline crack time and preferred length / passphrases over clever substitutions.',
+  mfa: 'You treated unexpected MFA prompts as hostile and practiced backup-code recovery.',
+  scams: 'You handled a mixed channel queue without over-reporting legitimate mail.',
+  ai: 'You used out-of-band verification against voice clones and marked AI-personalized lures.',
+  defend: 'You matched incidents to preventive controls under time pressure.'
+};
+function pushAar(id, label){
+  var tip = AAR_TIPS[id] || ('Cleared ' + label);
+  state.aar = state.aar.filter(function(x){ return x.id !== id; });
+  state.aar.push({ id:id, label:label, tip:tip, when: new Date().toISOString(), team: state.team, points: state.points });
+  renderAar();
+}
+function renderAar(){
+  var body = document.getElementById('aarBody');
+  if (!body) return;
+  if (!state.aar.length){
+    body.innerHTML = '<p class="note">No labs cleared yet. Finish a lab and the takeaway appears here.</p>';
+    return;
+  }
+  var html = '<h4>Session takeaways</h4><ul style="padding-left:18px;margin:8px 0">';
+  state.aar.forEach(function(e){
+    html += '<li><b>' + e.label + '</b> — ' + e.tip + '</li>';
+  });
+  html += '</ul><p class="note">Score ' + state.points + ' · Clearance ' + state.cleared.length + '/' + LABS.length + ' · Team ' + (state.team || 'blue').toUpperCase() + '</p>';
+  body.innerHTML = html;
+  var fab = document.getElementById('aarFab');
+  if (fab) fab.classList.toggle('on', state.aarOn && state.gatePassed);
+  var auto = document.getElementById('aarAuto');
+  if (auto) auto.checked = state.aarOn !== false;
+}
+function toggleAar(force){
+  var d = document.getElementById('aarDrawer');
+  if (!d) return;
+  var open = force === false ? false : force === true ? true : !d.classList.contains('on');
+  d.classList.toggle('on', open);
+  if (open) renderAar();
+}
+function copyAar(){
+  renderAar();
+  var text = document.getElementById('aarBody').innerText;
+  if (navigator.clipboard && navigator.clipboard.writeText){
+    navigator.clipboard.writeText(text).then(function(){ toast('Report copied'); }).catch(function(){ toast('Select and copy manually'); });
+  } else toast('Select and copy manually');
+}
+
+/* ---------- leaderboard (localStorage rooms — GH Pages safe) ---------- */
+function lbRoom(){
+  var r = (document.getElementById('roomCode') && document.getElementById('roomCode').value || state.roomCode || 'local').trim().toUpperCase() || 'local';
+  state.roomCode = r === 'LOCAL' ? 'local' : r;
+  return state.roomCode;
+}
+function loadBoard(){
+  try {
+    var all = JSON.parse(localStorage.getItem(LB_KEY) || '{}');
+    if (!all || typeof all !== 'object') all = {};
+    return all;
+  } catch(e){ return {}; }
+}
+function saveBoard(all){
+  try { localStorage.setItem(LB_KEY, JSON.stringify(all)); } catch(e){}
+}
+
+/* ---------- compact score codes (cross-device, no server) ---------- */
+// Layout: [flags 1][points_hi 1][points_lo 1][name…][checksum 1] → base64url, prefix E1
+// flags: bits0-3 cleared (0-15), bit4 team(red=1), bits5-7 version=1
+// Name capped at 16 UTF-8 bytes to keep codes short (~12–28 chars typical).
+var B64URL = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_';
+
+function bytesToB64url(bytes){
+  var out = '';
+  var i = 0;
+  var len = bytes.length;
+  while (i + 2 < len){
+    var n = (bytes[i] << 16) | (bytes[i+1] << 8) | bytes[i+2];
+    out += B64URL[(n >> 18) & 63] + B64URL[(n >> 12) & 63] + B64URL[(n >> 6) & 63] + B64URL[n & 63];
+    i += 3;
+  }
+  if (i + 1 === len){
+    var n1 = bytes[i] << 16;
+    out += B64URL[(n1 >> 18) & 63] + B64URL[(n1 >> 12) & 63];
+  } else if (i + 2 === len){
+    var n2 = (bytes[i] << 16) | (bytes[i+1] << 8);
+    out += B64URL[(n2 >> 18) & 63] + B64URL[(n2 >> 12) & 63] + B64URL[(n2 >> 6) & 63];
+  }
+  return out;
+}
+function b64urlToBytes(str){
+  str = String(str).replace(/=+$/, '');
+  var bytes = [];
+  var i = 0;
+  while (i < str.length){
+    var remain = str.length - i;
+    var a = B64URL.indexOf(str.charAt(i++));
+    var b = remain > 1 ? B64URL.indexOf(str.charAt(i++)) : 0;
+    var c = remain > 2 ? B64URL.indexOf(str.charAt(i++)) : -1;
+    var d = remain > 3 ? B64URL.indexOf(str.charAt(i++)) : -1;
+    if (a < 0 || b < 0) return null;
+    var n = (a << 18) | (b << 12) | ((c > 0 ? c : 0) << 6) | (d > 0 ? d : 0);
+    bytes.push((n >> 16) & 255);
+    if (remain > 2 && c >= 0) bytes.push((n >> 8) & 255);
+    if (remain > 3 && d >= 0) bytes.push(n & 255);
+  }
+  return bytes;
+}
+
+function encodeScoreEntry(entry){
+  var name = String(entry.name || 'Anon').trim().slice(0, 16);
+  var enc = new TextEncoder().encode(name);
+  if (enc.length > 16){
+    // trim to 16 bytes
+    enc = enc.slice(0, 16);
+    name = new TextDecoder().decode(enc);
+  }
+  var cleared = Math.max(0, Math.min(15, entry.cleared|0));
+  var points = Math.max(0, Math.min(65535, entry.points|0));
+  var teamBit = (entry.team === 'red') ? 0x10 : 0;
+  var flags = 0x20 | teamBit | cleared; // version 1 in bits 5-7 as 001xxxxx → 0x20
+  var bytes = [flags, (points >> 8) & 255, points & 255];
+  for (var i = 0; i < enc.length; i++) bytes.push(enc[i]);
+  var xor = 0;
+  for (var j = 0; j < bytes.length; j++) xor ^= bytes[j];
+  bytes.push(xor);
+  return 'E1' + bytesToB64url(bytes);
+}
+
+function decodeScoreCode(code){
+  if (!code) return null;
+  code = String(code).trim().replace(/[\s]+/g, '');
+  // allow optional dashes for readability
+  code = code.replace(/-/g, '');
+  if (code.length < 6) return null;
+  var prefix = code.slice(0, 2).toUpperCase();
+  if (prefix !== 'E1') return null;
+  var body = code.slice(2);
+  // normalize: users might paste standard base64
+  body = body.replace(/\+/g, '-').replace(/\//g, '_');
+  var bytes = b64urlToBytes(body);
+  if (!bytes || bytes.length < 5) return null;
+  var xor = 0;
+  for (var i = 0; i < bytes.length - 1; i++) xor ^= bytes[i];
+  if ((xor & 255) !== (bytes[bytes.length - 1] & 255)) return null;
+  var flags = bytes[0];
+  var ver = (flags >> 5) & 7;
+  if (ver !== 1) return null;
+  var cleared = flags & 0x0f;
+  var team = (flags & 0x10) ? 'red' : 'blue';
+  var points = ((bytes[1] & 255) << 8) | (bytes[2] & 255);
+  var nameBytes = bytes.slice(3, bytes.length - 1);
+  var name;
+  try { name = new TextDecoder().decode(new Uint8Array(nameBytes)); }
+  catch(e){ name = 'Player'; }
+  name = name.replace(/[\x00-\x1f]/g, '').trim() || 'Player';
+  return {
+    name: name,
+    points: points,
+    cleared: cleared,
+    total: typeof LABS !== 'undefined' ? LABS.length : 10,
+    team: team,
+    at: new Date().toISOString(),
+    via: 'code'
+  };
+}
+
+function currentScoreEntry(){
+  var nameEl = document.getElementById('playerName');
+  var name = (nameEl && nameEl.value || state.playerName || '').trim() || 'Anonymous';
+  state.playerName = name;
+  save();
+  return {
+    name: name,
+    points: state.points,
+    cleared: state.cleared.length,
+    total: LABS.length,
+    team: state.team || 'blue',
+    at: new Date().toISOString()
+  };
+}
+
+function copyScoreCode(){
+  var entry = currentScoreEntry();
+  var code = encodeScoreEntry(entry);
+  // pretty group for reading aloud / chat
+  var pretty = code.slice(0, 2) + '-' + code.slice(2).replace(/(.{4})/g, '$1-').replace(/-$/, '');
+  var box = document.getElementById('scoreCodeBox');
+  if (box){ box.style.display = 'block'; box.textContent = pretty; }
+  var note = document.getElementById('lbBriefNote');
+  if (note) note.textContent = 'Score code for ' + entry.name + ' · ' + entry.points + ' pts · ' + entry.cleared + ' labs · ' + entry.team.toUpperCase();
+  var status = document.getElementById('lbStatus');
+  if (status) status.textContent = 'Code ready';
+  if (navigator.clipboard && navigator.clipboard.writeText){
+    navigator.clipboard.writeText(pretty).then(function(){ toast('Score code copied'); }).catch(function(){ toast('Code shown — copy manually'); });
+  } else {
+    toast('Code shown below — copy manually');
+  }
+  return pretty;
+}
+
+function mergeEntryToRoom(entry, room){
+  room = room || lbRoom();
+  var all = loadBoard();
+  if (!all[room]) all[room] = [];
+  all[room] = all[room].filter(function(e){ return e.name.toLowerCase() !== entry.name.toLowerCase(); });
+  all[room].push(entry);
+  all[room].sort(function(a,b){ return b.points - a.points || b.cleared - a.cleared; });
+  all[room] = all[room].slice(0, 50);
+  saveBoard(all);
+  return all[room].length;
+}
+
+function importScoreCodesFromText(text){
+  if (!text || !String(text).trim()) return { ok:0, bad:0, names:[] };
+  // split on whitespace / commas / semicolons
+  var parts = String(text).split(/[\s,;]+/).map(function(s){ return s.trim(); }).filter(Boolean);
+  var ok = 0, bad = 0, names = [];
+  parts.forEach(function(p){
+    // rejoin accidental split of E1-xxxx-yyyy? already no spaces in code if dashed
+    var entry = decodeScoreCode(p);
+    if (!entry){ bad++; return; }
+    mergeEntryToRoom(entry);
+    ok++;
+    names.push(entry.name);
+  });
+  return { ok:ok, bad:bad, names:names };
+}
+
+function importScoreCodes(){
+  var box = document.getElementById('importCodeBox');
+  var text = box ? box.value : '';
+  var res = importScoreCodesFromText(text);
+  var status = document.getElementById('lbStatus');
+  if (res.ok){
+    if (status) status.textContent = 'Imported ' + res.ok + (res.bad ? ' (' + res.bad + ' invalid)' : '');
+    toast('Imported ' + res.ok + ' score' + (res.ok === 1 ? '' : 's'));
+    if (box) box.value = '';
+    renderLeaderboard();
+  } else {
+    if (status) status.textContent = 'No valid codes';
+    toast('Could not read those codes');
+  }
+}
+
+function teacherImportCodes(){
+  if (!state.teacher) return;
+  var box = document.getElementById('teacherImportBox');
+  var res = importScoreCodesFromText(box ? box.value : '');
+  if (res.ok){
+    document.getElementById('teacherNote').textContent = 'Imported ' + res.ok + ' student' + (res.ok===1?'':'s') +
+      (res.names.length ? ': ' + res.names.slice(0,8).join(', ') + (res.names.length>8?'…':'') : '') +
+      (res.bad ? ' · ' + res.bad + ' invalid' : '');
+    if (box) box.value = '';
+    toast('Imported ' + res.ok + ' to room ' + lbRoom());
+  } else {
+    document.getElementById('teacherNote').textContent = 'No valid score codes found.';
+  }
+}
+
+function submitScore(){
+  var nameEl = document.getElementById('playerName');
+  var roomEl = document.getElementById('roomCode');
+  var entry = currentScoreEntry();
+  if (roomEl) state.roomCode = roomEl.value.trim();
+  save();
+  var room = lbRoom();
+  mergeEntryToRoom(entry, room);
+  var note = document.getElementById('lbBriefNote');
+  if (note) note.textContent = 'Submitted "' + entry.name + '" to room ' + room + ' with score ' + entry.points + '. Copy a score code to send it to another device.';
+  toast('Score submitted to room ' + room);
+  renderLeaderboard();
+}
+
+function renderLeaderboard(){
+  var room = lbRoom();
+  var all = loadBoard();
+  var rows = all[room] || [];
+  var body = document.getElementById('lbBody');
+  var label = document.getElementById('lbRoomLabel');
+  if (label) label.textContent = room;
+  if (!body) return;
+  if (!rows.length){
+    body.innerHTML = '<tr><td colspan="5">No scores in this room yet. Submit yours.</td></tr>';
+    return;
+  }
+  var me = (state.playerName || '').toLowerCase();
+  body.innerHTML = rows.map(function(e, i){
+    var isMe = me && e.name.toLowerCase() === me;
+    return '<tr class="' + (isMe ? 'me' : '') + '"><td>' + (i+1) + '</td><td>' + escapeHtml(e.name) +
+      '</td><td>' + e.points + '</td><td>' + e.cleared + '/' + (e.total || LABS.length) +
+      '</td><td>' + (e.team || 'blue').toUpperCase() + '</td></tr>';
+  }).join('');
+}
+function escapeHtml(s){
+  return String(s).replace(/[&<>"']/g, function(c){ return ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[c]; });
+}
+function openLeaderboard(){
+  var nameEl = document.getElementById('playerName');
+  var roomEl = document.getElementById('roomCode');
+  if (nameEl && state.playerName) nameEl.value = state.playerName;
+  if (roomEl && state.roomCode) roomEl.value = state.roomCode;
+  renderLeaderboard();
+  document.getElementById('lbModal').classList.add('on');
+}
+function closeLb(){ document.getElementById('lbModal').classList.remove('on'); }
+function exportLb(){
+  var room = lbRoom();
+  var all = loadBoard();
+  var data = JSON.stringify({ room: room, scores: all[room] || [], exported: new Date().toISOString() }, null, 2);
+  var blob = new Blob([data], {type:'application/json'});
+  var a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'ecr-leaderboard-' + room + '.json';
+  a.click();
+  URL.revokeObjectURL(a.href);
+  toast('Leaderboard JSON downloaded');
+}
+
+/* ---------- teacher mode (client-side password) ---------- */
+// Default classroom password: Mr.B
+// SHA-256 hex of that string:
+var TEACHER_HASH = '73d31142751dc9e1a6dbed2982b5bad16d2695efe066b7b1baee23c5a23aa2cb';
+
+function openTeacher(){
+  document.getElementById('teacherModal').classList.add('on');
+  document.getElementById('teacherGate').style.display = state.teacher ? 'none' : 'block';
+  document.getElementById('teacherPanel').style.display = state.teacher ? 'block' : 'none';
+  document.getElementById('teacherGateNote').textContent = '';
+  document.getElementById('teacherPw').value = '';
+}
+function closeTeacher(){
+  document.getElementById('teacherModal').classList.remove('on');
+  document.getElementById('teacherHints').style.display = 'none';
+}
+function tryTeacherLogin(){
+  var pw = document.getElementById('teacherPw').value || '';
+  sha256(pw).then(function(h){
+    if (h === TEACHER_HASH || pw === 'Mr.B'){
+      state.teacher = true;
+      document.getElementById('teacherGate').style.display = 'none';
+      document.getElementById('teacherPanel').style.display = 'block';
+      document.getElementById('teacherNote').textContent = 'Teacher tools unlocked for this session.';
+      toast('Teacher mode unlocked');
+    } else {
+      document.getElementById('teacherGateNote').textContent = 'Incorrect password.';
+    }
+  });
+}
+function teacherRevealAll(){
+  if (!state.teacher) return;
+  var box = document.getElementById('teacherHints');
+  box.style.display = 'block';
+  box.innerHTML = '<h4>Quick answer keys / tells</h4>' +
+    '<ul style="padding-left:18px">' +
+    '<li><b>Entry phishing:</b> misspelled domain cybersecuirty, generic greeting, 24h deletion threat, zip attachment, link mismatch.</li>' +
+    '<li><b>Logs:</b> attacking IP repeats; count fails before success; wifi case = DEAUTH then ASSOC to lookalike AP + cleartext portal POST.</li>' +
+    '<li><b>MFA:</b> deny unexpected prompts; never read codes to callers; store backup codes offline.</li>' +
+    '<li><b>AI:</b> callback on known number; never relay MFA; mark urgency/secrecy/payment changes.</li>' +
+    '<li><b>Teacher password default:</b> Mr.B (change in source before public deploy if needed).</li>' +
+    '</ul>';
+  document.getElementById('teacherNote').textContent = 'Answer hints shown below.';
+}
+function teacherClearBoard(){
+  if (!state.teacher) return;
+  var room = lbRoom();
+  var all = loadBoard();
+  all[room] = [];
+  saveBoard(all);
+  renderLeaderboard();
+  document.getElementById('teacherNote').textContent = 'Cleared leaderboard for room ' + room + '.';
+}
+function teacherExportCsv(){
+  if (!state.teacher) return;
+  var room = lbRoom();
+  var rows = (loadBoard()[room] || []);
+  var csv = 'name,points,cleared,total,team,timestamp\n' + rows.map(function(e){
+    return [e.name, e.points, e.cleared, e.total||LABS.length, e.team||'blue', e.at].map(function(x){
+      return '"' + String(x).replace(/"/g,'""') + '"';
+    }).join(',');
+  }).join('\n');
+  var blob = new Blob([csv], {type:'text/csv'});
+  var a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'ecr-scores-' + room + '.csv';
+  a.click();
+  URL.revokeObjectURL(a.href);
+  document.getElementById('teacherNote').textContent = 'CSV downloaded for room ' + room + '.';
+}
+function teacherForceCert(){
+  if (!state.teacher) return;
+  drawCertificate(true);
+  document.getElementById('certCard').style.display = 'block';
+  document.getElementById('teacherNote').textContent = 'Certificate preview shown on Briefing.';
+  closeTeacher();
+  go('brief', document.querySelector('#rail button[data-lab="brief"]'));
+}
+
+/* ---------- certificate (#22) ---------- */
+function drawCertificate(force){
+  var done = state.cleared.length >= LABS.length;
+  var card = document.getElementById('certCard');
+  if (!force && !done){ if (card) card.style.display = 'none'; return; }
+  if (card) card.style.display = 'block';
+  var c = document.getElementById('certCanvas');
+  if (!c || !c.getContext) return;
+  var ctx = c.getContext('2d');
+  var w = c.width, h = c.height;
+  ctx.fillStyle = '#ffffff';
+  ctx.fillRect(0,0,w,h);
+  ctx.strokeStyle = '#1a56c4';
+  ctx.lineWidth = 4;
+  ctx.strokeRect(24,24,w-48,h-48);
+  ctx.strokeStyle = '#9bb4d6';
+  ctx.lineWidth = 1;
+  ctx.strokeRect(36,36,w-72,h-72);
+  ctx.fillStyle = '#1a56c4';
+  ctx.font = '600 22px Space Grotesk, sans-serif';
+  ctx.textAlign = 'center';
+  ctx.fillText('EASTERN CYBER RANGE', w/2, 100);
+  ctx.fillStyle = '#0f1a2e';
+  ctx.font = '700 36px Space Grotesk, sans-serif';
+  ctx.fillText('Range Cleared', w/2, 160);
+  ctx.fillStyle = '#4a5a72';
+  ctx.font = '16px IBM Plex Sans, sans-serif';
+  ctx.fillText('This certifies that', w/2, 210);
+  ctx.fillStyle = '#1a56c4';
+  ctx.font = '600 28px Space Grotesk, sans-serif';
+  ctx.fillText(state.playerName || 'Operator', w/2, 255);
+  ctx.fillStyle = '#4a5a72';
+  ctx.font = '15px IBM Plex Sans, sans-serif';
+  ctx.fillText('completed all labs · score ' + state.points + ' · ' + (state.team||'blue').toUpperCase() + ' team', w/2, 300);
+  ctx.fillText(new Date().toLocaleDateString(undefined, {year:'numeric',month:'long',day:'numeric'}), w/2, 340);
+  ctx.fillStyle = '#1a56c4';
+  ctx.font = '14px IBM Plex Mono, monospace';
+  ctx.fillText('Bristol Eastern Lancers · Blue & Grey', w/2, 400);
+  ctx.fillStyle = '#1f9a5a';
+  ctx.font = '13px IBM Plex Mono, monospace';
+  ctx.fillText('Confidentiality · Integrity · Availability', w/2, 430);
+  ctx.fillStyle = '#4a5a72';
+  ctx.font = '12px IBM Plex Mono, monospace';
+  ctx.fillText('Practice environment — verification is local to this browser', w/2, 460);
+}
+function downloadCert(){
+  drawCertificate(true);
+  var c = document.getElementById('certCanvas');
+  c.toBlob(function(blob){
+    if (!blob){ toast('Could not export'); return; }
+    var a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = 'eastern-cyber-range-certificate.png';
+    a.click();
+    URL.revokeObjectURL(a.href);
+  });
+}
+
+
+/* ---------- boot ---------- */
+initTriage();
+genLogCase();
+updateLogStreak();
+initInbox();
+renderCaesar();
+renderHash();
+loadIntercept();
+renderToy();
+makePhrase();
+scorePw();
+initScamQueue();
+resetCall();
+initArtifacts();
+initSpear();
+if (document.getElementById('playerName') && state.playerName) document.getElementById('playerName').value = state.playerName;
+if (document.getElementById('roomCode') && state.roomCode) document.getElementById('roomCode').value = state.roomCode;
+refreshProgress();
+applyTeamUI();
+renderAar();
+if (state.gatePassed){
+  document.getElementById('gate').style.display = 'none';
+  document.getElementById('console').style.display = 'block';
+}
+</script></body></html>
