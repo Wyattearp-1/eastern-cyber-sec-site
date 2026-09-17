@@ -110,9 +110,72 @@ header.top nav.rail button:hover{color:#fff}
 header.top nav.rail button.on{color:#9ec1ff;border-bottom-color:#9ec1ff}
 header.top .meter{background:rgba(255,255,255,.15)}
 header.top .tick{color:#7dffa8}
+
+
+/* Intro / orientation */
+.intro-card{margin-bottom:14px}
+.intro-card h3{font-family:var(--display);font-size:1.1rem;margin-bottom:8px;color:var(--text)}
+.intro-card p{color:var(--text);max-width:62ch}
+.intro-list{margin:10px 0 0 1.15rem;color:var(--text);max-width:62ch}
+.intro-list li{margin:6px 0}
+.intro-steps{margin:8px 0 0 1.25rem;color:var(--text);max-width:62ch}
+.intro-steps li{margin:8px 0}
+.intro-steps b{color:var(--blue-deep)}
+
+/* --- Brand / BE logo --- */
+.brand{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap}
+.brand-left{flex:1;min-width:200px}
+.site-title{
+  font-family:var(--display);font-size:clamp(1.15rem,3.5vw,1.45rem);font-weight:700;
+  color:#fff;text-decoration:underline;text-underline-offset:5px;text-decoration-thickness:2px;
+  letter-spacing:.01em;
+}
+.brand-meta{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.brand-meta .clearance{color:#dce8f8}
+.be-logo{flex-shrink:0;line-height:0}
+.be-logo svg{display:block;border-radius:8px;box-shadow:0 2px 8px rgba(0,0,0,.25)}
+
+/* --- Briefing mission board (mockup layout) --- */
+.brief-board{
+  display:grid;
+  grid-template-columns:1fr auto 1fr;
+  gap:18px 22px;
+  align-items:stretch;
+  margin-top:22px;
+  min-height:280px;
+}
+.brief-col{
+  list-style:none;
+  display:flex;
+  flex-direction:column;
+  gap:14px;
+  margin:0;padding:0;
+}
+.brief-col .mission{
+  background:var(--panel);
+  border:1px solid #8a919c;
+  border-radius:2px;
+  box-shadow:none;
+  padding:16px 18px;
+  min-height:64px;
+}
+.brief-col .mission:hover{border-color:var(--amber);transform:none}
+.brief-col .mission.done{opacity:.72}
+.brief-pillars{
+  display:flex;gap:8px;align-items:stretch;justify-content:center;
+  padding:4px 2px;min-width:56px;
+}
+.brief-pillars span{
+  display:block;width:10px;background:#0d2a6b;border-radius:1px;align-self:stretch;
+}
+.brief-pillars span.mid{width:22px}
+
+@media (max-width:720px){
+  .brief-board{grid-template-columns:1fr;gap:14px}
+  .brief-pillars{display:none}
+}
+
 .top-inner{max-width:960px;margin:0 auto}
-.brand{display:flex;align-items:baseline;justify-content:space-between;gap:14px;flex-wrap:wrap}
-.brand h1{font-family:var(--display);font-size:1.25rem}
 .clearance{font-family:var(--mono);font-size:.8rem;color:var(--amber)}
 .meter{height:4px;background:#c5c9d0;border-radius:2px;overflow:hidden;margin-top:14px}
 .meter i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--amber),var(--silver));transition:width .5s ease}
@@ -335,10 +398,63 @@ input.in.wrong{border-color:var(--red)}
 <div id="gate">
   <div class="gate-wrap">
 
-    <div id="stage-mail">
-      <div class="kicker">Eastern Cyber Range / entry check</div>
-      <h1 class="gate-title">Before you get access, read your mail.</h1>
-      <p class="gate-sub">One message is sitting in the practice inbox. Click anything in it that looks wrong, then decide what to do about it. Nothing here is real and nothing you type is stored.</p>
+    <!-- ===== INTRO: what is cybersecurity + what is the range ===== -->
+    <div id="stage-intro">
+      <div class="kicker">Bristol Eastern Cyber Ranger</div>
+      <h1 class="gate-title">Welcome to the range.</h1>
+      <p class="gate-sub">A short orientation before you train. Nothing here is graded yet — read this, then continue.</p>
+
+      <div class="card intro-card">
+        <h3>What is cybersecurity?</h3>
+        <p>Cybersecurity is how people and organizations protect <b>accounts, devices, data, and networks</b> from misuse. Attackers try to steal passwords, trick you into clicking bad links, lock files for ransom, or pretend to be someone you trust. Defenders learn to <b>spot the tricks, limit the damage, and recover</b>.</p>
+        <p style="margin-top:12px">Most real attacks do not start with Hollywood-style hacking. They start with a message that looks almost normal — email, text, phone call, or a pop-up — and a rushed decision.</p>
+      </div>
+
+      <div class="card intro-card">
+        <h3>Three ideas you will use on every lab</h3>
+        <ul class="intro-list">
+          <li><b>Confidentiality</b> — only the right people can see the information.</li>
+          <li><b>Integrity</b> — the information has not been secretly changed or faked.</li>
+          <li><b>Availability</b> — systems still work when people need them.</li>
+        </ul>
+        <p class="note" style="margin-top:12px">Together these are often called the <b>CIA triad</b>. Every incident you sort in the range lands on at least one of them.</p>
+      </div>
+
+      <div class="card intro-card">
+        <h3>What is the Cyber Ranger?</h3>
+        <p>This site is a <b>practice range</b> for Bristol Eastern students and anyone learning to stay safer online. You will work through hands-on labs — phishing, log analysis, passwords, multi-factor authentication, everyday scams, AI-assisted tricks, and incident response — without risking real accounts.</p>
+        <ul class="intro-list" style="margin-top:12px">
+          <li>Everything runs in your browser. Nothing you type is sent to a server.</li>
+          <li>You earn clearance as you finish labs. Progress stays on this device.</li>
+          <li>Blue team = defender view. Red team = how an attacker might think.</li>
+        </ul>
+      </div>
+
+      <div class="card intro-card">
+        <h3>How a session works</h3>
+        <ol class="intro-steps">
+          <li><b>Entry check</b> — a short phishing drill so you practice spotting red flags before the labs open.</li>
+          <li><b>Briefing board</b> — pick any lab. Order is up to you.</li>
+          <li><b>Clear labs</b> — each one teaches a skill you can use in class and in everyday life.</li>
+        </ol>
+      </div>
+
+      <button class="primary" onclick="startEntryCheck()">Continue to entry check</button>
+      <p class="note" style="margin-top:14px">Next: a practice inbox message. You will mark suspicious parts, then choose what to do.</p>
+    </div>
+
+    <div id="stage-mail" style="display:none">
+      <div class="kicker">Entry check · step 1 of 2</div>
+      <h1 class="gate-title">Practice inbox — find the red flags</h1>
+      <div class="card intro-card" style="margin-bottom:18px">
+        <h3 style="margin-bottom:8px">What to do</h3>
+        <ol class="intro-steps">
+          <li><b>Read the email</b> below. It is fake practice mail — not a real account warning.</li>
+          <li><b>Click any text that looks suspicious</b> (wrong spelling, pressure tactics, odd sender, shady attachment, and so on). Each click marks a red flag.</li>
+          <li>When you are ready, choose an action: <b>Report as phishing</b> (correct) or <b>Open the verification page</b> (the risky path — you can still recover).</li>
+        </ol>
+        <p class="note" style="margin-top:10px">Nothing here is real. Nothing you type is stored or sent anywhere.</p>
+      </div>
 
       <div class="mail">
         <div class="mail-bar"><span class="dot"></span><span class="dot"></span><span class="dot"></span> practice inbox — 1 unread</div>
@@ -372,9 +488,9 @@ input.in.wrong{border-color:var(--red)}
     </div>
 
     <div id="stage-portal" style="display:none">
-      <div class="kicker">Eastern Cyber Range / entry check</div>
-      <h1 class="gate-title">You clicked the link.</h1>
-      <p class="gate-sub">Look at the window before you type anything. Two things here should stop you cold.</p>
+      <div class="kicker">Entry check · step 2 of 2</div>
+      <h1 class="gate-title">You opened the link.</h1>
+      <p class="gate-sub">This is the risky path on purpose. Look at the address bar and the page before you type anything — two details here should make you stop.</p>
       <div class="browser">
         <div class="urlbar">
           <span class="insecure">not secure</span>
@@ -412,10 +528,20 @@ input.in.wrong{border-color:var(--red)}
 <header class="top">
   <div class="top-inner">
     <div class="brand">
-      <h1>Eastern Cyber Range</h1>
-      <span class="clearance" id="clearance">Clearance 0 / 10</span>
-      <span class="clearance" id="scoreVal" style="color:var(--amber)">Score 0</span>
-      <span class="mode-pill blue" id="modePill">BLUE TEAM</span>
+      <div class="brand-left">
+        <h1 class="site-title">Bristol Eastern Cyber Ranger</h1>
+      </div>
+      <div class="brand-meta">
+        <span class="clearance" id="clearance">Clearance 0 / 10</span>
+        <span class="clearance" id="scoreVal">Score 0</span>
+        <span class="mode-pill blue" id="modePill">BLUE TEAM</span>
+      </div>
+      <div class="be-logo" aria-label="Bristol Eastern" title="Bristol Eastern Lancers">
+        <svg viewBox="0 0 64 64" width="52" height="52" role="img">
+          <rect x="2" y="2" width="60" height="60" rx="6" fill="#fff" stroke="#0d2a6b" stroke-width="3"></rect>
+          <text x="32" y="44" text-anchor="middle" font-family="Space Grotesk, Arial Black, sans-serif" font-weight="800" font-size="28" fill="#0d2a6b">BE</text>
+        </svg>
+      </div>
     </div>
     <div class="top-tools">
       <div class="team-toggle" title="Switch perspective">
@@ -453,9 +579,16 @@ input.in.wrong{border-color:var(--red)}
       </div>
     </div>
 
-    <ul class="mission-list" id="missionList"></ul>
+    <!-- Mockup-style mission board: left col | blue pillars | right col -->
+    <div class="brief-board" id="briefBoard">
+      <ul class="brief-col" id="missionLeft"></ul>
+      <div class="brief-pillars" aria-hidden="true">
+        <span></span><span class="mid"></span><span></span>
+      </div>
+      <ul class="brief-col" id="missionRight"></ul>
+    </div>
 
-    <div class="card" style="margin-top:20px">
+    <div class="card" style="margin-top:24px">
       <h3>The three questions behind every lab here</h3>
       <p>Security work keeps circling back to the same trio. Confidentiality asks who is allowed to see this. Integrity asks whether it has been changed behind our backs. Availability asks whether it still works when someone needs it. Every incident you sort and every log line you read lands on one of those three.</p>
     </div>
@@ -1110,6 +1243,14 @@ function unlockConsole(){
   window.scrollTo(0,0);
 }
 
+function startEntryCheck(){
+  document.getElementById('stage-intro').style.display = 'none';
+  document.getElementById('stage-mail').style.display = 'block';
+  document.getElementById('stage-portal').style.display = 'none';
+  document.getElementById('stage-debrief').style.display = 'none';
+  window.scrollTo(0,0);
+}
+
 function replayGate(){
   spotted = {}; spottedCount = 0;
   Array.prototype.forEach.call(document.querySelectorAll('#stage-mail .flag-note'), function(n){ n.remove(); });
@@ -1119,7 +1260,8 @@ function replayGate(){
   document.getElementById('bait2').value = '';
   document.getElementById('stage-debrief').style.display = 'none';
   document.getElementById('stage-portal').style.display = 'none';
-  document.getElementById('stage-mail').style.display = 'block';
+  document.getElementById('stage-mail').style.display = 'none';
+  document.getElementById('stage-intro').style.display = 'block';
   document.getElementById('console').style.display = 'none';
   document.getElementById('gate').style.display = 'block';
   window.scrollTo(0,0);
@@ -1177,19 +1319,25 @@ function refreshProgress(){
     }
   });
 
-  var ml = document.getElementById('missionList');
-  ml.innerHTML = '';
-  LABS.forEach(function(L){
-    var done = state.cleared.indexOf(L[0]) > -1;
-    var li = document.createElement('li');
-    var btn = document.createElement('button');
-    btn.className = 'mission' + (done ? ' done' : '');
-    btn.innerHTML = '<span class="st">' + (done ? 'cleared' : 'open') + '</span><span><b></b><small></small></span>';
-    btn.querySelector('b').textContent = L[1];
-    btn.querySelector('small').textContent = L[2];
-    btn.onclick = function(){ go(L[0], document.querySelector('#rail button[data-lab="' + L[0] + '"]')); };
-    li.appendChild(btn); ml.appendChild(li);
-  });
+  var left = document.getElementById('missionLeft');
+  var right = document.getElementById('missionRight');
+  if (left && right){
+    left.innerHTML = '';
+    right.innerHTML = '';
+    var mid = Math.ceil(LABS.length / 2);
+    LABS.forEach(function(L, idx){
+      var done = state.cleared.indexOf(L[0]) > -1;
+      var li = document.createElement('li');
+      var btn = document.createElement('button');
+      btn.className = 'mission' + (done ? ' done' : '');
+      btn.innerHTML = '<span class="st">' + (done ? 'cleared' : 'open') + '</span><span><b></b><small></small></span>';
+      btn.querySelector('b').textContent = L[1];
+      btn.querySelector('small').textContent = L[2];
+      btn.onclick = function(){ go(L[0], document.querySelector('#rail button[data-lab="' + L[0] + '"]')); };
+      li.appendChild(btn);
+      (idx < mid ? left : right).appendChild(li);
+    });
+  }
   drawCertificate(false);
   renderAar();
   applyTeamUI();
