@@ -122,6 +122,101 @@ header.top .tick{color:#7dffa8}
 .intro-steps li{margin:8px 0}
 .intro-steps b{color:var(--blue-deep)}
 
+
+/* Side margin bait ads — banner style (desktop) */
+.ad-rail{
+  display:none;
+  position:fixed;
+  top:110px;
+  width:140px;
+  z-index:50;
+  flex-direction:column;
+  gap:12px;
+}
+.ad-rail.left{left:8px}
+.ad-rail.right{right:8px}
+@media (min-width:1320px){
+  .ad-rail{display:flex}
+}
+.fake-ad{
+  display:flex;flex-direction:column;width:100%;text-align:left;text-decoration:none;color:#111;
+  border:1px solid #999;border-radius:2px;padding:0;overflow:hidden;
+  font-size:.7rem;line-height:1.25;cursor:pointer;
+  box-shadow:0 2px 8px rgba(0,0,0,.18);
+  font-family:Arial, Helvetica, sans-serif;
+  transition:transform .12s,box-shadow .12s;
+  background:#fff;
+}
+.fake-ad:hover{transform:translateY(-2px);box-shadow:0 5px 14px rgba(0,0,0,.22)}
+.fake-ad .ad-topbar{
+  display:flex;justify-content:space-between;align-items:center;
+  background:#eee;border-bottom:1px solid #ccc;padding:2px 6px;
+  font-size:.58rem;color:#666;text-transform:uppercase;letter-spacing:.04em;
+}
+.fake-ad .ad-art{
+  height:64px;display:grid;place-items:center;color:#fff;font-weight:800;
+  font-size:.95rem;letter-spacing:.02em;text-align:center;padding:6px;
+  text-shadow:0 1px 2px rgba(0,0,0,.35);
+}
+.fake-ad .ad-body{padding:8px 8px 10px}
+.fake-ad .ad-title{font-weight:700;font-size:.78rem;color:#0b2a6b;margin:0 0 4px;line-height:1.2}
+.fake-ad .ad-sub{font-size:.68rem;color:#333;margin:0 0 8px}
+.fake-ad .ad-cta{
+  display:block;width:100%;text-align:center;padding:6px 4px;
+  background:linear-gradient(180deg,#3b7ddd,#1a56c4);color:#fff;border-radius:2px;
+  font-size:.7rem;font-weight:700;border:1px solid #0d3d8c;
+}
+.fake-ad.skin-red .ad-cta{background:linear-gradient(180deg,#e85d6c,#c43c4e);border-color:#8a1e2c}
+.fake-ad.skin-green .ad-cta{background:linear-gradient(180deg,#3dba6e,#1a8f52);border-color:#0d5c32}
+.fake-ad.skin-orange .ad-art{background:linear-gradient(135deg,#ff9966,#ff5e62)}
+.fake-ad.skin-blue .ad-art{background:linear-gradient(135deg,#4facfe,#00f2fe);color:#063}
+.fake-ad.skin-purple .ad-art{background:linear-gradient(135deg,#a18cd1,#fbc2eb);color:#321}
+.fake-ad.skin-dark .ad-art{background:linear-gradient(135deg,#232526,#414345)}
+.fake-ad.skin-warn .ad-art{background:linear-gradient(135deg,#f7b733,#fc4a1a)}
+.fake-ad.skin-dl .ad-art{background:linear-gradient(135deg,#667eea,#764ba2)}
+/* bottom leaderboard-style banner under main on wide screens */
+.ad-leader{
+  display:none;max-width:960px;margin:18px auto 0;padding:0 16px;
+}
+@media (min-width:900px){.ad-leader{display:block}}
+.ad-leader .fake-ad{flex-direction:row;align-items:stretch;min-height:72px}
+.ad-leader .ad-art{width:120px;height:auto;flex-shrink:0;font-size:.85rem}
+.ad-leader .ad-body{flex:1;display:flex;flex-direction:column;justify-content:center}
+.ad-leader .ad-cta{width:auto;align-self:flex-start;padding:6px 16px}
+/* fake download toast bar */
+#dlBar{
+  display:none;position:fixed;bottom:20px;left:50%;transform:translateX(-50%);
+  z-index:960;background:#1e1e1e;color:#eee;border:1px solid #444;border-radius:8px;
+  padding:12px 16px;min-width:280px;max-width:92vw;font-family:var(--mono);font-size:.82rem;
+  box-shadow:0 8px 28px rgba(0,0,0,.35);
+}
+#dlBar.on{display:block}
+#dlBar .dl-name{color:#8cf;margin-bottom:6px}
+#dlBar .dl-track{height:6px;background:#333;border-radius:3px;overflow:hidden}
+#dlBar .dl-track i{display:block;height:100%;width:0;background:linear-gradient(90deg,#3b7ddd,#5ad18f);transition:width .4s}
+
+
+/* Ad consequence modal */
+#adModal.modal-backdrop{z-index:980}
+#adModal .modal-panel{max-width:480px;background:var(--surface);border:2px solid var(--red)}
+#adModal h3{color:var(--red);font-family:var(--display)}
+.ad-risk-list{margin:12px 0 0 1.2rem;color:var(--text)}
+.ad-risk-list li{margin:6px 0}
+
+/* Team framing */
+.team-banner{
+  border-radius:var(--r-md);padding:14px 16px;margin-bottom:16px;border:1px solid var(--line);
+  font-size:.92rem;line-height:1.5;
+}
+.team-banner.blue{background:#e8f0fc;border-color:#9bb6d9}
+.team-banner.red{background:#fdecee;border-color:#e8a0a8}
+.team-banner b.tag{font-family:var(--mono);font-size:.75rem;letter-spacing:.04em}
+body[data-team="red"] .team-only-blue{display:none !important}
+body[data-team="blue"] .team-only-red{display:none !important}
+.lab-head .team-objective{margin-top:10px;padding:10px 14px;border-radius:var(--r-sm);font-size:.88rem;border-left:4px solid var(--amber)}
+body[data-team="blue"] .lab-head .team-objective{border-left-color:#1a56c4;background:#eef4fc}
+body[data-team="red"] .lab-head .team-objective{border-left-color:var(--red);background:#fdf0f1}
+
 /* --- Brand / BE logo --- */
 .brand{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap}
 .brand-left{flex:1;min-width:200px}
@@ -553,17 +648,20 @@ input.in.wrong{border-color:var(--red)}
     </div>
     <div class="meter"><i id="meterFill"></i></div>
     <nav class="rail" id="rail">
-      <button data-lab="brief" class="on" onclick="go('brief',this)">Briefing</button>
-      <button data-lab="triage" onclick="go('triage',this)">Triage board</button>
-      <button data-lab="logs" onclick="go('logs',this)">Log analysis</button>
-      <button data-lab="malware" onclick="go('malware',this)">Diagnostics</button>
-      <button data-lab="inbox" onclick="go('inbox',this)">Inbox shift</button>
-      <button data-lab="crypto" onclick="go('crypto',this)">Cipher bench</button>
-      <button data-lab="keys" onclick="go('keys',this)">Key vault</button>
-      <button data-lab="mfa" onclick="go('mfa',this)">MFA station</button>
-      <button data-lab="scams" onclick="go('scams',this)">Scam desk</button>
-      <button data-lab="ai" onclick="go('ai',this)">AI threats</button>
-      <button data-lab="defend" onclick="go('defend',this)">Response drill</button>
+      <button data-lab="brief" data-team="both" class="on" onclick="go('brief',this)">Briefing</button>
+      <button data-lab="triage" data-team="blue" onclick="go('triage',this)">Triage board</button>
+      <button data-lab="harden" data-team="blue" onclick="go('harden',this)">Harden desk</button>
+      <button data-lab="logs" data-team="both" onclick="go('logs',this)">Log analysis</button>
+      <button data-lab="malware" data-team="both" onclick="go('malware',this)">Diagnostics</button>
+      <button data-lab="inbox" data-team="both" onclick="go('inbox',this)">Inbox shift</button>
+      <button data-lab="crypto" data-team="both" onclick="go('crypto',this)">Cipher bench</button>
+      <button data-lab="keys" data-team="both" onclick="go('keys',this)">Key vault</button>
+      <button data-lab="mfa" data-team="blue" onclick="go('mfa',this)">MFA station</button>
+      <button data-lab="scams" data-team="both" onclick="go('scams',this)">Scam desk</button>
+      <button data-lab="ai" data-team="both" onclick="go('ai',this)">AI threats</button>
+      <button data-lab="defend" data-team="blue" onclick="go('defend',this)">Response drill</button>
+      <button data-lab="target" data-team="red" onclick="go('target',this)">Target desk</button>
+      <button data-lab="chain" data-team="red" onclick="go('chain',this)">Attack chain</button>
     </nav>
   </div>
 </header>
@@ -589,6 +687,41 @@ input.in.wrong{border-color:var(--red)}
     </div>
 
     <div class="card" style="margin-top:24px">
+      <h3>Blue team vs Red team — what is the difference?</h3>
+      <p>Real security programs practice from <b>both sides of the fight</b>. Use the Blue / Red switch in the header to change how every lab is framed.</p>
+      <div class="row two" style="margin-top:14px">
+        <div class="team-banner blue">
+          <b class="tag">BLUE TEAM · DEFENDERS</b>
+          <p style="margin-top:8px">You protect people, data, and systems. Blue work is detection, hardening, response, and teaching users good habits. On this range, blue mode asks: <i>How do I spot this? Which control stops it? What do I tell the user?</i></p>
+          <ul class="intro-list">
+            <li>Read logs and sort incidents by impact (CIA)</li>
+            <li>Report phishing, enable MFA, pick strong passwords</li>
+            <li>Match attacks to the control that would have blocked them</li>
+          </ul>
+        </div>
+        <div class="team-banner red">
+          <b class="tag">RED TEAM · ATTACKERS (authorized practice)</b>
+          <p style="margin-top:8px">You think like an adversary <b>only inside this practice range</b>. Red work is finding weak spots before real criminals do. On this range, red mode asks: <i>What would I try first? What would make this attack succeed? What would stop me?</i></p>
+          <ul class="intro-list">
+            <li>Study how phishing and scams are built</li>
+            <li>See which passwords and hashes fall quickly</li>
+            <li>Learn attacker tradecraft so blue can counter it</li>
+          </ul>
+        </div>
+      </div>
+      <p class="note" style="margin-top:12px"><b>Important:</b> Red team skills are for learning and authorized testing only — never against real people or systems without permission.</p>
+    </div>
+
+    <div id="teamOpsCard" class="card team-only-blue">
+      <h3>Blue ops focus today</h3>
+      <p>Work the board as a defender. Priority path: <b>Triage → Logs → Inbox → MFA → Scams → Response drill</b>. Your score reflects careful calls, not speed-hacking.</p>
+    </div>
+    <div class="card team-only-red" style="display:none">
+      <h3>Red ops focus today</h3>
+      <p>Work the board as an authorized attacker-in-training. Priority path: <b>Inbox → Scams → AI threats → Key vault → Cipher bench → Logs</b>. For each lab, ask what would make the attack quieter or more convincing — then note the blue control that stops it.</p>
+    </div>
+
+    <div class="card" style="margin-top:8px">
       <h3>The three questions behind every lab here</h3>
       <p>Security work keeps circling back to the same trio. Confidentiality asks who is allowed to see this. Integrity asks whether it has been changed behind our backs. Availability asks whether it still works when someone needs it. Every incident you sort and every log line you read lands on one of those three.</p>
     </div>
@@ -642,7 +775,9 @@ input.in.wrong{border-color:var(--red)}
   <section class="lab" id="lab-triage">
     <div class="lab-head">
       <h2>Triage board</h2>
-      <p>Six incidents came in overnight. Tap an incident, then tap the goal it damages first. A couple of these are less obvious than they look.</p>
+      <p class="lab-desc">Six incidents came in overnight. Tap an incident, then tap the goal it damages first. A couple of these are less obvious than they look.</p>
+    
+      <p class="team-objective" data-role="team-objective"></p>
     </div>
     <div class="card">
       <div class="tray" id="tray"></div>
@@ -660,7 +795,9 @@ input.in.wrong{border-color:var(--red)}
   <section class="lab" id="lab-logs">
     <div class="lab-head">
       <h2>Log analysis</h2>
-      <p>A new incident lands every time you ask for one — auth, web, firewall, or wireless/captive-portal logs (including evil-twin patterns on public Wi-Fi). Type in the filter box to narrow what you're looking at, click any line to flag it, then fill in what you found.</p>
+      <p class="lab-desc">A new incident lands every time you ask for one — auth, web, firewall, or wireless/captive-portal logs (including evil-twin patterns on public Wi-Fi). Type in the filter box to narrow what you're looking at, click any line to flag it, then fill in what you found.</p>
+    
+      <p class="team-objective" data-role="team-objective"></p>
     </div>
     <div class="card">
       <div class="hunt-bar" style="margin:0 0 16px">
@@ -683,7 +820,9 @@ input.in.wrong{border-color:var(--red)}
   <section class="lab" id="lab-malware">
     <div class="lab-head">
       <h2>Diagnostics terminal</h2>
-      <p>A machine is behaving badly. Symptoms stream in one line at a time. Type your call as soon as you think you have enough to go on — calling it early is the whole skill, and the terminal tells you how many symptoms you needed.</p>
+      <p class="lab-desc">A machine is behaving badly. Symptoms stream in one line at a time. Type your call as soon as you think you have enough to go on — calling it early is the whole skill, and the terminal tells you how many symptoms you needed.</p>
+    
+      <p class="team-objective" data-role="team-objective"></p>
     </div>
     <div class="card">
       <div class="term" id="term">&gt; terminal idle</div>
@@ -699,7 +838,9 @@ input.in.wrong{border-color:var(--red)}
   <section class="lab" id="lab-inbox">
     <div class="lab-head">
       <h2>Inbox shift</h2>
-      <p>You're covering the helpdesk queue. Open each message, read the raw headers underneath it the way a mail client rarely shows you, and call it. Real queues mix genuine mail in with the fakes, so reporting everything costs you as much as missing one.</p>
+      <p class="lab-desc">You're covering the helpdesk queue. Open each message, read the raw headers underneath it the way a mail client rarely shows you, and call it. Real queues mix genuine mail in with the fakes, so reporting everything costs you as much as missing one.</p>
+    
+      <p class="team-objective" data-role="team-objective"></p>
     </div>
     <div class="card">
       <div class="inbox" id="inbox"></div>
@@ -712,7 +853,9 @@ input.in.wrong{border-color:var(--red)}
   <section class="lab" id="lab-crypto">
     <div class="lab-head">
       <h2>Cipher bench</h2>
-      <p>Break an intercepted message, watch a real hash avalanche, seal a note so tampering is obvious, and attack a deliberately weak hash until you force a collision.</p>
+      <p class="lab-desc">Break an intercepted message, watch a real hash avalanche, seal a note so tampering is obvious, and attack a deliberately weak hash until you force a collision.</p>
+    
+      <p class="team-objective" data-role="team-objective"></p>
     </div>
 
     <div class="card">
@@ -810,7 +953,9 @@ input.in.wrong{border-color:var(--red)}
   <section class="lab" id="lab-keys">
     <div class="lab-head">
       <h2>Key vault</h2>
-      <p>Type a password and watch how long a fast offline attack would need. The estimate assumes 100 billion guesses a second, which is roughly what rented GPUs do to a weakly hashed database.</p>
+      <p class="lab-desc">Type a password and watch how long a fast offline attack would need. The estimate assumes 100 billion guesses a second, which is roughly what rented GPUs do to a weakly hashed database.</p>
+    
+      <p class="team-objective" data-role="team-objective"></p>
     </div>
 
     <div class="card">
@@ -842,7 +987,9 @@ input.in.wrong{border-color:var(--red)}
   <section class="lab" id="lab-mfa">
     <div class="lab-head">
       <h2>MFA station</h2>
-      <p>Practice the habits that actually stop account takeovers: treating unexpected prompts as hostile, storing backup codes properly, and preferring strong second factors.</p>
+      <p class="lab-desc">Practice the habits that actually stop account takeovers: treating unexpected prompts as hostile, storing backup codes properly, and preferring strong second factors.</p>
+    
+      <p class="team-objective" data-role="team-objective"></p>
     </div>
 
     <div class="card">
@@ -879,7 +1026,9 @@ input.in.wrong{border-color:var(--red)}
   <section class="lab" id="lab-scams">
     <div class="lab-head">
       <h2>Scam desk</h2>
-      <p>A mixed queue of SMS, email, chat, and voicemail. Open each item, read it the way it would actually appear, then take an action. Real messages are mixed in on purpose.</p>
+      <p class="lab-desc">A mixed queue of SMS, email, chat, and voicemail. Open each item, read it the way it would actually appear, then take an action. Real messages are mixed in on purpose.</p>
+    
+      <p class="team-objective" data-role="team-objective"></p>
     </div>
     <div class="card">
       <div class="hunt-bar" style="margin:0 0 14px">
@@ -911,7 +1060,9 @@ input.in.wrong{border-color:var(--red)}
   <section class="lab" id="lab-ai">
     <div class="lab-head">
       <h2>AI threats</h2>
-      <p>Hostile AI makes social engineering cheaper and more personal. Work three short simulations: a cloned-voice call, an inspectable deepfake frame, and a spear-phish you mark up yourself.</p>
+      <p class="lab-desc">Hostile AI makes social engineering cheaper and more personal. Work three short simulations: a cloned-voice call, an inspectable deepfake frame, and a spear-phish you mark up yourself.</p>
+    
+      <p class="team-objective" data-role="team-objective"></p>
     </div>
 
     <div class="card">
@@ -967,7 +1118,9 @@ input.in.wrong{border-color:var(--red)}
   <section class="lab" id="lab-defend">
     <div class="lab-head">
       <h2>Response drill</h2>
-      <p>Incidents arrive on a clock. Type the control that would have stopped it — start typing for suggestions, or just know the name. Three misses ends the shift.</p>
+      <p class="lab-desc">Incidents arrive on a clock. Type the control that would have stopped it — start typing for suggestions, or just know the name. Three misses ends the shift.</p>
+    
+      <p class="team-objective" data-role="team-objective"></p>
     </div>
     <div class="card">
       <div class="hud">
@@ -983,9 +1136,88 @@ input.in.wrong{border-color:var(--red)}
     </div>
   </section>
 
+
+  <!-- RED-ONLY: Target desk -->
+  <section class="lab" id="lab-target">
+    <div class="lab-head">
+      <h2>Target desk</h2>
+      <p class="lab-desc">Red-team practice: you have budget for <b>three</b> spear-phish emails. Rank who is worth contacting first — high impact if they fall, but not so hardened that the attempt is wasted. Analysis only; nothing is sent.</p>
+      <p class="team-objective" data-role="team-objective"></p>
+    </div>
+    <div class="card">
+      <p class="note">Tap up to three targets in priority order (1st = highest priority). Then choose why that mix is strong.</p>
+      <div class="msg-queue" id="targetList" style="margin-top:12px"></div>
+      <p class="note" id="targetPicks" style="margin-top:12px">Selected: none</p>
+      <div id="targetWhy" style="display:none;margin-top:14px">
+        <label class="lbl">Why is this the strongest three-target mix?</label>
+        <div class="choice-row" id="targetWhyChoices"></div>
+      </div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:12px">
+        <button class="ghost" onclick="initTarget()">Reset targets</button>
+        <button class="ghost" onclick="clearTargetPicks()">Clear selection</button>
+      </div>
+      <p class="note" id="targetNote" style="margin-top:10px"></p>
+    </div>
+  </section>
+
+  <!-- RED-ONLY: Attack chain -->
+  <section class="lab" id="lab-chain">
+    <div class="lab-head">
+      <h2>Attack chain</h2>
+      <p class="lab-desc">Red-team practice: put the attack steps in the order an adversary would run them. Then name the blue control that breaks the chain.</p>
+      <p class="team-objective" data-role="team-objective"></p>
+    </div>
+    <div class="card">
+      <p class="note">Tap steps in order (1 → 2 → 3 …). Wrong order resets the sequence.</p>
+      <div class="tray" id="chainTray" style="margin-top:12px"></div>
+      <p class="note" id="chainNote" style="margin-top:12px">Sequence: empty</p>
+      <div id="chainControl" style="display:none;margin-top:14px">
+        <label class="lbl">Which blue control breaks this chain?</label>
+        <div class="choice-row" id="chainChoices"></div>
+      </div>
+      <button class="ghost" style="margin-top:12px" onclick="initChain()">New chain</button>
+    </div>
+  </section>
+
+  <!-- BLUE-ONLY: Harden desk -->
+  <section class="lab" id="lab-harden">
+    <div class="lab-head">
+      <h2>Harden desk</h2>
+      <p class="lab-desc">Blue-team practice: for each weak setup, pick the hardening step that closes the hole.</p>
+      <p class="team-objective" data-role="team-objective"></p>
+    </div>
+    <div class="card">
+      <div id="hardenBody">
+        <p class="note" id="hardenPrompt">Loading…</p>
+        <div class="choice-row" id="hardenChoices" style="margin-top:12px"></div>
+        <p class="note" id="hardenNote" style="margin-top:12px"></p>
+      </div>
+      <button class="ghost" style="margin-top:12px" onclick="initHarden()">Next scenario</button>
+    </div>
+  </section>
+
 </main>
 
 <footer>Eastern Cyber Range — practice environment. Progress and leaderboards stay in your browser (GitHub Pages friendly). Teacher mode is password-gated on-device only.</footer>
+</div>
+
+
+<!-- Margin bait ads (filled randomly by JS) -->
+<aside class="ad-rail left" id="adRailLeft" aria-label="Practice advertisements"></aside>
+<aside class="ad-rail right" id="adRailRight" aria-label="Practice advertisements"></aside>
+<div class="ad-leader"><div id="adLeaderSlot"></div></div>
+<div id="dlBar" role="status"><div class="dl-name" id="dlName">Downloading…</div><div class="dl-track"><i id="dlFill"></i></div></div>
+
+<div class="modal-backdrop" id="adModal">
+  <div class="modal-panel">
+    <h3 id="adModalTitle">That was a trap</h3>
+    <p class="note" id="adModalLead" style="margin-top:8px"></p>
+    <ul class="ad-risk-list" id="adModalList"></ul>
+    <p class="note" style="margin-top:14px" id="adModalFoot"></p>
+    <div class="modal-row" style="margin-top:16px">
+      <button class="primary" style="margin-top:0" onclick="closeAdTrap()">Return to the range</button>
+    </div>
+  </div>
 </div>
 
 <div class="toast" id="toast"></div>
@@ -1268,25 +1500,39 @@ function replayGate(){
 }
 
 /* ---------- navigation and progress ---------- */
+// team: 'blue' | 'red' | 'both'
 var LABS = [
-  ['triage','Triage board','Sort six incidents by what they actually damage'],
-  ['logs','Log analysis','Read a raw auth log and pull out the attack'],
-  ['malware','Diagnostics','Read the symptoms, type the infection'],
-  ['inbox','Inbox shift','Clear a helpdesk queue, headers included'],
-  ['crypto','Cipher bench','Break intercepts, seal messages, force a hash collision'],
-  ['keys','Key vault','Time an offline attack against your own password'],
-  ['mfa','MFA station','Enable a second factor and spot fake prompts'],
-  ['scams','Scam desk','Classify everyday scams beyond email phishing'],
-  ['ai','AI threats','Defend against deepfakes, voice clones, and AI phishing'],
-  ['defend','Response drill','Ten incidents, eight seconds each']
+  ['triage','Triage board','Sort six incidents by CIA impact','blue'],
+  ['harden','Harden desk','Pick the fix for each weak setup','blue'],
+  ['logs','Log analysis','Pull the attack out of raw logs','both'],
+  ['malware','Diagnostics','Call the infection from symptoms','both'],
+  ['inbox','Inbox shift','Clear a queue with headers visible','both'],
+  ['crypto','Cipher bench','Break, seal, and collide hashes','both'],
+  ['keys','Key vault','Time offline password attacks','both'],
+  ['mfa','MFA station','Deny fake prompts; keep backup codes','blue'],
+  ['scams','Scam desk','Classify multi-channel scams','both'],
+  ['ai','AI threats','Counter deepfakes and AI lures','both'],
+  ['defend','Response drill','Name the control under time pressure','blue'],
+  ['target','Target desk','Rank who to phish first with a limited budget','red'],
+  ['chain','Attack chain','Order attacker steps; name the break','red']
 ];
+function teamLabs(){
+  var t = state.team === 'red' ? 'red' : 'blue';
+  return LABS.filter(function(L){ return L[3] === 'both' || L[3] === t; });
+}
+
 var RANKS = ['Trainee','Analyst I','Analyst II','Responder','Senior responder','Investigator','Shift lead','Range captain','AI-aware','Range cleared'];
 
 function go(id, btn){
   Array.prototype.forEach.call(document.querySelectorAll('.lab'), function(l){ l.classList.remove('on'); });
   Array.prototype.forEach.call(document.querySelectorAll('#rail button'), function(b){ b.classList.remove('on'); });
-  document.getElementById('lab-' + id).classList.add('on');
-  btn.classList.add('on');
+  var sec = document.getElementById('lab-' + id);
+  if (sec) sec.classList.add('on');
+  if (btn) btn.classList.add('on');
+  if (id === 'target') initTarget();
+  if (id === 'chain') initChain();
+  if (id === 'harden') initHarden();
+  shuffleAds();
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
@@ -1299,7 +1545,7 @@ function clearLab(id, label){
 }
 
 function refreshProgress(){
-  var n = state.cleared.length, total = LABS.length;
+  var active = teamLabs(); var n = state.cleared.filter(function(id){ return active.some(function(L){ return L[0]===id; }); }).length; var total = active.length;
   document.getElementById('clearance').textContent = 'Clearance ' + n + ' / ' + total;
   document.getElementById('scoreVal').textContent = 'Score ' + state.points;
   document.getElementById('meterFill').style.width = (n / total * 100) + '%';
@@ -1324,8 +1570,9 @@ function refreshProgress(){
   if (left && right){
     left.innerHTML = '';
     right.innerHTML = '';
-    var mid = Math.ceil(LABS.length / 2);
-    LABS.forEach(function(L, idx){
+    var list = teamLabs();
+    var mid = Math.ceil(list.length / 2);
+    list.forEach(function(L, idx){
       var done = state.cleared.indexOf(L[0]) > -1;
       var li = document.createElement('li');
       var btn = document.createElement('button');
@@ -1338,6 +1585,14 @@ function refreshProgress(){
       (idx < mid ? left : right).appendChild(li);
     });
   }
+  // Rail visibility by team
+  var tnow = state.team === 'red' ? 'red' : 'blue';
+  Array.prototype.forEach.call(document.querySelectorAll('#rail button[data-lab]'), function(btn){
+    var need = btn.getAttribute('data-team') || 'both';
+    var show = need === 'both' || need === tnow || btn.getAttribute('data-lab') === 'brief';
+    btn.style.display = show ? '' : 'none';
+  });
+  shuffleAds();
   drawCertificate(false);
   renderAar();
   applyTeamUI();
@@ -2722,8 +2977,129 @@ function setTeam(t){
   state.team = t === 'red' ? 'red' : 'blue';
   save();
   applyTeamUI();
-  toast(state.team === 'red' ? 'Red team perspective' : 'Blue team perspective');
+  refreshProgress();
+  // If current lab is not on this team, return to briefing
+  var on = document.querySelector('.lab.on');
+  if (on && on.id && on.id.indexOf('lab-') === 0){
+    var id = on.id.replace('lab-','');
+    if (id !== 'brief'){
+      var ok = teamLabs().some(function(L){ return L[0] === id; });
+      if (!ok) go('brief', document.querySelector('#rail button[data-lab="brief"]'));
+    }
+  }
+  toast(state.team === 'red' ? 'Red team perspective — think like an attacker (practice only)' : 'Blue team perspective — defend and detect');
 }
+
+var TEAM_OBJECTIVES = {
+  triage: {
+    blue: 'Blue objective: Sort each incident by the CIA impact a defender must address first.',
+    red: 'Red objective: For each incident, decide which attacker goal it advances (steal data, change records, or knock a service offline).'
+  },
+  logs: {
+    blue: 'Blue objective: Identify the attacker, count the attempts, and decide what alert you would fire.',
+    red: 'Red objective: Spot what a noisy attack looks like in logs — then note what you would change to leave fewer traces (for learning only).'
+  },
+  malware: {
+    blue: 'Blue objective: Call the infection type from symptoms so containment starts before a full signature exists.',
+    red: 'Red objective: Match symptoms to malware families so you understand what payload behavior looks like from the outside.'
+  },
+  inbox: {
+    blue: 'Blue objective: Protect users — report phishing, spare legitimate mail, and use headers not display names.',
+    red: 'Red objective: Study which messages look most convincing and which header failures a careful defender would catch.'
+  },
+  crypto: {
+    blue: 'Blue objective: Prove message integrity with hashes and see why weak crypto fails under attack.',
+    red: 'Red objective: Break the classical cipher and force a collision on a weak hash — then switch to blue controls that stop you.'
+  },
+  keys: {
+    blue: 'Blue objective: Choose a password that survives offline attack times; prefer length and passphrases.',
+    red: 'Red objective: Time how fast weak passwords fall offline — that is why blue bans short, common secrets.'
+  },
+  mfa: {
+    blue: 'Blue objective: Deny unexpected MFA prompts and keep backup codes offline.',
+    red: 'Red objective: See how MFA fatigue and fake prompts try to trick a user — then write the blue rule that blocks them.'
+  },
+  scams: {
+    blue: 'Blue objective: Classify mixed-channel scams without over-reporting legitimate messages.',
+    red: 'Red objective: Note which channel (SMS, chat, voice, mail) is easiest to abuse and what a user should verify out-of-band.'
+  },
+  ai: {
+    blue: 'Blue objective: Verify high-risk requests out-of-band; never relay MFA codes to a caller.',
+    red: 'Red objective: Study how voice clones and AI-written lures increase pressure — then list the blue checks that still work.'
+  },
+  defend: {
+    blue: 'Blue objective: Under time pressure, name the control that would have prevented each incident.',
+    red: 'Red objective: For each incident, name the weakness you would have exploited — then the control that closes it.'
+  },
+  target: {
+    blue: 'Blue objective: (Blue team uses Harden desk instead of Target desk.)',
+    red: 'Red objective: Spend a three-email budget on high-value, realistically phishable targets — then justify the mix.'
+  },
+  chain: {
+    blue: 'Blue objective: (Blue team uses Response drill instead of Attack chain.)',
+    red: 'Red objective: Order the attack steps correctly, then pick the control that breaks the chain.'
+  },
+  harden: {
+    blue: 'Blue objective: Choose the hardening step that closes each weak configuration.',
+    red: 'Red objective: (Red team uses Target desk / Attack chain instead of Harden desk.)'
+  }
+};
+
+var LAB_DESC = {
+  triage: {
+    blue: 'Six incidents came in overnight. Tap an incident, then tap the goal it damages first. A couple of these are less obvious than they look.',
+    red: 'Six outcomes an attacker might cause. Map each one to the attacker goal: steal/see data (C), change something (I), or take a service down (A).'
+  },
+  logs: {
+    blue: 'A new incident lands every time you ask for one — auth, web, firewall, or wireless/captive-portal logs. Filter, flag lines, and write what a defender should conclude.',
+    red: 'Same logs, attacker lens: find the noisy pattern you would leave, then think about what quieter steps look like — so blue knows what to hunt.'
+  },
+  malware: {
+    blue: 'A machine is behaving badly. Symptoms stream in. Type your call as soon as you have enough — calling early is a defender skill.',
+    red: 'Watch the symptom stream like an operator checking whether a payload is working. Name the family — then note the blue detection that would catch it.'
+  },
+  inbox: {
+    blue: 'Clear a helpdesk queue. Read headers. Report phishing; leave legitimate mail alone.',
+    red: 'Review the queue as if you wrote the lures. Which ones would you improve? Which header failures give you away?'
+  },
+  crypto: {
+    blue: 'Break an intercept, seal a note with a hash, and see why short hashes collide — so you never trust weak crypto in production.',
+    red: 'Practice classical cryptanalysis and collision hunting on purposely weak algorithms. Real systems should never ship these primitives.'
+  },
+  keys: {
+    blue: 'Time an offline attack against your own password. Longer passphrases beat clever substitutions.',
+    red: 'Measure crack time like a password-spraying operator with a hash dump. Weak secrets fall fast — that is the lesson for blue policy.'
+  },
+  mfa: {
+    blue: 'Enable a second factor and practice denying fake prompts. Unexpected MFA = treat as hostile.',
+    red: 'Walk through MFA fatigue and social-engineering prompts the way a scammer would stage them — then lock in the blue refusals.'
+  },
+  scams: {
+    blue: 'Classify everyday scams across SMS, chat, voice, and mail without over-reporting.',
+    red: 'Study multi-channel social engineering. Note urgency, secrecy, and payment-change tells you would plant — and that blue should spot.'
+  },
+  ai: {
+    blue: 'Defend against deepfakes, voice clones, and AI-written phishing with out-of-band verification.',
+    red: 'See how AI makes lures cheaper and voice more convincing. The red lesson is pressure + familiarity; the blue answer is still verify offline.'
+  },
+  defend: {
+    blue: 'Incidents arrive on a clock. Name the preventive control. Three misses ends the shift.',
+    red: 'Same drill, attacker framing: each card is a successful hit. Name the control that would have blocked your path.'
+  },
+  target: {
+    blue: 'Not shown on blue team.',
+    red: 'Pick three targets for spear-phish practice. Prioritize impact and likelihood of success — analysis only.'
+  },
+  chain: {
+    blue: 'Not shown on blue team.',
+    red: 'Put attacker steps in order, then choose the blue control that breaks the chain.'
+  },
+  harden: {
+    blue: 'For each weak setup, pick the hardening control a defender should apply.',
+    red: 'Not shown on red team.'
+  }
+};
+
 function applyTeamUI(){
   var blue = state.team !== 'red';
   var b = document.getElementById('btnBlue'), r = document.getElementById('btnRed'), pill = document.getElementById('modePill');
@@ -2733,13 +3109,434 @@ function applyTeamUI(){
     pill.textContent = blue ? 'BLUE TEAM' : 'RED TEAM';
     pill.className = 'mode-pill ' + (blue ? 'blue' : 'red');
   }
-  // light flavor on lab heads that exist
   document.body.dataset.team = state.team;
+
+  // Show/hide team-only blocks (also set display for elements that used inline style)
+  Array.prototype.forEach.call(document.querySelectorAll('.team-only-blue'), function(el){
+    el.style.display = blue ? '' : 'none';
+  });
+  Array.prototype.forEach.call(document.querySelectorAll('.team-only-red'), function(el){
+    el.style.display = blue ? 'none' : '';
+  });
+
+  // Lab descriptions + objectives
+  Array.prototype.forEach.call(document.querySelectorAll('.lab-desc[data-lab], .lab-head'), function(node){
+    // handled below via objectives + desc by section id
+  });
+  Object.keys(LAB_DESC).forEach(function(id){
+    var sec = document.getElementById('lab-' + id);
+    if (!sec) return;
+    var desc = sec.querySelector('.lab-desc');
+    var obj = sec.querySelector('[data-role="team-objective"]');
+    var pack = LAB_DESC[id];
+    var goals = TEAM_OBJECTIVES[id];
+    if (desc && pack) desc.textContent = blue ? pack.blue : pack.red;
+    if (obj && goals) obj.innerHTML = '<b>' + (blue ? 'Blue' : 'Red') + ' objective:</b> ' + (blue ? goals.blue.replace(/^Blue objective:\s*/i,'') : goals.red.replace(/^Red objective:\s*/i,''));
+  });
+
   var blurb = document.getElementById('caseBlurb');
-  if (blurb && current && current._blueBlurb){
+  if (blurb && typeof current !== 'undefined' && current && current._blueBlurb){
     blurb.textContent = blue ? current._blueBlurb : (current._redBlurb || current._blueBlurb);
   }
 }
+
+/* ---------- margin ad traps (educational) ---------- */
+var AD_CATALOG = [
+  { id:'prize', kind:'click', skin:'skin-orange', art:'🎁 FREE', title:'You are our 1,000,000th visitor!', sub:'Claim wireless earbuds — limited stock', cta:'CLAIM NOW',
+    titleModal:'That “prize” was a trap', lead:'“You won!” banners are built to create urgency so you skip checking the URL.',
+    risks:['Malicious claim pages that install adware','Phishing for email and payment details','Cross-site tracking profiles sold to brokers'],
+    foot:'Real contests do not appear as side ads on a school practice site. Close and move on.' },
+  { id:'update', kind:'download', skin:'skin-blue', art:'⬇ UPDATE', title:'Critical browser update required', sub:'Flash Player 192.168.1.3 · Download now', cta:'DOWNLOAD',
+    file:'BrowserUpdate_Setup.exe',
+    titleModal:'Fake update download blocked', lead:'The range simulated a file download. In the wild, “update” ads often deliver trojans.',
+    risks:['Trojanized installers with remote-access tools','Fake security warnings after install','Persistent startup malware'],
+    foot:'Update browsers only from the browser’s own settings or your device’s app store.' },
+  { id:'crypto', kind:'click', skin:'skin-dark', art:'₿ 2.4', title:'Your wallet has unclaimed BTC', sub:'Verify within 15:00 or funds lock', cta:'VERIFY WALLET',
+    titleModal:'Crypto verify ads are usually theft', lead:'Urgency + crypto is a high-yield scam pattern.',
+    risks:['Stolen seed phrases','Fake wallet-connect prompts','Drained exchange sessions'],
+    foot:'Never enter a seed phrase on a site you reached from an ad.' },
+  { id:'dating', kind:'click', skin:'skin-purple', art:'❤ NEAR YOU', title:'Singles near Bristol, CT', sub:'3 people viewed your photo', cta:'SEE WHO',
+    titleModal:'Romance bait harvests accounts', lead:'Local dating ads often feed phishing kits or malware apps.',
+    risks:['Stolen social logins','Malware via “download the app”','Targeted spam and sextortion follow-ups'],
+    foot:'Install apps only from official stores you open yourself.' },
+  { id:'survey', kind:'click', skin:'skin-green', art:'$50', title:'Gift card — 3 question survey', sub:'Amazon · Starbucks · Visa prepaid', cta:'START SURVEY',
+    titleModal:'Gift-card surveys sell your data', lead:'Short “reward” surveys are often data-broker funnels or payment scams.',
+    risks:['Email/phone sold to spammers','Fake shipping fees on a prize','Password harvest on later pages'],
+    foot:'Unsolicited gift cards in ads are almost never real.' },
+  { id:'support', kind:'click', skin:'skin-warn', art:'⚠ ALERT', title:'Your PC is infected', sub:'Microsoft Support · Call 1-800-555-0199', cta:'CALL NOW',
+    titleModal:'Tech-support ads are social engineering', lead:'Fear + a phone number is the whole scam. Vendors do not advertise support in random banners.',
+    risks:['Remote-access tool abuse','Gift-card payment theft','School and bank credential theft'],
+    foot:'Use official support channels you look up — never a number from a banner.' },
+  { id:'codec', kind:'download', skin:'skin-dl', art:'▶ PLAY', title:'Video codec missing', sub:'Install codec pack to watch HD clip', cta:'DOWNLOAD CODEC',
+    file:'HD_CodecPack_v4.msi',
+    titleModal:'Codec / player downloads are a malware classic', lead:'“Install this codec to watch” is an old but still effective payload path.',
+    risks:['Bundled PUPs and spyware','Browser hijackers','Credential stealers'],
+    foot:'Modern browsers play video without random codec packs from ads.' },
+  { id:'doc', kind:'download', skin:'skin-blue', art:'PDF', title:'Invoice_April_Final.pdf', sub:'Shared via secure document link', cta:'DOWNLOAD FILE',
+    file:'Invoice_April_Final.pdf.exe',
+    titleModal:'Double extensions hide executables', lead:'The range showed a “PDF” that was really an executable name — a common email and ad trick.',
+    risks:['Malware launched as a “document”','Macro-enabled office files','Ransomware droppers'],
+    foot:'Watch the full filename. Real PDFs do not end in .exe.' },
+  { id:'game', kind:'download', skin:'skin-purple', art:'🎮 FREE', title:'Unblocked games — school edition', sub:'Play now · No signup · Fast download', cta:'GET GAME',
+    file:'SchoolGames_Portable.exe',
+    titleModal:'“Unblocked games” downloads are risky', lead:'Free game ads on school networks are a frequent malware channel.',
+    risks:['Trojans bundled with game launchers','Crypto-miners using lab PCs','Account cookie theft'],
+    foot:'If a site needs a random .exe to “play,” walk away.' },
+  { id:'vpn', kind:'click', skin:'skin-dark', art:'VPN', title:'Free VPN — unblock anything', sub:'One tap · No account · Ultra fast', cta:'INSTALL FREE',
+    titleModal:'“Free VPN” ads often are the product', lead:'Some free VPN ads install traffic interceptors rather than privacy tools.',
+    risks:['Traffic logging and resale','Injected ads into every page','Credential interception on HTTP'],
+    foot:'Treat free VPN ads like any other unsolicited install prompt.' },
+  { id:'job', kind:'click', skin:'skin-green', art:'HIRING', title:'$28/hr student jobs — hire today', sub:'Work from phone · Paid daily', cta:'APPLY',
+    titleModal:'Job ads can be mule-recruitment scams', lead:'“Easy pay” student job ads sometimes recruit money mules or steal IDs.',
+    risks:['Identity document theft','Bank-account misuse','Romance/job hybrid scams'],
+    foot:'Real hiring does not start from a side banner on a random site.' },
+  { id:'coupon', kind:'click', skin:'skin-orange', art:'70% OFF', title:'Campus bookstore coupon', sub:'Auto-applied at checkout — tap to unlock', cta:'GET COUPON',
+    titleModal:'Coupon ads often track or phish', lead:'Coupon banners can install browser extensions that read every page you visit.',
+    risks:['Malicious browser extensions','Shopping-site phishing clones','Payment card skimming pages'],
+    foot:'Use coupons only from stores you navigated to yourself.' }
+];
+
+function shuffle(arr){
+  var a = arr.slice();
+  for (var i=a.length-1;i>0;i--){ var j=Math.floor(Math.random()*(i+1)); var t=a[i]; a[i]=a[j]; a[j]=t; }
+  return a;
+}
+
+function renderAdButton(ad){
+  var btn = document.createElement('button');
+  btn.type = 'button';
+  btn.className = 'fake-ad ' + (ad.skin || '');
+  btn.setAttribute('data-ad', ad.id);
+  btn.innerHTML =
+    '<span class="ad-topbar"><span>Sponsored</span><span>Ad</span></span>' +
+    '<span class="ad-art">' + ad.art + '</span>' +
+    '<span class="ad-body"><span class="ad-title"></span><span class="ad-sub"></span><span class="ad-cta"></span></span>';
+  btn.querySelector('.ad-title').textContent = ad.title;
+  btn.querySelector('.ad-sub').textContent = ad.sub;
+  btn.querySelector('.ad-cta').textContent = ad.cta;
+  btn.addEventListener('click', function(){ openAdTrap(ad.id); });
+  return btn;
+}
+
+function shuffleAds(){
+  var pool = shuffle(AD_CATALOG);
+  var left = document.getElementById('adRailLeft');
+  var right = document.getElementById('adRailRight');
+  var leader = document.getElementById('adLeaderSlot');
+  if (left){ left.innerHTML = ''; pool.slice(0,3).forEach(function(ad){ left.appendChild(renderAdButton(ad)); }); }
+  if (right){ right.innerHTML = ''; pool.slice(3,6).forEach(function(ad){ right.appendChild(renderAdButton(ad)); }); }
+  if (leader){
+    leader.innerHTML = '';
+    var wide = pool[6] || pool[0];
+    if (wide){
+      var w = renderAdButton(wide);
+      // leader uses horizontal layout via CSS
+      leader.appendChild(w);
+    }
+  }
+}
+
+function openAdTrap(kind){
+  var pack = null;
+  for (var i=0;i<AD_CATALOG.length;i++){ if (AD_CATALOG[i].id === kind){ pack = AD_CATALOG[i]; break; } }
+  if (!pack) pack = AD_CATALOG[0];
+
+  if (pack.kind === 'download'){
+    runFakeDownload(pack);
+    return;
+  }
+
+  showAdModal(pack);
+}
+
+function showAdModal(pack){
+  document.getElementById('adModalTitle').textContent = pack.titleModal;
+  document.getElementById('adModalLead').textContent = pack.lead;
+  document.getElementById('adModalFoot').textContent = pack.foot;
+  var ul = document.getElementById('adModalList');
+  ul.innerHTML = '';
+  pack.risks.forEach(function(r){
+    var li = document.createElement('li');
+    li.textContent = r;
+    ul.appendChild(li);
+  });
+  var m = document.getElementById('adModal');
+  m.classList.add('on');
+  m.style.display = 'flex';
+  if (!window._adLessons) window._adLessons = {};
+  if (!window._adLessons[pack.id]){
+    window._adLessons[pack.id] = true;
+    state.points += 5;
+    save(); refreshProgress();
+    toast('+5 for studying an ad trap');
+  }
+}
+
+function runFakeDownload(pack){
+  var bar = document.getElementById('dlBar');
+  var fill = document.getElementById('dlFill');
+  var name = document.getElementById('dlName');
+  name.textContent = 'Downloading ' + (pack.file || 'setup.exe') + '…';
+  fill.style.width = '0%';
+  bar.classList.add('on');
+  var p = 0;
+  clearInterval(window._dlTimer);
+  window._dlTimer = setInterval(function(){
+    p += 12 + Math.floor(Math.random()*18);
+    if (p >= 100){
+      p = 100;
+      fill.style.width = '100%';
+      clearInterval(window._dlTimer);
+      setTimeout(function(){
+        bar.classList.remove('on');
+        showAdModal(pack);
+        shuffleAds();
+      }, 350);
+    } else {
+      fill.style.width = p + '%';
+    }
+  }, 180);
+}
+
+function closeAdTrap(){
+  var m = document.getElementById('adModal');
+  m.classList.remove('on');
+  m.style.display = 'none';
+  shuffleAds();
+}
+
+/* ---------- red/blue exclusive lab logic ---------- */
+var RECON_TIPS = {
+  email: 'Email format (jblake@…) lets you build a full staff list once you know the pattern.',
+  systems: 'Named systems (PowerSchool, Google Workspace) tell you which phishing themes will look normal.',
+  travel: 'Travel / OOO dates are classic windows for business-email compromise impersonation.',
+  pet: 'Jokes or plaque phrases sometimes get reused as weak passwords — blue should train against that.',
+  assistant: 'Named assistants and schedules help craft believable “can you do me a quick favor?” messages.'
+};
+
+var TARGETS = [
+  { id:'payroll', name:'Payroll clerk', blurb:'Processes direct-deposit changes. Busy during pay week. Uses email MFA.', score:3 },
+  { id:'itadmin', name:'IT systems admin', blurb:'Domain admin. Hardened inbox, phish-trained, hardware key MFA.', score:1 },
+  { id:'principal', name:'Principal', blurb:'Can authorize urgent purchases. Assistant screens mail. Public figure.', score:2 },
+  { id:'coach', name:'Athletics office manager', blurb:'Active on social media; reuses patterns; manages vendor payments for travel.', score:3 },
+  { id:'student', name:'Random student account', blurb:'Easy inbox, low privileges, little access to money or grades admin.', score:0 },
+  { id:'sub', name:'Long-term substitute teacher', blurb:'New account, unsure of norms, access to attendance and some gradebooks.', score:2 },
+  { id:'nurse', name:'School nurse', blurb:'Health records access. Rarely targeted in training. Uses SMS MFA.', score:2 },
+  { id:'vendor', name:'HVAC vendor (external)', blurb:'Remote login to building systems. Email is a personal Gmail.', score:3 }
+];
+var targetOrder = [];
+function initTarget(){
+  targetOrder = [];
+  var box = document.getElementById('targetList');
+  if (!box) return;
+  box.innerHTML = '';
+  var list = TARGETS.slice();
+  for (var i=list.length-1;i>0;i--){ var j=Math.floor(Math.random()*(i+1)); var t=list[i]; list[i]=list[j]; list[j]=t; }
+  list.forEach(function(t){
+    var b = document.createElement('button');
+    b.type = 'button';
+    b.className = 'msg-card';
+    b.dataset.id = t.id;
+    b.innerHTML = '<div class="chan">Target profile</div><div class="preview"><b></b> — <span></span></div>';
+    b.querySelector('b').textContent = t.name;
+    b.querySelector('span').textContent = t.blurb;
+    b.onclick = function(){ toggleTarget(t.id, b); };
+    box.appendChild(b);
+  });
+  document.getElementById('targetPicks').textContent = 'Selected: none';
+  document.getElementById('targetWhy').style.display = 'none';
+  document.getElementById('targetNote').textContent = 'Pick three targets in order (first click = highest priority).';
+}
+function clearTargetPicks(){
+  targetOrder = [];
+  Array.prototype.forEach.call(document.querySelectorAll('#targetList .msg-card'), function(el){
+    el.classList.remove('done'); el.querySelector('.chan').textContent = 'Target profile';
+  });
+  document.getElementById('targetPicks').textContent = 'Selected: none';
+  document.getElementById('targetWhy').style.display = 'none';
+  document.getElementById('targetNote').textContent = 'Selection cleared.';
+}
+function toggleTarget(id, el){
+  var idx = targetOrder.indexOf(id);
+  if (idx >= 0){
+    targetOrder.splice(idx, 1);
+    el.classList.remove('done');
+    el.querySelector('.chan').textContent = 'Target profile';
+  } else {
+    if (targetOrder.length >= 3){
+      document.getElementById('targetNote').textContent = 'Budget is three emails. Deselect one before adding another.';
+      return;
+    }
+    targetOrder.push(id);
+    el.classList.add('done');
+  }
+  Array.prototype.forEach.call(document.querySelectorAll('#targetList .msg-card'), function(card){
+    var idc = card.dataset.id;
+    var n = targetOrder.indexOf(idc);
+    if (n >= 0){
+      card.classList.add('done');
+      card.querySelector('.chan').textContent = 'Priority ' + (n+1);
+    } else {
+      card.classList.remove('done');
+      card.querySelector('.chan').textContent = 'Target profile';
+    }
+  });
+  var names = targetOrder.map(function(id){
+    var t = TARGETS.filter(function(x){ return x.id===id; })[0];
+    return t ? t.name : id;
+  });
+  document.getElementById('targetPicks').textContent = names.length ? ('Selected: ' + names.join(' → ')) : 'Selected: none';
+  if (targetOrder.length === 3) showTargetWhy();
+  else document.getElementById('targetWhy').style.display = 'none';
+}
+function showTargetWhy(){
+  var score = 0;
+  targetOrder.forEach(function(id){
+    var t = TARGETS.filter(function(x){ return x.id===id; })[0];
+    if (t) score += t.score;
+  });
+  var hasStudent = targetOrder.indexOf('student') >= 0;
+  document.getElementById('targetWhy').style.display = 'block';
+  var box = document.getElementById('targetWhyChoices');
+  box.innerHTML = '';
+  var choices = [
+    { t: 'High business impact + realistic success chance; avoided the hardest inbox', ok: score >= 7 && !hasStudent },
+    { t: 'Always phish IT admin first for domain admin', ok: false },
+    { t: 'Students first — easiest inboxes, same value as payroll', ok: false },
+    { t: 'Three random names is fine; targeting does not matter', ok: false }
+  ];
+  if (!(score >= 7 && !hasStudent)){
+    choices[0].ok = false;
+    choices.push({ t: 'Re-pick: drop low-value or over-hardened targets and favor payment / vendor access', ok: true });
+  }
+  choices.forEach(function(c){
+    var b = document.createElement('button');
+    b.className = 'choice';
+    b.innerHTML = '<b></b>';
+    b.querySelector('b').textContent = c.t;
+    b.onclick = function(){
+      if (c.ok){
+        document.getElementById('targetNote').textContent = 'Solid targeting logic. Blue takeaway: train high-value roles, limit public org charts, and watch vendor email paths.';
+        addPoints(25);
+        clearLab('target', 'Target desk');
+      } else {
+        document.getElementById('targetNote').textContent = 'Not the best rationale. Prefer roles that move money or access systems — and that are not the most phish-hardened.';
+      }
+    };
+    box.appendChild(b);
+  });
+}
+
+
+
+var CHAIN_SETS = [
+  {
+    steps: ['Send spear-phish to staff','Harvest password on fake login','Log in to real webmail','Forward payroll redirect form'],
+    control: 'Multi-factor authentication',
+    options: ['Multi-factor authentication','Full disk encryption','Screen timeout lock','Open deskside Wi-Fi']
+  },
+  {
+    steps: ['Scan for exposed RDP','Spray common passwords','Land on a desktop','Deploy ransomware'],
+    control: 'Account lockout / MFA on remote access',
+    options: ['Account lockout / MFA on remote access','Color printer firmware','Screensaver slideshow','More mailbox storage']
+  },
+  {
+    steps: ['Buy lookalike domain','Host fake SSO page','Blast urgency SMS','Collect session cookies'],
+    control: 'User reporting + domain monitoring',
+    options: ['User reporting + domain monitoring','Disable all email','Remove hallway cameras','Longer passwords only']
+  }
+];
+var chainState = { order: [], set: null };
+function initChain(){
+  chainState.set = CHAIN_SETS[Math.floor(Math.random()*CHAIN_SETS.length)];
+  chainState.order = [];
+  var tray = document.getElementById('chainTray');
+  var steps = chainState.set.steps.map(function(s,i){ return { t:s, i:i }; });
+  for (var i=steps.length-1;i>0;i--){ var j=Math.floor(Math.random()*(i+1)); var tmp=steps[i]; steps[i]=steps[j]; steps[j]=tmp; }
+  tray.innerHTML = '';
+  steps.forEach(function(s){
+    var b = document.createElement('button');
+    b.className = 'incident';
+    b.textContent = s.t;
+    b.onclick = function(){
+      if (s.i === chainState.order.length){
+        chainState.order.push(s.t);
+        b.classList.add('done');
+        b.disabled = true;
+        document.getElementById('chainNote').textContent = 'Sequence: ' + chainState.order.join(' → ');
+        if (chainState.order.length === chainState.set.steps.length){
+          document.getElementById('chainControl').style.display = 'block';
+          var box = document.getElementById('chainChoices');
+          box.innerHTML = '';
+          chainState.set.options.forEach(function(opt){
+            var c = document.createElement('button');
+            c.className = 'choice';
+            c.innerHTML = '<b></b>';
+            c.querySelector('b').textContent = opt;
+            c.onclick = function(){
+              if (opt === chainState.set.control){
+                document.getElementById('chainNote').textContent = 'Chain correct. Break: ' + opt;
+                addPoints(30);
+                clearLab('chain', 'Attack chain');
+              } else {
+                document.getElementById('chainNote').textContent = 'That control does not break this chain. Try again.';
+              }
+            };
+            box.appendChild(c);
+          });
+        }
+      } else {
+        chainState.order = [];
+        Array.prototype.forEach.call(tray.querySelectorAll('button'), function(x){ x.classList.remove('done'); x.disabled=false; });
+        document.getElementById('chainNote').textContent = 'Wrong order — sequence reset.';
+        document.getElementById('chainControl').style.display = 'none';
+      }
+    };
+    tray.appendChild(b);
+  });
+  document.getElementById('chainControl').style.display = 'none';
+  document.getElementById('chainNote').textContent = 'Sequence: empty';
+}
+
+var HARDEN_SCENARIOS = [
+  { q:'Shared lab PC still has a sticky note password on the monitor.', ok:'Remove the note; set unique sign-in + auto-lock', opts:['Remove the note; set unique sign-in + auto-lock','Write the password darker','Email the password to the class','Disable the screen lock'] },
+  { q:'Teacher laptop allows login with no PIN after sleep.', ok:'Require password/PIN on wake', opts:['Require password/PIN on wake','Increase screen brightness','Install more browsers','Turn off Wi-Fi'] },
+  { q:'Student portal account reused the same password as a gaming site.', ok:'Unique password + password manager + MFA', opts:['Unique password + password manager + MFA','Change the gaming site only','Use a shorter password','Share the new password with friends'] },
+  { q:'Old accounts for graduated students still active on a file share.', ok:'Disable or delete dormant accounts', opts:['Disable or delete dormant accounts','Give them admin rights','Post the list on the wall','Ignore them until breach news'] }
+];
+var hardenIdx = 0;
+function initHarden(){
+  var s = HARDEN_SCENARIOS[hardenIdx % HARDEN_SCENARIOS.length];
+  hardenIdx++;
+  document.getElementById('hardenPrompt').textContent = s.q;
+  document.getElementById('hardenNote').textContent = '';
+  var box = document.getElementById('hardenChoices');
+  box.innerHTML = '';
+  var opts = s.opts.slice();
+  for (var i=opts.length-1;i>0;i--){ var j=Math.floor(Math.random()*(i+1)); var t=opts[i]; opts[i]=opts[j]; opts[j]=t; }
+  opts.forEach(function(opt){
+    var b = document.createElement('button');
+    b.className = 'choice';
+    b.innerHTML = '<b></b>';
+    b.querySelector('b').textContent = opt;
+    b.onclick = function(){
+      if (opt === s.ok){
+        document.getElementById('hardenNote').textContent = 'Correct — that hardens the setup.';
+        addPoints(15);
+        if (hardenIdx >= HARDEN_SCENARIOS.length) clearLab('harden', 'Harden desk');
+        else toast('Good. Try another scenario.');
+      } else {
+        document.getElementById('hardenNote').textContent = 'That does not close the hole. Try the control that removes the weakness.';
+      }
+    };
+    box.appendChild(b);
+  });
+}
+
+// Reshuffle ads when switching labs
+var _goOrig = null;
+
+
 
 /* ---------- after-action report ---------- */
 var AAR_TIPS = {
@@ -2752,7 +3549,10 @@ var AAR_TIPS = {
   mfa: 'You treated unexpected MFA prompts as hostile and practiced backup-code recovery.',
   scams: 'You handled a mixed channel queue without over-reporting legitimate mail.',
   ai: 'You used out-of-band verification against voice clones and marked AI-personalized lures.',
-  defend: 'You matched incidents to preventive controls under time pressure.'
+  defend: 'You matched incidents to preventive controls under time pressure.',
+  target: 'You practiced prioritizing spear-phish targets by impact and feasibility — analysis only.',
+  chain: 'You ordered an attack chain and named the control that breaks it.',
+  harden: 'You chose hardening steps for weak real-world setups.'
 };
 function pushAar(id, label){
   var tip = AAR_TIPS[id] || ('Cleared ' + label);
@@ -3225,4 +4025,7 @@ if (state.gatePassed){
   document.getElementById('gate').style.display = 'none';
   document.getElementById('console').style.display = 'block';
 }
+shuffleAds();
+document.addEventListener('visibilitychange', function(){ if (!document.hidden) shuffleAds(); });
+applyTeamUI();
 </script></body></html>
