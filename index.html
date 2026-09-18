@@ -38,8 +38,9 @@ input,textarea{font-family:inherit}
 @media (prefers-reduced-motion: reduce){*{animation-duration:.01ms !important;transition-duration:.01ms !important}}
 
 /* ---------- cold open ---------- */
-#gate{position:fixed;inset:0;z-index:900;background:var(--surface);overflow-y:auto;padding:28px 16px 70px}
-.gate-wrap{max-width:720px;margin:0 auto}
+#gate{position:fixed;inset:0;z-index:900;background:#d8dde5;overflow-y:auto;padding:28px 16px 70px}
+.gate-wrap{max-width:820px;margin:0 auto}
+#stage-intro.gate-wide,.gate-wrap:has(#stage-intro){max-width:900px}
 .kicker{font-family:var(--mono);font-size:.78rem;color:var(--amber)}
 .gate-title{font-family:var(--display);font-size:clamp(1.6rem,5vw,2.3rem);line-height:1.15;margin:6px 0 8px}
 .gate-sub{color:var(--muted);max-width:58ch;margin-bottom:22px}
@@ -112,7 +113,7 @@ header.top .meter{background:rgba(255,255,255,.15)}
 header.top .tick{color:#7dffa8}
 
 
-/* Intro / orientation */
+/* Intro / orientation — full-page mockup frame */
 .intro-card{margin-bottom:14px}
 .intro-card h3{font-family:var(--display);font-size:1.1rem;margin-bottom:8px;color:var(--text)}
 .intro-card p{color:var(--text);max-width:62ch}
@@ -122,67 +123,288 @@ header.top .tick{color:#7dffa8}
 .intro-steps li{margin:8px 0}
 .intro-steps b{color:var(--blue-deep)}
 
+#stage-intro{max-width:none;padding:0}
+#stage-intro .welcome-frame{
+  position:relative;
+  background:#ffffff;
+  border:2px solid #0d2a6b;
+  border-radius:2px;
+  overflow:hidden;
+  padding:40px 96px 48px;
+  box-shadow:0 8px 32px rgba(13,42,107,.12);
+}
+/* Blue double-stripe pillars — full height of entire page content */
+#stage-intro .welcome-frame::before,
+#stage-intro .welcome-frame::after{
+  content:"";
+  position:absolute;
+  top:0;bottom:0;
+  width:76px;
+  pointer-events:none;
+  z-index:0;
+}
+#stage-intro .welcome-frame::before{
+  left:0;
+  background:
+    linear-gradient(#0d2a6b,#0d2a6b) left top/20px 100% no-repeat,
+    linear-gradient(#ffffff,#ffffff) left 20px top/12px 100% no-repeat,
+    linear-gradient(#1a56c4,#1a56c4) left 32px top/44px 100% no-repeat;
+}
+#stage-intro .welcome-frame::after{
+  right:0;
+  background:
+    linear-gradient(#1a56c4,#1a56c4) right 32px top/44px 100% no-repeat,
+    linear-gradient(#ffffff,#ffffff) right 20px top/12px 100% no-repeat,
+    linear-gradient(#0d2a6b,#0d2a6b) right top/20px 100% no-repeat;
+}
+#stage-intro .welcome-inner{
+  position:relative;
+  z-index:1;
+  max-width:620px;
+  margin:0 auto;
+}
+#stage-intro .welcome-hero{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  text-align:center;
+  padding:20px 0 8px;
+  min-height:280px;
+  justify-content:center;
+}
+.welcome-title-plate{
+  background:#0d2a6b;
+  color:#ffffff;
+  text-align:center;
+  padding:32px 40px;
+  max-width:520px;
+  width:100%;
+  box-shadow:0 8px 28px rgba(13,42,107,.22);
+}
+.welcome-title-plate h1{
+  font-family:var(--display);
+  font-weight:700;
+  font-size:clamp(1.55rem,4.5vw,2.35rem);
+  line-height:1.25;
+  letter-spacing:.01em;
+  margin:0;
+  color:#fff;
+}
+.welcome-actions{
+  display:flex;
+  gap:28px;
+  flex-wrap:wrap;
+  justify-content:center;
+  margin-top:40px;
+}
+.welcome-actions button{
+  min-width:148px;
+  height:46px;
+  padding:0 28px;
+  border:none;
+  border-radius:10px;
+  background:#0d2a6b;
+  color:#fff;
+  font-family:var(--display);
+  font-weight:600;
+  font-size:.95rem;
+  cursor:pointer;
+  box-shadow:0 4px 14px rgba(13,42,107,.2);
+  transition:transform .12s,background .12s;
+}
+.welcome-actions button:hover{background:#1a56c4;transform:translateY(-2px)}
+.welcome-actions button.secondary{background:#1a56c4}
+.welcome-actions button.secondary:hover{background:#0d2a6b}
 
-/* Side margin bait ads — banner style (desktop) */
+/* Orientation content stays inside the same striped white frame */
+#stage-intro .intro-body{
+  margin-top:28px;
+  padding-top:28px;
+  border-top:2px solid #d0d6e0;
+}
+#stage-intro .intro-body .gate-sub{color:#4a5568}
+#stage-intro .intro-body .card,
+#stage-intro .intro-body .intro-card{
+  background:#f4f6f9;
+  border:1px solid #c5cdd9;
+  box-shadow:none;
+  border-radius:4px;
+}
+#stage-intro .intro-body .primary{
+  background:#0d2a6b;
+  border-radius:10px;
+}
+#stage-intro .intro-body .primary:hover{background:#1a56c4}
+
+@media (max-width:700px){
+  #stage-intro .welcome-frame{padding:28px 52px 36px}
+  #stage-intro .welcome-frame::before,
+  #stage-intro .welcome-frame::after{width:40px}
+  #stage-intro .welcome-frame::before{
+    background:
+      linear-gradient(#0d2a6b,#0d2a6b) left top/12px 100% no-repeat,
+      linear-gradient(#ffffff,#ffffff) left 12px top/6px 100% no-repeat,
+      linear-gradient(#1a56c4,#1a56c4) left 18px top/22px 100% no-repeat;
+  }
+  #stage-intro .welcome-frame::after{
+    background:
+      linear-gradient(#1a56c4,#1a56c4) right 18px top/22px 100% no-repeat,
+      linear-gradient(#ffffff,#ffffff) right 12px top/6px 100% no-repeat,
+      linear-gradient(#0d2a6b,#0d2a6b) right top/12px 100% no-repeat;
+  }
+  .welcome-title-plate{padding:22px 18px}
+  .welcome-actions{gap:16px;margin-top:32px}
+  #stage-intro .welcome-hero{min-height:220px}
+}
+
+/* Side margin bait ads — white margins, clear of briefing content */
+#console{position:relative}
+#console main{position:relative}
 .ad-rail{
   display:none;
-  position:fixed;
-  top:110px;
-  width:140px;
-  z-index:50;
+  position:absolute;
+  top:12px;
+  width:148px;
+  z-index:40;
   flex-direction:column;
   gap:12px;
+  pointer-events:auto;
 }
-.ad-rail.left{left:8px}
-.ad-rail.right{right:8px}
-@media (min-width:1320px){
+.ad-rail.left{left:10px}
+.ad-rail.right{right:10px}
+@media (min-width:1100px){
   .ad-rail{display:flex}
+  #console main{
+    padding-left:170px;
+    padding-right:170px;
+    max-width:1200px;
+    margin:0 auto;
+  }
+}
+@media (min-width:1400px){
+  #console main{
+    padding-left:190px;
+    padding-right:190px;
+    max-width:1320px;
+  }
 }
 .fake-ad{
-  display:flex;flex-direction:column;width:100%;text-align:left;text-decoration:none;color:#111;
-  border:1px solid #999;border-radius:2px;padding:0;overflow:hidden;
-  font-size:.7rem;line-height:1.25;cursor:pointer;
-  box-shadow:0 2px 8px rgba(0,0,0,.18);
+  display:flex;flex-direction:column;width:148px;box-sizing:border-box;
+  text-align:left;text-decoration:none;color:#111;
+  border:1px solid #b8b8b8;border-radius:3px;padding:0;overflow:hidden;
+  font-size:.7rem;line-height:1.3;cursor:pointer;
+  box-shadow:0 2px 8px rgba(0,0,0,.12);
   font-family:Arial, Helvetica, sans-serif;
-  transition:transform .12s,box-shadow .12s;
   background:#fff;
+  transition:transform .12s,box-shadow .12s;
 }
-.fake-ad:hover{transform:translateY(-2px);box-shadow:0 5px 14px rgba(0,0,0,.22)}
+.fake-ad:hover{transform:translateY(-2px);box-shadow:0 5px 14px rgba(0,0,0,.18)}
 .fake-ad .ad-topbar{
   display:flex;justify-content:space-between;align-items:center;
-  background:#eee;border-bottom:1px solid #ccc;padding:2px 6px;
-  font-size:.58rem;color:#666;text-transform:uppercase;letter-spacing:.04em;
+  background:#f0f0f0;border-bottom:1px solid #ddd;padding:3px 7px;
+  font-size:.58rem;color:#777;text-transform:uppercase;letter-spacing:.04em;
+  flex-shrink:0;
 }
 .fake-ad .ad-art{
-  height:64px;display:grid;place-items:center;color:#fff;font-weight:800;
-  font-size:.95rem;letter-spacing:.02em;text-align:center;padding:6px;
-  text-shadow:0 1px 2px rgba(0,0,0,.35);
+  display:flex;align-items:center;justify-content:center;
+  color:#fff;font-weight:800;text-align:center;padding:8px 6px;
+  text-shadow:0 1px 2px rgba(0,0,0,.3);letter-spacing:.03em;
+  line-height:1.15;flex-shrink:0;
 }
-.fake-ad .ad-body{padding:8px 8px 10px}
-.fake-ad .ad-title{font-weight:700;font-size:.78rem;color:#0b2a6b;margin:0 0 4px;line-height:1.2}
-.fake-ad .ad-sub{font-size:.68rem;color:#333;margin:0 0 8px}
+.fake-ad .ad-body{
+  padding:8px 9px 10px;display:flex;flex-direction:column;gap:4px;flex:1;
+}
+.fake-ad .ad-title{
+  font-weight:700;font-size:.75rem;color:#0b2a6b;margin:0;line-height:1.25;
+  display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;
+}
+.fake-ad .ad-sub{
+  font-size:.65rem;color:#444;margin:0;line-height:1.3;
+  display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;
+}
 .fake-ad .ad-cta{
-  display:block;width:100%;text-align:center;padding:6px 4px;
+  display:block;width:100%;text-align:center;padding:6px 4px;margin-top:4px;
   background:linear-gradient(180deg,#3b7ddd,#1a56c4);color:#fff;border-radius:2px;
-  font-size:.7rem;font-weight:700;border:1px solid #0d3d8c;
+  font-size:.68rem;font-weight:700;border:1px solid #0d3d8c;
+  box-sizing:border-box;
 }
 .fake-ad.skin-red .ad-cta{background:linear-gradient(180deg,#e85d6c,#c43c4e);border-color:#8a1e2c}
 .fake-ad.skin-green .ad-cta{background:linear-gradient(180deg,#3dba6e,#1a8f52);border-color:#0d5c32}
 .fake-ad.skin-orange .ad-art{background:linear-gradient(135deg,#ff9966,#ff5e62)}
-.fake-ad.skin-blue .ad-art{background:linear-gradient(135deg,#4facfe,#00f2fe);color:#063}
+.fake-ad.skin-blue .ad-art{background:linear-gradient(135deg,#4facfe,#00c6ff);color:#063}
 .fake-ad.skin-purple .ad-art{background:linear-gradient(135deg,#a18cd1,#fbc2eb);color:#321}
 .fake-ad.skin-dark .ad-art{background:linear-gradient(135deg,#232526,#414345)}
 .fake-ad.skin-warn .ad-art{background:linear-gradient(135deg,#f7b733,#fc4a1a)}
 .fake-ad.skin-dl .ad-art{background:linear-gradient(135deg,#667eea,#764ba2)}
+.fake-ad.skin-teal .ad-art{background:linear-gradient(135deg,#11998e,#38ef7d);color:#063}
+.fake-ad.skin-rose .ad-art{background:linear-gradient(135deg,#ee0979,#ff6a00)}
+.fake-ad.skin-slate .ad-art{background:linear-gradient(135deg,#3a4a6b,#1e2a44)}
+.fake-ad.size-sky .ad-art{height:72px;font-size:1.05rem}
+.fake-ad.size-tall .ad-art{height:110px;font-size:1.15rem}
+.fake-ad.size-wide .ad-art{height:42px;font-size:.8rem}
+.fake-ad.size-compact .ad-art{height:36px;font-size:.78rem}
+.fake-ad.size-compact .ad-sub{display:none}
+.fake-ad.size-billboard .ad-art{height:96px;font-size:1rem}
+.fake-ad.size-strip{flex-direction:row;align-items:stretch;min-height:64px}
+.fake-ad.size-strip .ad-topbar{display:none}
+.fake-ad.size-strip .ad-art{width:52px;min-height:64px;height:auto;font-size:.68rem;padding:4px}
+.fake-ad.size-strip .ad-body{padding:6px 7px;justify-content:center}
+.fake-ad.size-strip .ad-title{font-size:.7rem}
+.fake-ad.size-strip .ad-sub{font-size:.6rem}
+.fake-ad.size-strip .ad-cta{padding:3px 2px;font-size:.6rem;margin-top:2px}
+
 /* bottom leaderboard-style banner under main on wide screens */
 .ad-leader{
-  display:none;max-width:960px;margin:18px auto 0;padding:0 16px;
+  display:none;
+  max-width:960px;
+  margin:24px auto 8px;
+  padding:0 16px;
+  box-sizing:border-box;
 }
-@media (min-width:900px){.ad-leader{display:block}}
-.ad-leader .fake-ad{flex-direction:row;align-items:stretch;min-height:72px}
-.ad-leader .ad-art{width:120px;height:auto;flex-shrink:0;font-size:.85rem}
-.ad-leader .ad-body{flex:1;display:flex;flex-direction:column;justify-content:center}
-.ad-leader .ad-cta{width:auto;align-self:flex-start;padding:6px 16px}
+@media (min-width:900px){
+  .ad-leader{display:block}
+}
+.ad-leader .fake-ad{
+  width:100%;
+  max-width:960px;
+  flex-direction:row;
+  align-items:stretch;
+  min-height:88px;
+}
+.ad-leader .fake-ad .ad-topbar{
+  display:none;
+}
+.ad-leader .fake-ad .ad-art{
+  width:140px;
+  min-height:88px;
+  height:auto;
+  flex-shrink:0;
+  font-size:1rem;
+  padding:10px;
+}
+.ad-leader .fake-ad .ad-body{
+  flex:1;
+  padding:12px 16px;
+  justify-content:center;
+  gap:6px;
+}
+.ad-leader .fake-ad .ad-title{
+  font-size:.95rem;
+  -webkit-line-clamp:1;
+}
+.ad-leader .fake-ad .ad-sub{
+  font-size:.8rem;
+  display:block;
+  -webkit-line-clamp:1;
+}
+.ad-leader .fake-ad .ad-cta{
+  width:auto;
+  align-self:flex-start;
+  padding:8px 18px;
+  margin-top:4px;
+  font-size:.8rem;
+}
+
 /* fake download toast bar */
 #dlBar{
   display:none;position:fixed;bottom:20px;left:50%;transform:translateX(-50%);
@@ -495,47 +717,61 @@ input.in.wrong{border-color:var(--red)}
 
     <!-- ===== INTRO: what is cybersecurity + what is the range ===== -->
     <div id="stage-intro">
-      <div class="kicker">Bristol Eastern Cyber Ranger</div>
-      <h1 class="gate-title">Welcome to the range.</h1>
-      <p class="gate-sub">A short orientation before you train. Nothing here is graded yet — read this, then continue.</p>
-
-      <div class="card intro-card">
-        <h3>What is cybersecurity?</h3>
-        <p>Cybersecurity is how people and organizations protect <b>accounts, devices, data, and networks</b> from misuse. Attackers try to steal passwords, trick you into clicking bad links, lock files for ransom, or pretend to be someone you trust. Defenders learn to <b>spot the tricks, limit the damage, and recover</b>.</p>
-        <p style="margin-top:12px">Most real attacks do not start with Hollywood-style hacking. They start with a message that looks almost normal — email, text, phone call, or a pop-up — and a rushed decision.</p>
+      <div class="welcome-frame">
+      <div class="welcome-inner">
+      <div class="welcome-hero">
+        <div class="welcome-title-plate">
+          <h1>Welcome to the<br>Bristol Eastern<br>Cyber Range!</h1>
+        </div>
+        <div class="welcome-actions">
+          <button type="button" onclick="startEntryCheck()">Start training</button>
+          <button type="button" class="secondary" onclick="document.getElementById('introBody').scrollIntoView({behavior:'smooth',block:'start'})">How it works</button>
+        </div>
       </div>
 
-      <div class="card intro-card">
-        <h3>Three ideas you will use on every lab</h3>
-        <ul class="intro-list">
-          <li><b>Confidentiality</b> — only the right people can see the information.</li>
-          <li><b>Integrity</b> — the information has not been secretly changed or faked.</li>
-          <li><b>Availability</b> — systems still work when people need them.</li>
-        </ul>
-        <p class="note" style="margin-top:12px">Together these are often called the <b>CIA triad</b>. Every incident you sort in the range lands on at least one of them.</p>
-      </div>
+      <div class="intro-body" id="introBody">
+        <p class="gate-sub" style="margin-bottom:16px">A short orientation before you train. Nothing here is graded yet.</p>
 
-      <div class="card intro-card">
-        <h3>What is the Cyber Ranger?</h3>
-        <p>This site is a <b>practice range</b> for Bristol Eastern students and anyone learning to stay safer online. You will work through hands-on labs — phishing, log analysis, passwords, multi-factor authentication, everyday scams, AI-assisted tricks, and incident response — without risking real accounts.</p>
-        <ul class="intro-list" style="margin-top:12px">
-          <li>Everything runs in your browser. Nothing you type is sent to a server.</li>
-          <li>You earn clearance as you finish labs. Progress stays on this device.</li>
-          <li>Blue team = defender view. Red team = how an attacker might think.</li>
-        </ul>
-      </div>
+        <div class="card intro-card">
+          <h3>What is cybersecurity?</h3>
+          <p>Cybersecurity is how people and organizations protect <b>accounts, devices, data, and networks</b> from misuse. Attackers try to steal passwords, trick you into clicking bad links, lock files for ransom, or pretend to be someone you trust. Defenders learn to <b>spot the tricks, limit the damage, and recover</b>.</p>
+          <p style="margin-top:12px">Most real attacks do not start with Hollywood-style hacking. They start with a message that looks almost normal — email, text, phone call, or a pop-up — and a rushed decision.</p>
+        </div>
 
-      <div class="card intro-card">
-        <h3>How a session works</h3>
-        <ol class="intro-steps">
-          <li><b>Entry check</b> — a short phishing drill so you practice spotting red flags before the labs open.</li>
-          <li><b>Briefing board</b> — pick any lab. Order is up to you.</li>
-          <li><b>Clear labs</b> — each one teaches a skill you can use in class and in everyday life.</li>
-        </ol>
-      </div>
+        <div class="card intro-card">
+          <h3>Three ideas you will use on every lab</h3>
+          <ul class="intro-list">
+            <li><b>Confidentiality</b> — only the right people can see the information.</li>
+            <li><b>Integrity</b> — the information has not been secretly changed or faked.</li>
+            <li><b>Availability</b> — systems still work when people need them.</li>
+          </ul>
+          <p class="note" style="margin-top:12px">Together these are often called the <b>CIA triad</b>. Every incident you sort in the range lands on at least one of them.</p>
+        </div>
 
-      <button class="primary" onclick="startEntryCheck()">Continue to entry check</button>
-      <p class="note" style="margin-top:14px">Next: a practice inbox message. You will mark suspicious parts, then choose what to do.</p>
+        <div class="card intro-card">
+          <h3>What is the Cyber Ranger?</h3>
+          <p>This site is a <b>practice range</b> for Bristol Eastern students and anyone learning to stay safer online. You will work through hands-on labs — phishing, log analysis, passwords, multi-factor authentication, everyday scams, AI-assisted tricks, and incident response — without risking real accounts.</p>
+          <ul class="intro-list" style="margin-top:12px">
+            <li>Everything runs in your browser. Nothing you type is sent to a server.</li>
+            <li>You earn clearance as you finish labs. Progress stays on this device.</li>
+            <li>Blue team = defender view. Red team = how an attacker might think.</li>
+          </ul>
+        </div>
+
+        <div class="card intro-card">
+          <h3>How a session works</h3>
+          <ol class="intro-steps">
+            <li><b>Entry check</b> — a short phishing drill so you practice spotting red flags before the labs open.</li>
+            <li><b>Briefing board</b> — pick any lab. Order is up to you.</li>
+            <li><b>Clear labs</b> — each one teaches a skill you can use in class and in everyday life.</li>
+          </ol>
+        </div>
+
+        <button class="primary" onclick="startEntryCheck()">Continue to entry check</button>
+        <p class="note" style="margin-top:14px">Next: a practice inbox message. You will mark suspicious parts, then choose what to do.</p>
+      </div>
+      </div><!-- .welcome-inner -->
+      </div><!-- .welcome-frame -->
     </div>
 
     <div id="stage-mail" style="display:none">
@@ -660,13 +896,19 @@ input.in.wrong{border-color:var(--red)}
       <button data-lab="scams" data-team="both" onclick="go('scams',this)">Scam desk</button>
       <button data-lab="ai" data-team="both" onclick="go('ai',this)">AI threats</button>
       <button data-lab="defend" data-team="blue" onclick="go('defend',this)">Response drill</button>
+      <button data-lab="patch" data-team="blue" onclick="go('patch',this)">Patch board</button>
       <button data-lab="target" data-team="red" onclick="go('target',this)">Target desk</button>
       <button data-lab="chain" data-team="red" onclick="go('chain',this)">Attack chain</button>
+      <button data-lab="pivot" data-team="red" onclick="go('pivot',this)">Pivot desk</button>
     </nav>
   </div>
 </header>
 
 <main>
+<!-- Margin bait ads: inside main so they sit in the white content margins -->
+<aside class="ad-rail left" id="adRailLeft" aria-label="Practice advertisements"></aside>
+<aside class="ad-rail right" id="adRailRight" aria-label="Practice advertisements"></aside>
+
 
   <section class="lab on" id="lab-brief">
     <div class="badge-card">
@@ -714,11 +956,11 @@ input.in.wrong{border-color:var(--red)}
 
     <div id="teamOpsCard" class="card team-only-blue">
       <h3>Blue ops focus today</h3>
-      <p>Work the board as a defender. Priority path: <b>Triage → Logs → Inbox → MFA → Scams → Response drill</b>. Your score reflects careful calls, not speed-hacking.</p>
+      <p>Work the board as a defender. Priority path: <b>Triage → Harden desk → Patch board → Logs → MFA → Response drill</b>. Your score reflects careful calls, not speed-hacking.</p>
     </div>
     <div class="card team-only-red" style="display:none">
       <h3>Red ops focus today</h3>
-      <p>Work the board as an authorized attacker-in-training. Priority path: <b>Inbox → Scams → AI threats → Key vault → Cipher bench → Logs</b>. For each lab, ask what would make the attack quieter or more convincing — then note the blue control that stops it.</p>
+      <p>Work the board as an authorized attacker-in-training. Priority path: <b>Target desk → Pivot desk → Attack chain → Inbox → Scams → Key vault</b>. For each lab, ask what would make the attack quieter or more convincing — then note the blue control that stops it.</p>
     </div>
 
     <div class="card" style="margin-top:8px">
@@ -1196,16 +1438,45 @@ input.in.wrong{border-color:var(--red)}
     </div>
   </section>
 
+
+  <!-- BLUE-ONLY: Patch board -->
+  <section class="lab" id="lab-patch">
+    <div class="lab-head">
+      <h2>Patch board</h2>
+      <p class="lab-desc">Blue-team practice: four systems need attention. Tap them in the order you would patch — highest risk first.</p>
+      <p class="team-objective" data-role="team-objective"></p>
+    </div>
+    <div class="card">
+      <p class="note">Priority should weigh internet exposure, known exploitability, and what data the system holds — not only the scary CVSS number.</p>
+      <div class="tray" id="patchTray" style="margin-top:12px"></div>
+      <p class="note" id="patchNote" style="margin-top:12px">Order: empty</p>
+      <button class="ghost" style="margin-top:12px" onclick="initPatch()">Shuffle systems</button>
+    </div>
+  </section>
+
+  <!-- RED-ONLY: Pivot desk -->
+  <section class="lab" id="lab-pivot">
+    <div class="lab-head">
+      <h2>Pivot desk</h2>
+      <p class="lab-desc">Red-team practice: you already have a foothold. Choose the next step that advances the objective without burning the access — analysis only.</p>
+      <p class="team-objective" data-role="team-objective"></p>
+    </div>
+    <div class="card">
+      <p class="note" id="pivotScenario" style="margin-bottom:12px"></p>
+      <div class="choice-row" id="pivotChoices"></div>
+      <p class="note" id="pivotNote" style="margin-top:12px"></p>
+      <button class="ghost" style="margin-top:12px" onclick="initPivot()">New foothold</button>
+    </div>
+  </section>
+
 </main>
+
+<div class="ad-leader"><div id="adLeaderSlot"></div></div>
 
 <footer>Eastern Cyber Range — practice environment. Progress and leaderboards stay in your browser (GitHub Pages friendly). Teacher mode is password-gated on-device only.</footer>
 </div>
 
 
-<!-- Margin bait ads (filled randomly by JS) -->
-<aside class="ad-rail left" id="adRailLeft" aria-label="Practice advertisements"></aside>
-<aside class="ad-rail right" id="adRailRight" aria-label="Practice advertisements"></aside>
-<div class="ad-leader"><div id="adLeaderSlot"></div></div>
 <div id="dlBar" role="status"><div class="dl-name" id="dlName">Downloading…</div><div class="dl-track"><i id="dlFill"></i></div></div>
 
 <div class="modal-backdrop" id="adModal">
@@ -1513,8 +1784,10 @@ var LABS = [
   ['scams','Scam desk','Classify multi-channel scams','both'],
   ['ai','AI threats','Counter deepfakes and AI lures','both'],
   ['defend','Response drill','Name the control under time pressure','blue'],
+  ['patch','Patch board','Prioritize which systems to fix first','blue'],
   ['target','Target desk','Rank who to phish first with a limited budget','red'],
-  ['chain','Attack chain','Order attacker steps; name the break','red']
+  ['chain','Attack chain','Order attacker steps; name the break','red'],
+  ['pivot','Pivot desk','Pick the next move after a foothold','red']
 ];
 function teamLabs(){
   var t = state.team === 'red' ? 'red' : 'blue';
@@ -1532,6 +1805,8 @@ function go(id, btn){
   if (id === 'target') initTarget();
   if (id === 'chain') initChain();
   if (id === 'harden') initHarden();
+  if (id === 'patch') initPatch();
+  if (id === 'pivot') initPivot();
   shuffleAds();
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
@@ -1592,7 +1867,6 @@ function refreshProgress(){
     var show = need === 'both' || need === tnow || btn.getAttribute('data-lab') === 'brief';
     btn.style.display = show ? '' : 'none';
   });
-  shuffleAds();
   drawCertificate(false);
   renderAar();
   applyTeamUI();
@@ -3041,7 +3315,15 @@ var TEAM_OBJECTIVES = {
   },
   harden: {
     blue: 'Blue objective: Choose the hardening step that closes each weak configuration.',
-    red: 'Red objective: (Red team uses Target desk / Attack chain instead of Harden desk.)'
+    red: 'Red objective: (Red team uses Target desk / Attack chain / Pivot desk instead.)'
+  },
+  patch: {
+    blue: 'Blue objective: Order patch work by real risk — exposure and data value, not CVSS alone.',
+    red: 'Red objective: (Red team uses Pivot desk instead of Patch board.)'
+  },
+  pivot: {
+    blue: 'Blue objective: (Blue team uses Patch board / Response drill instead of Pivot desk.)',
+    red: 'Red objective: After a foothold, pick the next step that advances the goal without noisy mistakes.'
   }
 };
 
@@ -3097,6 +3379,14 @@ var LAB_DESC = {
   harden: {
     blue: 'For each weak setup, pick the hardening control a defender should apply.',
     red: 'Not shown on red team.'
+  },
+  patch: {
+    blue: 'Four systems need patches. Rank them by risk: internet-facing and data-rich systems first.',
+    red: 'Not shown on red team.'
+  },
+  pivot: {
+    blue: 'Not shown on blue team.',
+    red: 'You have a foothold. Choose the next attacker step that advances the objective carefully.'
   }
 };
 
@@ -3142,58 +3432,178 @@ function applyTeamUI(){
 
 /* ---------- margin ad traps (educational) ---------- */
 var AD_CATALOG = [
-  { id:'prize', kind:'click', skin:'skin-orange', art:'🎁 FREE', title:'You are our 1,000,000th visitor!', sub:'Claim wireless earbuds — limited stock', cta:'CLAIM NOW',
-    titleModal:'That “prize” was a trap', lead:'“You won!” banners are built to create urgency so you skip checking the URL.',
-    risks:['Malicious claim pages that install adware','Phishing for email and payment details','Cross-site tracking profiles sold to brokers'],
-    foot:'Real contests do not appear as side ads on a school practice site. Close and move on.' },
-  { id:'update', kind:'download', skin:'skin-blue', art:'⬇ UPDATE', title:'Critical browser update required', sub:'Flash Player 192.168.1.3 · Download now', cta:'DOWNLOAD',
+  { id:'prize', kind:'click', size:'size-billboard', skin:'skin-orange', art:'FREE GIFT', title:'You are visitor #1,000,000', sub:'Wireless earbuds — claim today', cta:'CLAIM NOW',
+    titleModal:'That “prize” was a trap', lead:'Prize banners create urgency so you skip checking the URL.',
+    risks:['Malware on claim pages','Phishing for email or payment','Tracking profiles sold to brokers'],
+    foot:'Real contests do not appear as side ads on a school site.' },
+  { id:'update', kind:'download', size:'size-sky', skin:'skin-blue', art:'UPDATE NOW', title:'Critical browser update', sub:'Security patch · Install required', cta:'DOWNLOAD',
     file:'BrowserUpdate_Setup.exe',
-    titleModal:'Fake update download blocked', lead:'The range simulated a file download. In the wild, “update” ads often deliver trojans.',
-    risks:['Trojanized installers with remote-access tools','Fake security warnings after install','Persistent startup malware'],
-    foot:'Update browsers only from the browser’s own settings or your device’s app store.' },
-  { id:'crypto', kind:'click', skin:'skin-dark', art:'₿ 2.4', title:'Your wallet has unclaimed BTC', sub:'Verify within 15:00 or funds lock', cta:'VERIFY WALLET',
+    titleModal:'Fake update download blocked', lead:'“Update” ads often deliver trojans.',
+    risks:['Trojanized installers','Fake security warnings','Startup malware'],
+    foot:'Update only from browser settings or the official store.' },
+  { id:'crypto', kind:'click', size:'size-tall', skin:'skin-dark', art:'2.4 BTC', title:'Unclaimed wallet balance', sub:'Verify in 15 min or funds lock', cta:'VERIFY',
     titleModal:'Crypto verify ads are usually theft', lead:'Urgency + crypto is a high-yield scam pattern.',
-    risks:['Stolen seed phrases','Fake wallet-connect prompts','Drained exchange sessions'],
-    foot:'Never enter a seed phrase on a site you reached from an ad.' },
-  { id:'dating', kind:'click', skin:'skin-purple', art:'❤ NEAR YOU', title:'Singles near Bristol, CT', sub:'3 people viewed your photo', cta:'SEE WHO',
-    titleModal:'Romance bait harvests accounts', lead:'Local dating ads often feed phishing kits or malware apps.',
-    risks:['Stolen social logins','Malware via “download the app”','Targeted spam and sextortion follow-ups'],
-    foot:'Install apps only from official stores you open yourself.' },
-  { id:'survey', kind:'click', skin:'skin-green', art:'$50', title:'Gift card — 3 question survey', sub:'Amazon · Starbucks · Visa prepaid', cta:'START SURVEY',
-    titleModal:'Gift-card surveys sell your data', lead:'Short “reward” surveys are often data-broker funnels or payment scams.',
-    risks:['Email/phone sold to spammers','Fake shipping fees on a prize','Password harvest on later pages'],
-    foot:'Unsolicited gift cards in ads are almost never real.' },
-  { id:'support', kind:'click', skin:'skin-warn', art:'⚠ ALERT', title:'Your PC is infected', sub:'Microsoft Support · Call 1-800-555-0199', cta:'CALL NOW',
-    titleModal:'Tech-support ads are social engineering', lead:'Fear + a phone number is the whole scam. Vendors do not advertise support in random banners.',
-    risks:['Remote-access tool abuse','Gift-card payment theft','School and bank credential theft'],
-    foot:'Use official support channels you look up — never a number from a banner.' },
-  { id:'codec', kind:'download', skin:'skin-dl', art:'▶ PLAY', title:'Video codec missing', sub:'Install codec pack to watch HD clip', cta:'DOWNLOAD CODEC',
+    risks:['Stolen seed phrases','Fake wallet prompts','Drained accounts'],
+    foot:'Never enter a seed phrase from an ad.' },
+  { id:'dating', kind:'click', size:'size-wide', skin:'skin-purple', art:'NEAR YOU', title:'Singles near Bristol, CT', sub:'3 people viewed your photo', cta:'SEE WHO',
+    titleModal:'Romance bait harvests accounts', lead:'Local dating ads often feed phishing kits.',
+    risks:['Stolen social logins','Fake app malware','Targeted spam'],
+    foot:'Use official app stores only.' },
+  { id:'survey', kind:'click', size:'size-compact', skin:'skin-green', art:'$50', title:'Gift card survey', sub:'3 questions · Instant reward', cta:'START',
+    titleModal:'Gift-card surveys sell your data', lead:'Reward surveys are often data-broker funnels.',
+    risks:['Spam lists','Fake shipping fees','Password harvest'],
+    foot:'Unsolicited gift cards in ads are rarely real.' },
+  { id:'support', kind:'click', size:'size-sky', skin:'skin-warn', art:'ALERT', title:'Your PC is infected', sub:'Call Microsoft Support now', cta:'CALL NOW',
+    titleModal:'Tech-support ads are social engineering', lead:'Fear plus a phone number is the scam.',
+    risks:['Remote-access abuse','Gift-card theft','Credential theft'],
+    foot:'Look up official support yourself — never from a banner.' },
+  { id:'codec', kind:'download', size:'size-wide', skin:'skin-dl', art:'PLAY', title:'Video codec missing', sub:'Install pack for HD video', cta:'GET CODEC',
     file:'HD_CodecPack_v4.msi',
-    titleModal:'Codec / player downloads are a malware classic', lead:'“Install this codec to watch” is an old but still effective payload path.',
-    risks:['Bundled PUPs and spyware','Browser hijackers','Credential stealers'],
-    foot:'Modern browsers play video without random codec packs from ads.' },
-  { id:'doc', kind:'download', skin:'skin-blue', art:'PDF', title:'Invoice_April_Final.pdf', sub:'Shared via secure document link', cta:'DOWNLOAD FILE',
+    titleModal:'Codec downloads are a malware classic', lead:'“Install this codec” is an old payload path.',
+    risks:['Bundled spyware','Browser hijackers','Stealers'],
+    foot:'Browsers play video without random codec packs.' },
+  { id:'doc', kind:'download', size:'size-strip', skin:'skin-blue', art:'PDF', title:'Invoice_April_Final.pdf', sub:'Shared document link', cta:'DOWNLOAD',
     file:'Invoice_April_Final.pdf.exe',
-    titleModal:'Double extensions hide executables', lead:'The range showed a “PDF” that was really an executable name — a common email and ad trick.',
-    risks:['Malware launched as a “document”','Macro-enabled office files','Ransomware droppers'],
-    foot:'Watch the full filename. Real PDFs do not end in .exe.' },
-  { id:'game', kind:'download', skin:'skin-purple', art:'🎮 FREE', title:'Unblocked games — school edition', sub:'Play now · No signup · Fast download', cta:'GET GAME',
+    titleModal:'Double extensions hide executables', lead:'A “PDF” can really be an .exe.',
+    risks:['Malware as a document','Macro malware','Ransomware'],
+    foot:'Real PDFs do not end in .exe.' },
+  { id:'game', kind:'download', size:'size-billboard', skin:'skin-purple', art:'GAMES', title:'Unblocked games — school', sub:'No signup · Instant play', cta:'GET GAME',
     file:'SchoolGames_Portable.exe',
-    titleModal:'“Unblocked games” downloads are risky', lead:'Free game ads on school networks are a frequent malware channel.',
-    risks:['Trojans bundled with game launchers','Crypto-miners using lab PCs','Account cookie theft'],
-    foot:'If a site needs a random .exe to “play,” walk away.' },
-  { id:'vpn', kind:'click', skin:'skin-dark', art:'VPN', title:'Free VPN — unblock anything', sub:'One tap · No account · Ultra fast', cta:'INSTALL FREE',
-    titleModal:'“Free VPN” ads often are the product', lead:'Some free VPN ads install traffic interceptors rather than privacy tools.',
-    risks:['Traffic logging and resale','Injected ads into every page','Credential interception on HTTP'],
-    foot:'Treat free VPN ads like any other unsolicited install prompt.' },
-  { id:'job', kind:'click', skin:'skin-green', art:'HIRING', title:'$28/hr student jobs — hire today', sub:'Work from phone · Paid daily', cta:'APPLY',
-    titleModal:'Job ads can be mule-recruitment scams', lead:'“Easy pay” student job ads sometimes recruit money mules or steal IDs.',
-    risks:['Identity document theft','Bank-account misuse','Romance/job hybrid scams'],
-    foot:'Real hiring does not start from a side banner on a random site.' },
-  { id:'coupon', kind:'click', skin:'skin-orange', art:'70% OFF', title:'Campus bookstore coupon', sub:'Auto-applied at checkout — tap to unlock', cta:'GET COUPON',
-    titleModal:'Coupon ads often track or phish', lead:'Coupon banners can install browser extensions that read every page you visit.',
-    risks:['Malicious browser extensions','Shopping-site phishing clones','Payment card skimming pages'],
-    foot:'Use coupons only from stores you navigated to yourself.' }
+    titleModal:'“Unblocked games” downloads are risky', lead:'Free game ads on school networks often carry malware.',
+    risks:['Trojan launchers','Crypto-miners','Cookie theft'],
+    foot:'If it needs a random .exe to play, walk away.' },
+  { id:'vpn', kind:'click', size:'size-tall', skin:'skin-dark', art:'VPN', title:'Free VPN — unblock anything', sub:'One tap · No account needed', cta:'INSTALL',
+    titleModal:'“Free VPN” ads often are the product', lead:'Some free VPNs intercept your traffic.',
+    risks:['Traffic logging','Injected ads','Credential interception'],
+    foot:'Treat free VPN ads like any unsolicited install.' },
+  { id:'job', kind:'click', size:'size-wide', skin:'skin-green', art:'HIRING', title:'$28/hr student jobs', sub:'Phone work · Paid daily', cta:'APPLY',
+    titleModal:'Job ads can be mule-recruitment scams', lead:'“Easy pay” jobs sometimes steal identities.',
+    risks:['ID theft','Bank misuse','Scam pipelines'],
+    foot:'Real hiring does not start from a random sidebar.' },
+  { id:'coupon', kind:'click', size:'size-compact', skin:'skin-orange', art:'70% OFF', title:'Bookstore coupon', sub:'Unlock at checkout', cta:'GET CODE',
+    titleModal:'Coupon ads often track or phish', lead:'Coupon banners can install hostile extensions.',
+    risks:['Malicious extensions','Fake stores','Card skimming'],
+    foot:'Use coupons only from stores you open yourself.' },
+  { id:'stream', kind:'click', size:'size-sky', skin:'skin-purple', art:'STREAM', title:'Movies free — no account', sub:'HD streams · No card', cta:'WATCH',
+    titleModal:'Pirate stream ads push malware', lead:'“Free movies” sidebars often deliver stealers.',
+    risks:['Fake players','Browser lock pages','Banking trojans'],
+    foot:'Legal streaming does not need a sidebar install.' },
+  { id:'quiz', kind:'click', size:'size-strip', skin:'skin-orange', art:'IQ', title:'What is your IQ?', sub:'60-second test', cta:'TAKE TEST',
+    titleModal:'Quiz ads farm permissions and data', lead:'Viral quizzes often request contacts or installs.',
+    risks:['Contact harvesting','App prompts','Phishing after results'],
+    foot:'Skip quizzes that demand logins or downloads.' },
+  { id:'driver', kind:'download', size:'size-tall', skin:'skin-warn', art:'DRIVER', title:'Printer driver update', sub:'HP · Epson · Canon pack', cta:'DOWNLOAD',
+    file:'PrinterDriver_AllInOne.exe',
+    titleModal:'Driver packs from ads are unsafe', lead:'Printer driver ads are a common malware costume.',
+    risks:['System malware','Fake utilities','Backdoors'],
+    foot:'Get drivers from the maker or Windows Update.' },
+  { id:'nft', kind:'click', size:'size-billboard', skin:'skin-dl', art:'NFT', title:'Free mint — last 50', sub:'Ends tonight · Gas free', cta:'MINT',
+    titleModal:'NFT mint ads often drain wallets', lead:'“Free mint” banners can trigger hostile signatures.',
+    risks:['Hostile approvals','Drained wallets','Seed phishing'],
+    foot:'Never connect a wallet from a random ad.' },
+  { id:'bank', kind:'click', size:'size-wide', skin:'skin-blue', art:'BANK', title:'Unusual login detected', sub:'Verify student checking', cta:'SECURE',
+    titleModal:'Banking ads are phishing in disguise', lead:'Banks do not verify accounts through random banners.',
+    risks:['Credential harvest','Session theft','Wire fraud setup'],
+    foot:'Open your bank app or type the official URL.' },
+  { id:'wifi', kind:'click', size:'size-compact', skin:'skin-slate', art:'Wi‑Fi', title:'Campus Wi‑Fi booster', sub:'Faster speeds · One click', cta:'ENABLE',
+    titleModal:'“Wi‑Fi booster” ads are junkware', lead:'These prompts often install browser hijackers.',
+    risks:['Search hijacking','Adware','Proxy abuse'],
+    foot:'Network issues go through school IT.' },
+  { id:'antivirus', kind:'download', size:'size-sky', skin:'skin-warn', art:'SCAN', title:'22 threats found', sub:'Free cleaner · 1-click fix', cta:'CLEAN NOW',
+    file:'PC_Cleaner_Pro.exe',
+    titleModal:'Fake antivirus is still common', lead:'Scareware claims threats to push a download.',
+    risks:['Scareware','Fake cleaners','Real malware'],
+    foot:'Use OS security or a vendor you chose in advance.' },
+  { id:'scholarship', kind:'click', size:'size-strip', skin:'skin-green', art:'AID', title:'$10,000 scholarship', sub:'No essay · 2 minutes', cta:'APPLY',
+    titleModal:'Scholarship ads can be data traps', lead:'“No essay” banners often sell data or phish FAFSA info.',
+    risks:['SSN phishing','Data resale','Fake portals'],
+    foot:'Use official school and .gov aid sites.' },
+  { id:'spotify', kind:'click', size:'size-wide', skin:'skin-teal', art:'MUSIC', title:'Premium music free', sub:'No ads · Unlimited skips', cta:'UNLOCK',
+    titleModal:'“Free premium” ads are account traps', lead:'Pirated premium offers often steal logins or install junk.',
+    risks:['Account theft','Malicious APKs','Payment scams'],
+    foot:'Pay for services through the official app only.' },
+  { id:'tax', kind:'click', size:'size-sky', skin:'skin-blue', art:'IRS', title:'Tax refund pending', sub:'Confirm deposit details', cta:'CLAIM',
+    titleModal:'IRS refund ads are phishing', lead:'Tax agencies do not process refunds through website banners.',
+    risks:['SSN harvest','Bank account theft','Identity fraud'],
+    foot:'Use official .gov sites you type yourself.' },
+  { id:'delivery', kind:'click', size:'size-compact', skin:'skin-orange', art:'PKG', title:'Package held at depot', sub:'Pay $2.99 redelivery', cta:'PAY FEE',
+    titleModal:'Delivery fee ads are scams', lead:'Fake shipping notices push small payments and card data.',
+    risks:['Card skimming','Phishing sites','Malware apps'],
+    foot:'Track packages only on the carrier’s official site.' },
+  { id:'roblox', kind:'download', size:'size-billboard', skin:'skin-rose', art:'ROBUX', title:'Free Robux generator', sub:'Working 2026 · No survey', cta:'GENERATE',
+    file:'RobuxGenerator.exe',
+    titleModal:'Game-currency generators are malware', lead:'“Free Robux/V-Bucks” tools are a classic student malware lure.',
+    risks:['Account theft','Stealers','Ransomware'],
+    foot:'There is no legit free generator in a sidebar ad.' },
+  { id:'zoom', kind:'download', size:'size-strip', skin:'skin-blue', art:'CAM', title:'Zoom background pack', sub:'School themes · Free', cta:'DOWNLOAD',
+    file:'Zoom_Backgrounds_Setup.exe',
+    titleModal:'“Background packs” can be loaders', lead:'Innocent-looking media packs may install unwanted software.',
+    risks:['PUPs','Browser changes','Backdoors'],
+    foot:'Use built-in backgrounds or files from people you trust.' },
+  { id:'tiktok', kind:'click', size:'size-wide', skin:'skin-rose', art:'FANS', title:'1,000 followers free', sub:'Instagram · TikTok · Fast', cta:'GET NOW',
+    titleModal:'Follower ads steal social accounts', lead:'Growth services often ask for your password.',
+    risks:['Account takeover','Spam from your profile','Scam resale'],
+    foot:'Never give social passwords to a promo site.' },
+  { id:'cloud', kind:'click', size:'size-tall', skin:'skin-slate', art:'CLOUD', title:'Mailbox storage full', sub:'Upgrade free · 50 GB', cta:'UPGRADE',
+    titleModal:'Storage warning ads are phishing', lead:'Fake “mailbox full” banners harvest webmail logins.',
+    risks:['Email account takeover','Secondary account pivots','BEC setup'],
+    foot:'Check storage inside the real mail app, not an ad.' },
+  { id:'chrome', kind:'download', size:'size-sky', skin:'skin-dl', art:'EXT', title:'Ad blocker — recommended', sub:'School edition · Free', cta:'ADD',
+    file:'SchoolAdBlock_Extension.exe',
+    titleModal:'Fake extensions are high risk', lead:'Sidebar “extensions” may not be from the real store.',
+    risks:['Browser hijack','Keylogging','Traffic redirection'],
+    foot:'Install extensions only from the official browser store.' },
+  { id:'weather', kind:'click', size:'size-compact', skin:'skin-teal', art:'STORM', title:'Severe weather alert', sub:'Enable alerts for CT', cta:'ENABLE',
+    titleModal:'Alert ads push notification spam', lead:'Fake alerts trick you into allowing noisy notifications or installs.',
+    risks:['Notification spam','Malicious prompts','Tracking'],
+    foot:'Get weather from a known app or site, not a banner.' },
+  { id:'discord', kind:'click', size:'size-wide', skin:'skin-dl', art:'NITRO', title:'Discord Nitro free', sub:'3 months · Limited offer', cta:'REDEEM',
+    titleModal:'Nitro giveaway ads steal accounts', lead:'Token-grabber sites pretend to be free Nitro.',
+    risks:['Discord token theft','Server takeover','Scam DMs'],
+    foot:'Discord does not give Nitro through random web ads.' },
+  { id:'hw', kind:'download', size:'size-strip', skin:'skin-green', art:'HW', title:'Homework answers PDF', sub:'All subjects · Free download', cta:'GET PDF',
+    file:'Homework_Answers_All.pdf.exe',
+    titleModal:'“Answer key” downloads are bait', lead:'Academic piracy lures are a common malware path for students.',
+    risks:['Malware droppers','Account theft','Device compromise'],
+    foot:'If the file name looks odd, do not open it.' },
+  { id:'captcha', kind:'click', size:'size-sky', skin:'skin-slate', art:'VERIFY', title:'Confirm you are human', sub:'Quick check to continue', cta:'I AM HUMAN',
+    titleModal:'Fake CAPTCHAs can be traps', lead:'Some “verify” widgets push extensions or credential pages.',
+    risks:['Forced extension installs','Phishing','Botnet recruitment'],
+    foot:'Real sites rarely put CAPTCHA in a side advertisement.' },
+  { id:'steam', kind:'click', size:'size-billboard', skin:'skin-dark', art:'STEAM', title:'Free Steam gift card', sub:'$50 · Login to claim', cta:'CLAIM',
+    titleModal:'Steam gift ads are phishing', lead:'Fake gift pages steal Steam credentials.',
+    risks:['Game account theft','Payment fraud','Inventory scams'],
+    foot:'Steam will not gift cards through random banners.' },
+  { id:'outlook', kind:'click', size:'size-wide', skin:'skin-blue', art:'MAIL', title:'Password expiring tonight', sub:'Reset school email now', cta:'RESET',
+    titleModal:'Password-expiry ads are phishing', lead:'Credential theft often pretends to be an urgent IT reset.',
+    risks:['School account takeover','Grade / file access','Lateral phishing'],
+    foot:'Change passwords only through official school SSO.' },
+  { id:'android', kind:'download', size:'size-tall', skin:'skin-teal', art:'APK', title:'MOD menu — unlimited coins', sub:'Android · No root', cta:'GET APK',
+    file:'GameMod_Unlimited.apk',
+    titleModal:'Sideloaded MOD APKs are dangerous', lead:'Modified game APKs often include spyware.',
+    risks:['Android malware','SMS fraud','Account theft'],
+    foot:'Install mobile apps from the official store only.' },
+  { id:'espn', kind:'click', size:'size-compact', skin:'skin-orange', art:'LIVE', title:'Game stream free', sub:'Celtics · No cable needed', cta:'WATCH LIVE',
+    titleModal:'Sports stream ads are malware magnets', lead:'Illegal streams monetize with hostile ads and downloads.',
+    risks:['Malware','Phishing overlays','Card skimmers'],
+    foot:'Use legitimate sports apps and subscriptions.' },
+  { id:'canvas', kind:'click', size:'size-strip', skin:'skin-blue', art:'LMS', title:'Canvas grade updated', sub:'View new comment', cta:'OPEN',
+    titleModal:'LMS lookalike ads are phishing', lead:'Fake Canvas/Google Classroom links steal student logins.',
+    risks:['SSO credential theft','Assignment sabotage','Account misuse'],
+    foot:'Open Canvas from your school bookmark, not an ad.' },
+  { id:'crypto2', kind:'click', size:'size-sky', skin:'skin-dark', art:'DROP', title:'Token airdrop live', sub:'Connect wallet · Free claim', cta:'CONNECT',
+    titleModal:'Airdrop ads drain wallets', lead:'Hostile sites ask you to “connect” then request approvals.',
+    risks:['Wallet drain','Hostile signatures','Seed phishing'],
+    foot:'Ignore airdrop ads on random websites.' },
+  { id:'speed', kind:'download', size:'size-wide', skin:'skin-warn', art:'PC', title:'Speed up this computer', sub:'1-click optimizer', cta:'OPTIMIZE',
+    file:'PC_SpeedBoost.exe',
+    titleModal:'Optimizer ads are often junkware', lead:'“Speed up PC” tools rarely help and often harm.',
+    risks:['PUPs','Browser hijacks','Fake cleaners'],
+    foot:'Use built-in disk cleanup and official updates instead.' },
+  { id:'dating2', kind:'click', size:'size-billboard', skin:'skin-rose', art:'CHAT', title:'Someone likes you', sub:'Local match waiting', cta:'VIEW',
+    titleModal:'“Someone likes you” is engagement bait', lead:'These ads drive installs and data collection.',
+    risks:['Malware apps','Romance scams','Data resale'],
+    foot:'Dating apps belong in official stores, not sidebars.' }
 ];
 
 function shuffle(arr){
@@ -3202,10 +3612,15 @@ function shuffle(arr){
   return a;
 }
 
-function renderAdButton(ad){
+function renderAdButton(ad, opts){
+  opts = opts || {};
   var btn = document.createElement('button');
   btn.type = 'button';
-  btn.className = 'fake-ad ' + (ad.skin || '');
+  if (opts.leader){
+    btn.className = 'fake-ad ' + (ad.skin || 'skin-blue') + ' size-wide';
+  } else {
+    btn.className = 'fake-ad ' + (ad.skin || '') + ' ' + (ad.size || 'size-sky');
+  }
   btn.setAttribute('data-ad', ad.id);
   btn.innerHTML =
     '<span class="ad-topbar"><span>Sponsored</span><span>Ad</span></span>' +
@@ -3214,8 +3629,37 @@ function renderAdButton(ad){
   btn.querySelector('.ad-title').textContent = ad.title;
   btn.querySelector('.ad-sub').textContent = ad.sub;
   btn.querySelector('.ad-cta').textContent = ad.cta;
-  btn.addEventListener('click', function(){ openAdTrap(ad.id); });
+  btn.addEventListener('click', function(){ openAdTrap(ad.id, btn); });
   return btn;
+}
+
+function currentlyShownAdIds(){
+  var ids = {};
+  Array.prototype.forEach.call(document.querySelectorAll('.fake-ad[data-ad]'), function(el){
+    ids[el.getAttribute('data-ad')] = true;
+  });
+  return ids;
+}
+
+function pickReplacementAd(excludeId){
+  var shown = currentlyShownAdIds();
+  var pool = AD_CATALOG.filter(function(ad){
+    return ad.id !== excludeId && !shown[ad.id];
+  });
+  if (!pool.length){
+    pool = AD_CATALOG.filter(function(ad){ return ad.id !== excludeId; });
+  }
+  if (!pool.length) return AD_CATALOG[0];
+  return pool[Math.floor(Math.random() * pool.length)];
+}
+
+function replaceSingleAd(btn){
+  if (!btn || !btn.parentNode) return;
+  var oldId = btn.getAttribute('data-ad');
+  var isLeader = !!(btn.closest && btn.closest('.ad-leader'));
+  var next = pickReplacementAd(oldId);
+  var neu = renderAdButton(next, { leader: isLeader });
+  btn.parentNode.replaceChild(neu, btn);
 }
 
 function shuffleAds(){
@@ -3223,20 +3667,21 @@ function shuffleAds(){
   var left = document.getElementById('adRailLeft');
   var right = document.getElementById('adRailRight');
   var leader = document.getElementById('adLeaderSlot');
-  if (left){ left.innerHTML = ''; pool.slice(0,3).forEach(function(ad){ left.appendChild(renderAdButton(ad)); }); }
-  if (right){ right.innerHTML = ''; pool.slice(3,6).forEach(function(ad){ right.appendChild(renderAdButton(ad)); }); }
+  // Four banners per side
+  if (left){ left.innerHTML = ''; pool.slice(0, 4).forEach(function(ad){ left.appendChild(renderAdButton(ad)); }); }
+  if (right){ right.innerHTML = ''; pool.slice(4, 8).forEach(function(ad){ right.appendChild(renderAdButton(ad)); }); }
+  // Footer horizontal banner
   if (leader){
     leader.innerHTML = '';
-    var wide = pool[6] || pool[0];
-    if (wide){
-      var w = renderAdButton(wide);
-      // leader uses horizontal layout via CSS
-      leader.appendChild(w);
-    }
+    var wide = pool[8] || pool[0];
+    if (wide) leader.appendChild(renderAdButton(wide, { leader: true }));
   }
 }
 
-function openAdTrap(kind){
+var _activeAdBtn = null;
+
+function openAdTrap(kind, btn){
+  _activeAdBtn = btn || null;
   var pack = null;
   for (var i=0;i<AD_CATALOG.length;i++){ if (AD_CATALOG[i].id === kind){ pack = AD_CATALOG[i]; break; } }
   if (!pack) pack = AD_CATALOG[0];
@@ -3290,7 +3735,6 @@ function runFakeDownload(pack){
       setTimeout(function(){
         bar.classList.remove('on');
         showAdModal(pack);
-        shuffleAds();
       }, 350);
     } else {
       fill.style.width = p + '%';
@@ -3302,7 +3746,11 @@ function closeAdTrap(){
   var m = document.getElementById('adModal');
   m.classList.remove('on');
   m.style.display = 'none';
-  shuffleAds();
+  // Only refresh the ad that was clicked — not the whole board
+  if (_activeAdBtn){
+    replaceSingleAd(_activeAdBtn);
+    _activeAdBtn = null;
+  }
 }
 
 /* ---------- red/blue exclusive lab logic ---------- */
@@ -3313,6 +3761,126 @@ var RECON_TIPS = {
   pet: 'Jokes or plaque phrases sometimes get reused as weak passwords — blue should train against that.',
   assistant: 'Named assistants and schedules help craft believable “can you do me a quick favor?” messages.'
 };
+
+
+/* ---------- Patch board (blue) ---------- */
+var PATCH_ITEMS = [
+  { id:'vpn', label:'Edge VPN appliance', detail:'Internet-facing · known exploit in the wild · remote access to staff', rank:0 },
+  { id:'grades', label:'Gradebook web app', detail:'Staff + student PII · reachable from school network · critical SQLi', rank:1 },
+  { id:'labpc', label:'Single lab PC', detail:'Offline imaging station · local admin vuln · no student data', rank:3 },
+  { id:'print', label:'Hallway print server', detail:'Internal only · outdated firmware · no sensitive stores', rank:2 }
+];
+var patchOrder = [];
+function initPatch(){
+  patchOrder = [];
+  var tray = document.getElementById('patchTray');
+  if (!tray) return;
+  tray.innerHTML = '';
+  var items = PATCH_ITEMS.slice();
+  for (var i=items.length-1;i>0;i--){ var j=Math.floor(Math.random()*(i+1)); var t=items[i]; items[i]=items[j]; items[j]=t; }
+  items.forEach(function(it){
+    var b = document.createElement('button');
+    b.type = 'button';
+    b.className = 'incident';
+    b.dataset.id = it.id;
+    b.innerHTML = '<b></b><span class="note" style="display:block;margin-top:4px"></span>';
+    b.querySelector('b').textContent = it.label;
+    b.querySelector('span').textContent = it.detail;
+    b.onclick = function(){ pickPatch(it.id, b); };
+    tray.appendChild(b);
+  });
+  document.getElementById('patchNote').textContent = 'Order: empty — tap highest priority first.';
+}
+function pickPatch(id, el){
+  if (patchOrder.indexOf(id) >= 0) return;
+  patchOrder.push(id);
+  el.classList.add('done');
+  el.disabled = true;
+  el.querySelector('b').textContent = patchOrder.length + '. ' + PATCH_ITEMS.filter(function(x){ return x.id===id; })[0].label;
+  var labels = patchOrder.map(function(pid){
+    return PATCH_ITEMS.filter(function(x){ return x.id===pid; })[0].label;
+  });
+  document.getElementById('patchNote').textContent = 'Order: ' + labels.join(' → ');
+  if (patchOrder.length === PATCH_ITEMS.length){
+    // ideal order by rank 0,1,2,3
+    var ideal = PATCH_ITEMS.slice().sort(function(a,b){ return a.rank - b.rank; }).map(function(x){ return x.id; });
+    var score = 0;
+    for (var i=0;i<ideal.length;i++){ if (patchOrder[i] === ideal[i]) score++; }
+    // also accept if first two are vpn then grades
+    var topOk = patchOrder[0] === 'vpn' && patchOrder[1] === 'grades';
+    if (score >= 3 || topOk){
+      document.getElementById('patchNote').textContent = 'Strong prioritization. Edge-exposed and data-rich systems before quiet internal hosts.';
+      addPoints(20);
+      clearLab('patch', 'Patch board');
+    } else {
+      document.getElementById('patchNote').textContent = 'Not quite. Internet-facing VPN with a live exploit and the gradebook with PII should lead; the offline lab PC can wait.';
+      // allow retry
+      setTimeout(function(){ initPatch(); }, 2200);
+    }
+  }
+}
+
+/* ---------- Pivot desk (red) ---------- */
+var PIVOT_CASES = [
+  {
+    scene: 'Foothold: student Chromebook via malicious homework macro. Goal: reach grade-change capability.',
+    options: [
+      { t: 'Immediately ransomware the Chromebook for attention', ok: false },
+      { t: 'Harvest tokens/cookies and look for teacher SSO sessions', ok: true },
+      { t: 'Port-scan the entire district Class-A at full speed', ok: false },
+      { t: 'Post the access on a public forum', ok: false }
+    ],
+    tip: 'Quiet credential/session reuse beats noisy scans. Blue should watch for impossible-travel SSO and token theft.'
+  },
+  {
+    scene: 'Foothold: phished payroll clerk webmail. Goal: change direct-deposit details.',
+    options: [
+      { t: 'Search mail for prior deposit-change forms and reply-all threads', ok: true },
+      { t: 'Email the entire staff list a second obvious phish right away', ok: false },
+      { t: 'Delete the clerk’s entire mailbox to cover tracks first', ok: false },
+      { t: 'Attack the firewall management interface from the open web', ok: false }
+    ],
+    tip: 'Business-email compromise stays inside trusted threads. Blue: out-of-band verify pay changes.'
+  },
+  {
+    scene: 'Foothold: HVAC vendor VPN account (shared password). Goal: broader network access.',
+    options: [
+      { t: 'Use the vendor path to map internal subnets and jump hosts quietly', ok: true },
+      { t: 'Deface the school website homepage', ok: false },
+      { t: 'Run a loud vulnerability scanner across all VLANs overnight', ok: false },
+      { t: 'Reset every student password at once', ok: false }
+    ],
+    tip: 'Vendor VPNs are classic pivots. Blue: MFA + least privilege on vendor accounts.'
+  }
+];
+var pivotIdx = 0;
+function initPivot(){
+  var c = PIVOT_CASES[pivotIdx % PIVOT_CASES.length];
+  pivotIdx++;
+  document.getElementById('pivotScenario').textContent = c.scene;
+  document.getElementById('pivotNote').textContent = '';
+  var box = document.getElementById('pivotChoices');
+  box.innerHTML = '';
+  var opts = c.options.slice();
+  for (var i=opts.length-1;i>0;i--){ var j=Math.floor(Math.random()*(i+1)); var t=opts[i]; opts[i]=opts[j]; opts[j]=t; }
+  opts.forEach(function(opt){
+    var b = document.createElement('button');
+    b.className = 'choice';
+    b.innerHTML = '<b></b>';
+    b.querySelector('b').textContent = opt.t;
+    b.onclick = function(){
+      if (opt.ok){
+        document.getElementById('pivotNote').textContent = 'Good call. ' + c.tip;
+        addPoints(20);
+        clearLab('pivot', 'Pivot desk');
+      } else {
+        document.getElementById('pivotNote').textContent = 'That is noisy or off-goal. Prefer steps that quietly advance access toward the objective.';
+      }
+    };
+    box.appendChild(b);
+  });
+}
+
 
 var TARGETS = [
   { id:'payroll', name:'Payroll clerk', blurb:'Processes direct-deposit changes. Busy during pay week. Uses email MFA.', score:3 },
@@ -3552,7 +4120,9 @@ var AAR_TIPS = {
   defend: 'You matched incidents to preventive controls under time pressure.',
   target: 'You practiced prioritizing spear-phish targets by impact and feasibility — analysis only.',
   chain: 'You ordered an attack chain and named the control that breaks it.',
-  harden: 'You chose hardening steps for weak real-world setups.'
+  harden: 'You chose hardening steps for weak real-world setups.',
+  patch: 'You prioritized patch work by exposure and business impact, not CVSS alone.',
+  pivot: 'You practiced choosing a quiet next step after a foothold — and what blue should detect.'
 };
 function pushAar(id, label){
   var tip = AAR_TIPS[id] || ('Cleared ' + label);
@@ -4027,5 +4597,10 @@ if (state.gatePassed){
 }
 shuffleAds();
 document.addEventListener('visibilitychange', function(){ if (!document.hidden) shuffleAds(); });
+// Rotate margin ads every 3 minutes while the range is open
+setInterval(function(){
+  var c = document.getElementById('console');
+  if (c && c.style.display !== 'none') shuffleAds();
+}, 3 * 60 * 1000);
 applyTeamUI();
 </script></body></html>
